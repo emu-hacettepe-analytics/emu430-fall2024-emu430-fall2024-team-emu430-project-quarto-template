@@ -1,5 +1,5 @@
 ---
-title: "Team XXX"
+title: "Team R'hapsody"
 sidebar: false 
 ---
 
@@ -7,18 +7,50 @@ This is our project webpage.
 
 Please stay tuned to follow our project activities.
 
-This is our template.
-
 # Team Members
 
-1.  [Edin_Džeko](https://tr.wikipedia.org/wiki/Edin_D%C5%BEeko)
+1.  Yusuf Karakulle
 
-2.  [Dušan Tadić](https://tr.wikipedia.org/wiki/Du%C5%A1an_Tadi%C4%87)
+2.  Efe Kayra Torun
 
-3.  [Frederico Rodrigues de Paula Santos](https://tr.wikipedia.org/wiki/Fred_(1993_do%C4%9Fumlu_futbolcu))
+3.  Barış Aksu
 
-4.  [Sebastian Szymański](https://tr.wikipedia.org/wiki/Sebastian_Szyma%C5%84ski)
+4.  Firdevs Elif Batur
+
+5.  Ramazan Ortasöz
 
 # Project Topic
 
+This project aims to deeply analyze one of the most significant macroeconomic indicators of
+the Turkish economy, the Consumer Price Index (CPI), to better understand economic
+dynamics. The CPI is a critical index used to measure price changes at the consumer level and
+the overall inflation rate, providing insights into the general health of the economy. However,
+examining the CPI in isolation may fall short of capturing the multidimensional factors
+influencing it. Therefore, this project will comprehensively explore the relationship between
+the CPI and other key economic indicators such as the Producer Price Index (PPI), exchange
+rates, energy price index, housing price index, import price index, interest rates, consumer
+confidence index, consumer expenditures, and credit card usage.
+
 # Data Set
+
+The data utilized in the project consists of the following indices and indicators:
+• Producer Price Index (PPI)
+• Exchange Rates
+• Energy Price Index
+• Housing Price Index
+• Import Price Index
+• Interest Rates
+• Consumer Confidence Index
+• Consumer Expenditures
+• Credit Card Usage
+The data for the analysis is sourced from reliable institutions such as the Turkish Statistical
+Institute (TÜİK) and the Central Bank of the Republic of Turkey (TCMB). The dataset is
+sufficiently large and up-to-date, enabling meaningful relationships to be established between
+economic indicators.
+The primary objective of the project is to identify the factors affecting the CPI, reveal how
+these factors interact with the CPI, and provide a broader economic perspective based on the
+findings. Statistical and data analysis methods will be employed to examine the correlations,
+causality relationships, and temporal dynamics between the CPI and other indicators,
+shedding light on which indicators have more pronounced impacts on the CPI. This process
+will also help better understand critical dynamics unique to Turkey's economic structure, such
+as the significant influence of exchange rates and energy prices on the CPI.
