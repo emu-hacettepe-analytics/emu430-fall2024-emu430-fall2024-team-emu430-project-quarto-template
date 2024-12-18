@@ -120,7 +120,7 @@ CPI = 13.99 + 0.49669.PPI
 
 And there is graph with regression line.
 
-```{r}
+```{r include=FALSE}
 data1$Tarih <- as.Date(paste0("01-", data1$Tarih), format = "%d-%m-%Y")
 reg_graph<-ggplot(data1, aes(x = PPI, y = CPI)) +
   geom_point(color = "blue") + 
@@ -134,6 +134,3 @@ reg_graph<-ggplot(data1, aes(x = PPI, y = CPI)) +
 ```{r}
 reg_graph
 ```
-
-
-
