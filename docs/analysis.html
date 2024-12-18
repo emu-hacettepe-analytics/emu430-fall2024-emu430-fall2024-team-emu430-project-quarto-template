@@ -177,13 +177,192 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>About this site</p>
+<p><strong>1-Producer Price Index vs Consumer Price Index</strong></p>
+<p>In this study, the relationship between the Producer Price Index (PPI) and the Consumer Price Index (CPI) has been analyzed. While PPI measures changes in the prices of goods and services at the producer level, CPI reflects changes in the prices paid by consumers. The interaction between these indices is crucial for understanding price formation processes, as changes in production costs (PPI) can often translate into consumer prices (CPI). This analysis examines how changes in PPI affect CPI and evaluates the interaction between these two economic indicators. Using historical data and various statistical methods, the direction and magnitude of this relationship have been revealed.</p>
+<p>Based on this analysis we will choose PPI or CPI as our baseline to compare it’s effects on other economic indicators.</p>
+<p>First let’s look the table we will use for analysis.We used annual percentage changes of the variables as index values.</p>
+<p>First let’s look the table we will use for analysis.We used annual percentage changes of the variables as index values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table2,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code># A tibble: 10 × 3
+   Tarih     PPI   CPI
+   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+ 1 01-2019 32.9  20.4 
+ 2 02-2019 29.6  19.7 
+ 3 03-2019 29.6  19.7 
+ 4 04-2019 30.1  19.5 
+ 5 05-2019 28.7  18.7 
+ 6 06-2019 25.0  15.7 
+ 7 07-2019 21.7  16.6 
+ 8 08-2019 13.4  15.0 
+ 9 09-2019  2.45  9.26
+10 10-2019  1.7   8.55</code></pre>
 </div>
 </div>
+<p>We will plot a line graph where we will show both index as a variable over time.This will help us to visualize their relation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>graph_line1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(table2, <span class="fu">aes</span>(<span class="at">x =</span> Tarih)) <span class="sc">+</span>      </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> PPI, <span class="at">color =</span> <span class="st">"PP Index(%)"</span> )) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> CPI, <span class="at">color =</span> <span class="st">"Cp Index(%)"</span>)) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"PP Index(%)"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Cp Index(%)"</span> <span class="ot">=</span> <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PPI&amp;CPI Graph"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Tarih"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Variable"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Variables"</span>) <span class="sc">+</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span><span class="fu">theme_economist</span>()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>graph_line1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_line()`: Each group consists of only one observation.
+ℹ Do you need to adjust the group aesthetic?
+`geom_line()`: Each group consists of only one observation.
+ℹ Do you need to adjust the group aesthetic?</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As you can see in the graph above,it seems both indexes have a similar behaviour over time.By just looking at this graph,we may think there is a strong relation between them.They track each others movement on the graph.But just visuality may not be enough therefore we will do a correlation test.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>correlation1 <span class="ot">&lt;-</span> <span class="fu">cor</span>(table2<span class="sc">$</span>PPI, table2<span class="sc">$</span>CPI)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(correlation1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7959363</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cor_test <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(table2<span class="sc">$</span>PPI, table2<span class="sc">$</span>CPI)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_test<span class="sc">$</span>p.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.087791e-16</code></pre>
+</div>
+</div>
+<p>This correlation value supports visual data and says there is really strong relation between them.Also, p-value(1.087791e-16) is very low.Usually,results are considered significant if they are less than 0.5.In this case, the probability of the course of the situation arising by chance is extremely low.But what happens if there is some lag between interaction.Let’s do some lagged correlation tests.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data1 <span class="ot">&lt;-</span> table2 <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PPI_lag1 =</span> <span class="fu">lag</span>(PPI, <span class="dv">1</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">PPI_lag2 =</span> <span class="fu">lag</span>(PPI, <span class="dv">2</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">PPI_lag3 =</span> <span class="fu">lag</span>(PPI, <span class="dv">3</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">PPI_lag4 =</span> <span class="fu">lag</span>(PPI, <span class="dv">4</span>),<span class="at">PPI_lag5 =</span> <span class="fu">lag</span>(PPI, <span class="dv">5</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>cor_lag1 <span class="ot">&lt;-</span> <span class="fu">cor</span>(data1<span class="sc">$</span>PPI_lag1, data1<span class="sc">$</span>CPI, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>cor_lag2 <span class="ot">&lt;-</span> <span class="fu">cor</span>(data1<span class="sc">$</span>PPI_lag2, data1<span class="sc">$</span>CPI, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>cor_lag3 <span class="ot">&lt;-</span> <span class="fu">cor</span>(data1<span class="sc">$</span>PPI_lag3, data1<span class="sc">$</span>CPI, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>cor_lag4 <span class="ot">&lt;-</span> <span class="fu">cor</span>(data1<span class="sc">$</span>PPI_lag4, data1<span class="sc">$</span>CPI, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_lag1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8098936</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_lag2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7947913</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_lag3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7669985</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_lag4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.732202</code></pre>
+</div>
+</div>
+<p>Highest correlation is 0.809 with a 1 unit time lag.More than 1 unit time lag,correlation values is decreasing and they are less than original correlation value.There is not an obvious increase on values with lag.But still it’s proves there is a strong relation between two index.But which index affects the other?Which index should we use as a independent variable to analyse other economic indicators’s behaviours?We should Grenger casuality test to decide.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grangertest</span>(PPI <span class="sc">~</span> CPI, <span class="at">order =</span> <span class="dv">2</span>, <span class="at">data =</span> table2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Granger causality test
+
+Model 1: PPI ~ Lags(PPI, 1:2) + Lags(CPI, 1:2)
+Model 2: PPI ~ Lags(PPI, 1:2)
+  Res.Df Df      F Pr(&gt;F)
+1     64                 
+2     66 -2 2.3675 0.1019</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grangertest</span>(CPI <span class="sc">~</span> PPI, <span class="at">order =</span> <span class="dv">2</span>, <span class="at">data =</span> table2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Granger causality test
+
+Model 1: CPI ~ Lags(CPI, 1:2) + Lags(PPI, 1:2)
+Model 2: CPI ~ Lags(CPI, 1:2)
+  Res.Df Df      F    Pr(&gt;F)    
+1     64                        
+2     66 -2 11.208 6.712e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>First Granger test examines if CPI affects PPI values and it has a p-value as 0.1019 which is too high.That means CPI values does not have a effect on PPI values. On the other hand,second Granger test examinse if PPI affects CPI values and it has a p-value as 6.712e-05 which is very low.Generally p-values less than 0.05 considered statistically meaningful.Thus,we can say PPI values does affect CPI values. Finally we can say PPI can be independent variable for our further analysis.That’s why we choose PPI as our inflation rate. Before continue on further analysis we will do a regression analysis between PPI and CPI to better understanding of their relation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>reg_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(CPI <span class="sc">~</span> PPI, <span class="at">data =</span> data1)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = CPI ~ PPI, data = data1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-19.811 -10.354  -6.141   5.421  32.803 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 13.99397    2.91415   4.802  8.8e-06 ***
+PPI          0.49669    0.04548  10.921  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 15.49 on 69 degrees of freedom
+Multiple R-squared:  0.6335,    Adjusted R-squared:  0.6282 
+F-statistic: 119.3 on 1 and 69 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Let’s analys this result.</p>
+<p>Intercept:13.99 This represents the predicted value of CPI when PPI (index) is zero.Practically, it indicates the starting point.</p>
+<p>PPI Coefficient (index):0.49669 This coefficient shows that a one-unit increase in PPI leads to an average increase of 0.497 units in CPI. The positive sign indicates that an increase in PPI results in an increase in CPI.</p>
+<p>P-values (for coefficients):</p>
+<p>Intercept:p=8.8𝑒-0.6 PPI coefficient=p&lt;2𝑒-16</p>
+<p>Since the p-values for both coefficients are less than 0.05, they are statistically significant. This supports the conclusion that the independent variable (PPI) has a significant effect on the dependent variable (CPI).</p>
+<p>Multiple R-squared:0.6335 This value indicates that the model explains 63.35% of the total variation in the CPI variable. This suggests a strong relationship, although 36.65% of the variation remains unexplained. The model has reasonable explanatory power.</p>
+<p>F-Statistic:119.3, p&lt; 2.2𝑒- 16</p>
+<p>This test evaluates the overall significance of the model. It shows that PPI is a significant variable for predicting CPI. The very small p-value (&lt; 0.05) confirms that the model as a whole is statistically significant.</p>
+<p>Regression equation:</p>
+<p>CPI = 13.99 + 0.49669.PPI</p>
+<p>And there is graph with regression line.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>reg_graph<span class="ot">&lt;-</span><span class="fu">ggplot</span>(data1, <span class="fu">aes</span>(<span class="at">x =</span> PPI, <span class="at">y =</span> CPI)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Regression Analysis: PPI vs CPI"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Producer Price Index (PPI)"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Consumer Price Index (CPI)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$x
+[1] "Producer Price Index (PPI)"
+
+$y
+[1] "Consumer Price Index (CPI)"
+
+$title
+[1] "Regression Analysis: PPI vs CPI"
+
+attr(,"class")
+[1] "labels"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>  reg_graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>`` ```</p>
 
 
 
