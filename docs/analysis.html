@@ -186,18 +186,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table2,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
-   Tarih     PPI   CPI
-   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
- 1 01-2019 32.9  20.4 
- 2 02-2019 29.6  19.7 
- 3 03-2019 29.6  19.7 
- 4 04-2019 30.1  19.5 
- 5 05-2019 28.7  18.7 
- 6 06-2019 25.0  15.7 
- 7 07-2019 21.7  16.6 
- 8 08-2019 13.4  15.0 
- 9 09-2019  2.45  9.26
-10 10-2019  1.7   8.55</code></pre>
+   Tarih        PPI   CPI
+   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;
+ 1 2019-01-01 32.9  20.4 
+ 2 2019-02-01 29.6  19.7 
+ 3 2019-03-01 29.6  19.7 
+ 4 2019-04-01 30.1  19.5 
+ 5 2019-05-01 28.7  18.7 
+ 6 2019-06-01 25.0  15.7 
+ 7 2019-07-01 21.7  16.6 
+ 8 2019-08-01 13.4  15.0 
+ 9 2019-09-01  2.45  9.26
+10 2019-10-01  1.7   8.55</code></pre>
 </div>
 </div>
 <p>We will plot a line graph where we will show both index as a variable over time.This will help us to visualize their relation.</p>
@@ -212,12 +212,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Variables"</span>) <span class="sc">+</span> </span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span><span class="fu">theme_economist</span>()</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>graph_line1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_line()`: Each group consists of only one observation.
-ℹ Do you need to adjust the group aesthetic?
-`geom_line()`: Each group consists of only one observation.
-ℹ Do you need to adjust the group aesthetic?</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -228,49 +222,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>As you can see in the graph above,it seems both indexes have a similar behaviour over time.By just looking at this graph,we may think there is a strong relation between them.They track each others movement on the graph.But just visuality may not be enough therefore we will do a correlation test.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>correlation1 <span class="ot">&lt;-</span> <span class="fu">cor</span>(table2<span class="sc">$</span>PPI, table2<span class="sc">$</span>CPI)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(correlation1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>correlation1 <span class="ot">&lt;-</span> <span class="fu">cor</span>(table2<span class="sc">$</span>PPI, table2<span class="sc">$</span>CPI)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(correlation1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7959363</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cor_test <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(table2<span class="sc">$</span>PPI, table2<span class="sc">$</span>CPI)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_test<span class="sc">$</span>p.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cor_test <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(table2<span class="sc">$</span>PPI, table2<span class="sc">$</span>CPI)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_test<span class="sc">$</span>p.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.087791e-16</code></pre>
 </div>
 </div>
 <p>This correlation value supports visual data and says there is really strong relation between them.Also, p-value(1.087791e-16) is very low.Usually,results are considered significant if they are less than 0.5.In this case, the probability of the course of the situation arising by chance is extremely low.But what happens if there is some lag between interaction.Let’s do some lagged correlation tests.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data1 <span class="ot">&lt;-</span> table2 <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PPI_lag1 =</span> <span class="fu">lag</span>(PPI, <span class="dv">1</span>),</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">PPI_lag2 =</span> <span class="fu">lag</span>(PPI, <span class="dv">2</span>),</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">PPI_lag3 =</span> <span class="fu">lag</span>(PPI, <span class="dv">3</span>),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">PPI_lag4 =</span> <span class="fu">lag</span>(PPI, <span class="dv">4</span>),<span class="at">PPI_lag5 =</span> <span class="fu">lag</span>(PPI, <span class="dv">5</span>))</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>cor_lag1 <span class="ot">&lt;-</span> <span class="fu">cor</span>(data1<span class="sc">$</span>PPI_lag1, data1<span class="sc">$</span>CPI, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>cor_lag2 <span class="ot">&lt;-</span> <span class="fu">cor</span>(data1<span class="sc">$</span>PPI_lag2, data1<span class="sc">$</span>CPI, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>cor_lag3 <span class="ot">&lt;-</span> <span class="fu">cor</span>(data1<span class="sc">$</span>PPI_lag3, data1<span class="sc">$</span>CPI, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>cor_lag4 <span class="ot">&lt;-</span> <span class="fu">cor</span>(data1<span class="sc">$</span>PPI_lag4, data1<span class="sc">$</span>CPI, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_lag1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data1 <span class="ot">&lt;-</span> table2 <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PPI_lag1 =</span> <span class="fu">lag</span>(PPI, <span class="dv">1</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">PPI_lag2 =</span> <span class="fu">lag</span>(PPI, <span class="dv">2</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">PPI_lag3 =</span> <span class="fu">lag</span>(PPI, <span class="dv">3</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">PPI_lag4 =</span> <span class="fu">lag</span>(PPI, <span class="dv">4</span>),<span class="at">PPI_lag5 =</span> <span class="fu">lag</span>(PPI, <span class="dv">5</span>))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>cor_lag1 <span class="ot">&lt;-</span> <span class="fu">cor</span>(data1<span class="sc">$</span>PPI_lag1, data1<span class="sc">$</span>CPI, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>cor_lag2 <span class="ot">&lt;-</span> <span class="fu">cor</span>(data1<span class="sc">$</span>PPI_lag2, data1<span class="sc">$</span>CPI, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>cor_lag3 <span class="ot">&lt;-</span> <span class="fu">cor</span>(data1<span class="sc">$</span>PPI_lag3, data1<span class="sc">$</span>CPI, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>cor_lag4 <span class="ot">&lt;-</span> <span class="fu">cor</span>(data1<span class="sc">$</span>PPI_lag4, data1<span class="sc">$</span>CPI, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_lag1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8098936</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_lag2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_lag2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7947913</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_lag3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_lag3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7669985</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_lag4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_lag4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.732202</code></pre>
 </div>
 </div>
 <p>Highest correlation is 0.809 with a 1 unit time lag.More than 1 unit time lag,correlation values is decreasing and they are less than original correlation value.There is not an obvious increase on values with lag.But still it’s proves there is a strong relation between two index.But which index affects the other?Which index should we use as a independent variable to analyse other economic indicators’s behaviours?We should Grenger casuality test to decide.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grangertest</span>(PPI <span class="sc">~</span> CPI, <span class="at">order =</span> <span class="dv">2</span>, <span class="at">data =</span> table2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grangertest</span>(PPI <span class="sc">~</span> CPI, <span class="at">order =</span> <span class="dv">2</span>, <span class="at">data =</span> table2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Granger causality test
 
@@ -280,7 +274,7 @@ Model 2: PPI ~ Lags(PPI, 1:2)
 1     64                 
 2     66 -2 2.3675 0.1019</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grangertest</span>(CPI <span class="sc">~</span> PPI, <span class="at">order =</span> <span class="dv">2</span>, <span class="at">data =</span> table2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grangertest</span>(CPI <span class="sc">~</span> PPI, <span class="at">order =</span> <span class="dv">2</span>, <span class="at">data =</span> table2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Granger causality test
 
@@ -295,8 +289,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>First Granger test examines if CPI affects PPI values and it has a p-value as 0.1019 which is too high.That means CPI values does not have a effect on PPI values. On the other hand,second Granger test examinse if PPI affects CPI values and it has a p-value as 6.712e-05 which is very low.Generally p-values less than 0.05 considered statistically meaningful.Thus,we can say PPI values does affect CPI values. Finally we can say PPI can be independent variable for our further analysis.That’s why we choose PPI as our inflation rate. Before continue on further analysis we will do a regression analysis between PPI and CPI to better understanding of their relation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>reg_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(CPI <span class="sc">~</span> PPI, <span class="at">data =</span> data1)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>reg_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(CPI <span class="sc">~</span> PPI, <span class="at">data =</span> data1)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -331,12 +325,13 @@ F-statistic: 119.3 on 1 and 69 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>CPI = 13.99 + 0.49669.PPI</p>
 <p>And there is graph with regression line.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>reg_graph<span class="ot">&lt;-</span><span class="fu">ggplot</span>(data1, <span class="fu">aes</span>(<span class="at">x =</span> PPI, <span class="at">y =</span> CPI)) <span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) </span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Regression Analysis: PPI vs CPI"</span>,</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Producer Price Index (PPI)"</span>,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Consumer Price Index (CPI)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data1<span class="sc">$</span>Tarih <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="fu">paste0</span>(<span class="st">"01-"</span>, data1<span class="sc">$</span>Tarih), <span class="at">format =</span> <span class="st">"%d-%m-%Y"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>reg_graph<span class="ot">&lt;-</span><span class="fu">ggplot</span>(data1, <span class="fu">aes</span>(<span class="at">x =</span> PPI, <span class="at">y =</span> CPI)) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Regression Analysis: PPI vs CPI"</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Producer Price Index (PPI)"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Consumer Price Index (CPI)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$x
 [1] "Producer Price Index (PPI)"
@@ -350,19 +345,20 @@ $title
 attr(,"class")
 [1] "labels"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>  reg_graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>reg_graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>`` ```</p>
 
 
 

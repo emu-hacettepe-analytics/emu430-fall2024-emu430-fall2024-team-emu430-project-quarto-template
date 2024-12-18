@@ -23,6 +23,8 @@ setwd("C:/Users/Barış/Desktop/vfdbcbcv")
 ppi <- read_excel("ppi.xlsx")
 cpi <- read_excel("cpı.xlsx")
 table2 <- left_join(ppi,cpi, by ="Tarih")
+table2$Tarih <- as.Date(paste0("01-", table2$Tarih), format = "%d-%m-%Y")
+
 
 ```
 
@@ -119,15 +121,19 @@ CPI = 13.99 + 0.49669.PPI
 And there is graph with regression line.
 
 ```{r}
+data1$Tarih <- as.Date(paste0("01-", data1$Tarih), format = "%d-%m-%Y")
 reg_graph<-ggplot(data1, aes(x = PPI, y = CPI)) +
   geom_point(color = "blue") + 
   geom_smooth(method = "lm", color = "red", se = TRUE) 
   labs(title = "Regression Analysis: PPI vs CPI",
        x = "Producer Price Index (PPI)",
        y = "Consumer Price Index (CPI)")
-  reg_graph
+  
+```
+
+```{r}
+reg_graph
 ```
 
 
 
-\`\` \`\`\`
