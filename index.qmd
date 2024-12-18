@@ -5,7 +5,7 @@ sidebar: false
 
 This is our project webpage.
 
-Please stay tuned to follow our project activities.
+Please stay tuned! to follow our project activities.
 
 # Team Members
 

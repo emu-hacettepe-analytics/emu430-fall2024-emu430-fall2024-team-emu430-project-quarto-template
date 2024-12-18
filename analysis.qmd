@@ -10,6 +10,24 @@ Based on this analysis we will choose PPI or CPI as our baseline to compare it's
 
 First let's look the table we will use for analysis.We used annual percentage changes of the variables as index values.
 
+```{r include=FALSE}
+library(tidyverse)
+library(readxl)
+library(ggthemes)
+library(lmtest)
+
+```
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+ppi <- read_excel("ppi.xlsx")
+cpi <- read_excel("cpı.xlsx")
+table2 <- left_join(ppi,cpi, by ="Tarih")
+
+```
+
+First let's look the table we will use for analysis.We used annual percentage changes of the variables as index values.
+
 ```{r}
 head(table2,10)
 ```
@@ -17,6 +35,7 @@ head(table2,10)
 We will plot a line graph where we will show both index as a variable over time.This will help us to visualize their relation.
 
 ```{r}
+
 graph_line1 <- ggplot(table2, aes(x = Tarih)) +      
   geom_line(aes(y = PPI, color = "PP Index(%)" )) +
   geom_line(aes(y = CPI, color = "Cp Index(%)")) +
@@ -43,17 +62,23 @@ print(cor_test$p.value)
 This correlation value supports visual data and says there is really strong relation between them.Also, p-value(1.087791e-16) is very low.Usually,results are considered significant if they are less than 0.5.In this case, the probability of the course of the situation arising by chance is extremely low.But what happens if there is some lag between interaction.Let's do some lagged correlation tests.
 
 ```{r}
-cor_lag1 <- cor(data1$PPI_lag1, data1$PPI, use = "complete.obs")
-cor_lag2 <- cor(data1$PPI_lag2, data1$PPI, use = "complete.obs")
-cor_lag3 <- cor(data1$PPI_lag3, data1$PPI, use = "complete.obs")
-cor_lag4 <- cor(data1$PPI_lag4, data1$PPI, use = "complete.obs")
+data1 <- table2 %>%
+  mutate(PPI_lag1 = lag(PPI, 1),
+        PPI_lag2 = lag(PPI, 2),
+         PPI_lag3 = lag(PPI, 3),
+         PPI_lag4 = lag(PPI, 4),PPI_lag5 = lag(PPI, 5))
+
+cor_lag1 <- cor(data1$PPI_lag1, data1$CPI, use = "complete.obs")
+cor_lag2 <- cor(data1$PPI_lag2, data1$CPI, use = "complete.obs")
+cor_lag3 <- cor(data1$PPI_lag3, data1$CPI, use = "complete.obs")
+cor_lag4 <- cor(data1$PPI_lag4, data1$CPI, use = "complete.obs")
 print(cor_lag1)
 print(cor_lag2)
 print(cor_lag3)
 print(cor_lag4)
 ```
 
-Highest correlation is 0.979 with a 1 unit time lag.After 1 unit time lag,correlation values is decreasing but all of these correlation values is higher than normal correlation values.0.979 is a very huge value for correlation and it's proves there is a strong relation between two index.But which index affects the other?Which index should we use as a independent variable to analyse other economic indicators's behaviours?We should Grenger casuality test to decide.
+Highest correlation is 0.809 with a 1 unit time lag.More than 1 unit time lag,correlation values is decreasing and they are less than original correlation value.There is not an obvious increase on values with lag.But still it's proves there is a strong relation between two index.But which index affects the other?Which index should we use as a independent variable to analyse other economic indicators's behaviours?We should Grenger casuality test to decide.
 
 ```{r}
 grangertest(PPI ~ CPI, order = 2, data = table2)
@@ -100,8 +125,9 @@ reg_graph<-ggplot(data1, aes(x = PPI, y = CPI)) +
   labs(title = "Regression Analysis: PPI vs CPI",
        x = "Producer Price Index (PPI)",
        y = "Consumer Price Index (CPI)")
+  reg_graph
 ```
 
-```{r}
-reg_graph
-```
+
+
+\`\` \`\`\`
