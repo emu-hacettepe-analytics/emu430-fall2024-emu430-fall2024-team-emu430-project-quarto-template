@@ -134,3 +134,81 @@ reg_graph<-ggplot(data1, aes(x = PPI, y = CPI)) +
 ```{r}
 reg_graph
 ```
+
+
+```{r}
+library(readxl)      
+library(ggplot2)     
+library(dplyr)       
+library(ggthemes)
+```
+
+```{r}
+data <- read_excel("DATA.xlsx") |> 
+  mutate(Date = as.Date(paste0("01-", Date), format = "%d-%m-%Y"))
+
+```
+
+```{r}
+head(data, n = 10)
+```
+
+```{r}
+scale_usd <- max(data$`PPI (%)`, na.rm = TRUE) / max(data$USD, na.rm = TRUE)
+scale_import <- max(data$`PPI (%)`, na.rm = TRUE) / max(data$`Import Unit Value Index (TL)`, na.rm = TRUE)
+
+```
+
+```{r}
+graph_usd <- data |> 
+  ggplot(aes(x = Date)) +
+  geom_line(aes(y = `PPI (%)`, color = "PPI (%)")) +
+  geom_line(aes(y = USD * scale_usd, color = "Exchange Rate (USD)")) +
+  scale_y_continuous(
+    name = "PPI (%)",
+    sec.axis = sec_axis(~ . / scale_usd, name = "Exchange Rate (USD)")
+  ) +
+  scale_color_manual(values = c("PPI (%)" = "blue", "Exchange Rate (USD)" = "red")) +
+  labs(title = "PPI (%) vs Exchange Rate (USD) Over Time",
+       x = "Date",
+       y = "PPI (%)",
+       color = "Variables") +
+  theme_minimal() +
+  theme_economist()
+graph_usd
+```
+```{r}
+graph_import <- data |> 
+  ggplot(aes(x = Date)) +
+  geom_line(aes(y = `PPI (%)`, color = "PPI (%)")) +
+  geom_line(aes(y = `Import Unit Value Index (TL)` * scale_import, color = "Import Price Index (TL)")) +
+  scale_y_continuous(
+    name = "PPI (%)",
+    sec.axis = sec_axis(~ . / scale_import, name = "Import Price Index (TL)")
+  ) +
+  scale_color_manual(values = c("PPI (%)" = "blue", "Import Price Index (TL)" = "orange")) +
+  labs(title = "PPI (%) vs Import Price Index (TL) Over Time",
+       x = "Date",
+       y = "PPI (%)",
+       color = "Variables") +
+  theme_minimal() +
+  theme_economist()
+graph_import
+```
+```{r}
+library(dplyr)
+
+cor_ppi_usd <- data %>%
+  summarize(correlation = cor(`PPI (%)`, USD, use = "complete.obs", method = "pearson"))
+```
+
+```{r}
+cor_ppi_usd$correlation
+```
+```{r}
+cor_ppi_import$correlation
+```
+```{r}
+
+```
+
