@@ -135,32 +135,31 @@ reg_graph<-ggplot(data1, aes(x = PPI, y = CPI)) +
 reg_graph
 ```
 
-
-```{r}
+```{r include=FALSE}
 library(readxl)      
 library(ggplot2)     
 library(dplyr)       
 library(ggthemes)
 ```
 
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+dataefe <- read_excel("DATA.xlsx")
+dataefe$Date <- as.Date(paste0("01-", dataefe$Date), format = "%d-%m-%Y")
+```
+
 ```{r}
-data <- read_excel("DATA.xlsx") |> 
-  mutate(Date = as.Date(paste0("01-", Date), format = "%d-%m-%Y"))
+head(dataefe, n = 10)
+```
+
+```{r}
+scale_usd <- max(dataefe$`PPI (%)`, na.rm = TRUE) / max(dataefe$USD, na.rm = TRUE)
+scale_import <- max(dataefe$`PPI (%)`, na.rm = TRUE) / max(dataefe$`Import Unit Value Index (TL)`, na.rm = TRUE)
 
 ```
 
 ```{r}
-head(data, n = 10)
-```
-
-```{r}
-scale_usd <- max(data$`PPI (%)`, na.rm = TRUE) / max(data$USD, na.rm = TRUE)
-scale_import <- max(data$`PPI (%)`, na.rm = TRUE) / max(data$`Import Unit Value Index (TL)`, na.rm = TRUE)
-
-```
-
-```{r}
-graph_usd <- data |> 
+graph_usd <- dataefe |> 
   ggplot(aes(x = Date)) +
   geom_line(aes(y = `PPI (%)`, color = "PPI (%)")) +
   geom_line(aes(y = USD * scale_usd, color = "Exchange Rate (USD)")) +
@@ -177,8 +176,9 @@ graph_usd <- data |>
   theme_economist()
 graph_usd
 ```
+
 ```{r}
-graph_import <- data |> 
+graph_import <- dataefe |> 
   ggplot(aes(x = Date)) +
   geom_line(aes(y = `PPI (%)`, color = "PPI (%)")) +
   geom_line(aes(y = `Import Unit Value Index (TL)` * scale_import, color = "Import Price Index (TL)")) +
@@ -195,20 +195,25 @@ graph_import <- data |>
   theme_economist()
 graph_import
 ```
+
 ```{r}
 library(dplyr)
 
-cor_ppi_usd <- data %>%
+cor_ppi_usd <- dataefe %>%
   summarize(correlation = cor(`PPI (%)`, USD, use = "complete.obs", method = "pearson"))
+cor_ppi_import <- dataefe %>%
+  summarize(correlation = cor(`PPI (%)`, `Import Unit Value Index (TL)`, use = "complete.obs", method = "pearson"))
+
 ```
 
 ```{r}
 cor_ppi_usd$correlation
 ```
+
 ```{r}
 cor_ppi_import$correlation
 ```
+
 ```{r}
 
 ```
-
