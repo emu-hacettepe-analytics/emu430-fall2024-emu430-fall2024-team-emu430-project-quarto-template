@@ -1,1 +1,30 @@
 /* css styles */
+/* Sayfa başlıkları */
+h1, h2, h3 {
+  color: #2C3E50;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Navigasyon menüsü */
+.navbar {
+  background-color: #34495E;
+}
+
+.navbar a {
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #1ABC9C;
+  color: white;
+}
+
+/* Footer */
+footer {
+  background-color: #2C3E50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
