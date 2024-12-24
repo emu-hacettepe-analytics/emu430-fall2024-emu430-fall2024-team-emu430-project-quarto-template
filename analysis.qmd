@@ -227,7 +227,7 @@ library(ggthemes)
 ```{r include=FALSE}
 setwd("C:/Users/Barış/Desktop/vfdbcbcv")
 data_yusuf <- read_excel("data_rhapsody.xlsx", sheet = "Sheet1")
-data_yusuf <- data_yusuf[, c("DATE", "CPI", "IR", "CCI")]
+data_yusuf <- data_yusuf[, c("DATE", "PPI", "IR", "CCI")]
 colnames(data_yusuf) <- c("DATE", "PPI", "IR", "CCI")
 data_yusuf$DATE <- as.Date(paste0(data_yusuf$DATE, "-01"), format = "%Y-%m-%d")
 data_yusuf0<-data_yusuf[, c("DATE","PPI","IR")]
@@ -260,7 +260,7 @@ print(cortest_interest$p.value)
 
 ```
 
-Correlation value is 0.638 which means these two indicators has a moderatly strong relation.Also p-value is less than 0.05 and this indicates this correlation value is significantly meaningfull.To conclude,we can say PPI and Interest Rate indicators can affects each other moderatly.
+Correlation value is 0.119 which means these two indicators does not have a strong relation.Also p-value is more than 0.05 and this indicates this correlation value is NOT significantly meaningfull.To conclude,we can say we did not find a clue about relation between PPI and Interest Rate indicators.
 
 **4-PRODUCER PRICE INDEX VS CONSUMER CONFIDENCE INDEX**
 
@@ -271,7 +271,7 @@ First let's take a look at our data frame:
 ```{r include=FALSE}
 setwd("C:/Users/Barış/Desktop/vfdbcbcv")
 data_yusuf <- read_excel("data_rhapsody.xlsx", sheet = "Sheet1")
-data_yusuf <- data_yusuf[, c("DATE", "CPI", "IR", "CCI")]
+data_yusuf <- data_yusuf[, c("DATE", "PPI", "IR", "CCI")]
 colnames(data_yusuf) <- c("DATE", "PPI", "IR", "CCI")
 data_yusuf$DATE <- as.Date(paste0(data_yusuf$DATE, "-01"), format = "%Y-%m-%d")
 data_yusuf1<-data_yusuf[, c("DATE","PPI","CCI")]
@@ -302,7 +302,7 @@ cortest_confidence <- cor.test(data_yusuf$PPI, data_yusuf$CCI)
 print(cortest_confidence$p.value)
 ```
 
-0.326 is too low to say these indicators has a notable relation and also p-value is low enough to be statisticaly meaningful but it is lower than our other correlation p-values.So we can easily say we can not confirm that there is a strong relation bewteen PPI and CCI.
+0.422 is relatively low to say these indicators has a notable relation but p-value is low enough to be statisticaly meaningful.So we can easily say we can confirm that there is a relation bewteen PPI and CCI and this relation is not strong.
 
 ```{r}
 library(readxl)      
@@ -407,9 +407,9 @@ cor_ppi_import$correlation
 
 • Import Price Index- Producer Price Index (PPI)= 0.41490
 
-• Interest Rates- Producer Price Index (PPI)= : 0.63844
+• Interest Rates- Producer Price Index (PPI)= 0.11986
 
-• Consumer Confidence Index- Producer Price Index (PPI)= 0.32652
+• Consumer Confidence Index- Producer Price Index (PPI)= 0.42212
 
 • Consumer Price Index- Producer Price Index (PPI)= 0.7959363
 
@@ -421,7 +421,7 @@ We can choose the four most important and influential variables from the dataset
 
 -   Housing Price Index- Producer Price Index (PPI)= 0.888596687452896
 
--   Interest Rates- Producer Price Index (PPI)= : 0.63844
+-    Consumer Confidence Index- Producer Price Index (PPI)= 0.42212
 
 -   Credit Card Usage- Producer Price Index (PPI)= 0.60305
 
@@ -430,7 +430,7 @@ We can choose the four most important and influential variables from the dataset
 ```{r}
 labels <- c("Consumer Price Index", "Housing Price Index", 
             "Interest Rates", "Consumer Confidence Index")
-correlations <- c(0.7959363, 0.88859, 0.63844,0.30305)
+correlations <- c(0.7959363, 0.88859, 0.42212,0.60305)
 total <- sum(correlations)
 percentages <- (correlations / total) * 100
 

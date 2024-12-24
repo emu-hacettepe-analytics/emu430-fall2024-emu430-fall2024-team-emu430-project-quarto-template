@@ -444,16 +444,16 @@ F-statistic: 119.3 on 1 and 69 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code># A tibble: 10 × 3
    DATE         PPI    IR
    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;
- 1 2019-01-01 20.4   30.5
- 2 2019-02-01 19.7   26.2
- 3 2019-03-01 19.7   22.8
- 4 2019-04-01 19.5   24.3
- 5 2019-05-01 18.7   27.8
- 6 2019-06-01 15.7   28.6
- 7 2019-07-01 16.6   26.9
- 8 2019-08-01 15.0   21.2
- 9 2019-09-01  9.26  18.2
-10 2019-10-01  8.55  17.2</code></pre>
+ 1 2019-01-01 32.9   30.5
+ 2 2019-02-01 29.6   26.2
+ 3 2019-03-01 29.6   22.8
+ 4 2019-04-01 30.1   24.3
+ 5 2019-05-01 28.7   27.8
+ 6 2019-06-01 25.0   28.6
+ 7 2019-07-01 21.7   26.9
+ 8 2019-08-01 13.4   21.2
+ 9 2019-09-01  2.45  18.2
+10 2019-10-01  1.7   17.2</code></pre>
 </div>
 </div>
 <p>Now we will sketch a graph line for visualization purposes.</p>
@@ -481,15 +481,15 @@ F-statistic: 119.3 on 1 and 69 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>cor_interest <span class="ot">&lt;-</span> <span class="fu">cor</span>(data_yusuf<span class="sc">$</span>PPI, data_yusuf<span class="sc">$</span>IR)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_interest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6384482</code></pre>
+<pre><code>[1] 0.1198634</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>cortest_interest <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(data_yusuf<span class="sc">$</span>PPI, data_yusuf<span class="sc">$</span>IR)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cortest_interest<span class="sc">$</span>p.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.099621e-09</code></pre>
+<pre><code>[1] 0.3194176</code></pre>
 </div>
 </div>
-<p>Correlation value is 0.638 which means these two indicators has a moderatly strong relation.Also p-value is less than 0.05 and this indicates this correlation value is significantly meaningfull.To conclude,we can say PPI and Interest Rate indicators can affects each other moderatly.</p>
+<p>Correlation value is 0.119 which means these two indicators does not have a strong relation.Also p-value is more than 0.05 and this indicates this correlation value is NOT significantly meaningfull.To conclude,we can say we did not find a clue about relation between PPI and Interest Rate indicators.</p>
 <p><strong>4-PRODUCER PRICE INDEX VS CONSUMER CONFIDENCE INDEX</strong></p>
 <p>This study analyzes the relationship between the Producer Price Index (PPI) and the Consumer Confidence Index (CCI). While PPI measures changes in the prices of goods and services at the producer level, the Consumer Confidence Index reflects the sentiment and expectations of consumers regarding the economy. Understanding the interaction between these two indicators is crucial for assessing the impact of price changes on consumer perceptions and behavior. Using historical data, the study examines how changes in PPI influence consumer confidence and evaluates the direction and magnitude of this relationship through various statistical methods.</p>
 <p>First let’s take a look at our data frame:</p>
@@ -499,16 +499,16 @@ F-statistic: 119.3 on 1 and 69 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code># A tibble: 10 × 3
    DATE         PPI   CCI
    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;
- 1 2019-01-01 20.4   127.
- 2 2019-02-01 19.7   131.
- 3 2019-03-01 19.7   140.
- 4 2019-04-01 19.5   139.
- 5 2019-05-01 18.7   143.
- 6 2019-06-01 15.7   153.
- 7 2019-07-01 16.6   148.
- 8 2019-08-01 15.0   130.
- 9 2019-09-01  9.26  139.
-10 2019-10-01  8.55  142.</code></pre>
+ 1 2019-01-01 32.9   127.
+ 2 2019-02-01 29.6   131.
+ 3 2019-03-01 29.6   140.
+ 4 2019-04-01 30.1   139.
+ 5 2019-05-01 28.7   143.
+ 6 2019-06-01 25.0   153.
+ 7 2019-07-01 21.7   148.
+ 8 2019-08-01 13.4   130.
+ 9 2019-09-01  2.45  139.
+10 2019-10-01  1.7   142.</code></pre>
 </div>
 </div>
 <p>And again as we have done all above we will sketch a line graph:</p>
@@ -532,15 +532,15 @@ F-statistic: 119.3 on 1 and 69 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cor_confidence <span class="ot">&lt;-</span> <span class="fu">cor</span>(data_yusuf<span class="sc">$</span>PPI, data_yusuf<span class="sc">$</span>CCI)</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_confidence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3265229</code></pre>
+<pre><code>[1] 0.4221268</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>cortest_confidence <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(data_yusuf<span class="sc">$</span>PPI, data_yusuf<span class="sc">$</span>CCI)</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cortest_confidence<span class="sc">$</span>p.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.00545086</code></pre>
+<pre><code>[1] 0.0002456725</code></pre>
 </div>
 </div>
-<p>0.326 is too low to say these indicators has a notable relation and also p-value is low enough to be statisticaly meaningful but it is lower than our other correlation p-values.So we can easily say we can not confirm that there is a strong relation bewteen PPI and CCI.</p>
+<p>0.422 is relatively low to say these indicators has a notable relation but p-value is low enough to be statisticaly meaningful.So we can easily say we can confirm that there is a relation bewteen PPI and CCI and this relation is not strong.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)      </span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)     </span>
@@ -645,22 +645,22 @@ F-statistic: 119.3 on 1 and 69 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>• Energy Price Index- Producer Price Index (PPI)= 0.25689</p>
 <p>• Housing Price Index- Producer Price Index (PPI)= 0.88859</p>
 <p>• Import Price Index- Producer Price Index (PPI)= 0.41490</p>
-<p>• Interest Rates- Producer Price Index (PPI)= : 0.63844</p>
-<p>• Consumer Confidence Index- Producer Price Index (PPI)= 0.32652</p>
+<p>• Interest Rates- Producer Price Index (PPI)= 0.11986</p>
+<p>• Consumer Confidence Index- Producer Price Index (PPI)= 0.42212</p>
 <p>• Consumer Price Index- Producer Price Index (PPI)= 0.7959363</p>
 <p>• Credit Card Usage- Producer Price Index (PPI)= 0.60305</p>
 <p>We can choose the four most important and influential variables from the dataset we are using, then run a regression analysis to see which factors have the biggest effects on the PPI. We may learn more about the characteristics of the models we should concentrate on and how to enhance them to increase their efficacy or predictive power after performing this regression study. Our best 4 atrribute:</p>
 <ul>
 <li><p>Consumer Price Index- Producer Price Index (PPI)= 0.7959363</p></li>
 <li><p>Housing Price Index- Producer Price Index (PPI)= 0.888596687452896</p></li>
-<li><p>Interest Rates- Producer Price Index (PPI)= : 0.63844</p></li>
+<li><p>Consumer Confidence Index- Producer Price Index (PPI)= 0.42212</p></li>
 <li><p>Credit Card Usage- Producer Price Index (PPI)= 0.60305</p></li>
 </ul>
 <p><strong>PIE CHART FOR CORRELATION VALUES BETWEEN PPI AND FOUR INDICATORS</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Consumer Price Index"</span>, <span class="st">"Housing Price Index"</span>, </span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Interest Rates"</span>, <span class="st">"Consumer Confidence Index"</span>)</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.7959363</span>, <span class="fl">0.88859</span>, <span class="fl">0.63844</span>,<span class="fl">0.30305</span>)</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.7959363</span>, <span class="fl">0.88859</span>, <span class="fl">0.42212</span>,<span class="fl">0.60305</span>)</span>
 <span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> <span class="fu">sum</span>(correlations)</span>
 <span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>percentages <span class="ot">&lt;-</span> (correlations <span class="sc">/</span> total) <span class="sc">*</span> <span class="dv">100</span></span>
 <span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a></span>
