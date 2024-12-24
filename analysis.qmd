@@ -214,6 +214,96 @@ print(cor_lag5_ppi_ccu)
 
 As the lag time increases, the correlation value increases. After the 4th and 5th delay, the rate of increase slows down.So we can say PPI values causes CCU Therefore, we can say that PPI has a delayed effect on credit card usage which is higher than correlation value without time lag.
 
+**3-PRODUCER PRICE INDEX VS INTEREST RATE**
+
+In this study, the relationship between the Producer Price Index (PPI) and interest rates has been analyzed. While PPI measures changes in the prices of goods and services at the producer level, interest rates are a critical macroeconomic indicator influencing economic growth, consumption, and investment decisions. The interaction between these two variables is significant for understanding inflation dynamics and supporting economic policy decisions. Using historical data, the study evaluates the impact of changes in PPI on interest rates and examines the direction and magnitude of this relationship through various statistical methods.First let's take a look at our data table:
+
+```{r include=FALSE}
+library(readxl)      
+library(tidyverse)       
+library(ggthemes)
+```
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+data_yusuf <- read_excel("data_rhapsody.xlsx", sheet = "Sheet1")
+data_yusuf <- data_yusuf[, c("DATE", "CPI", "IR", "CCI")]
+colnames(data_yusuf) <- c("DATE", "PPI", "IR", "CCI")
+data_yusuf$DATE <- as.Date(paste0(data_yusuf$DATE, "-01"), format = "%Y-%m-%d")
+data_yusuf0<-data_yusuf[, c("DATE","PPI","IR")]
+
+```
+
+```{r}
+head(data_yusuf0,10)
+
+```
+
+Now we will sketch a graph line for visualization purposes.
+
+```{r}
+ggplot(data=data_yusuf, aes(x=DATE)) +
+  geom_line(aes(y=PPI, color="PPI"), size=1) +
+  geom_line(aes(y=IR, color="Interest Rate (IR)"), size=1, linetype="dashed") +
+  labs(title="PPI vs Interest Rate Over Time", x="Date", y="Values", color="Legend") +
+  theme_economist() +
+  scale_color_economist()
+```
+
+Because we need analytical data we will implement a correlation test for this two economic indicators.
+
+```{r}
+cor_interest <- cor(data_yusuf$PPI, data_yusuf$IR)
+print(cor_interest)
+cortest_interest <- cor.test(data_yusuf$PPI, data_yusuf$IR)
+print(cortest_interest$p.value)
+
+```
+
+Correlation value is 0.638 which means these two indicators has a moderatly strong relation.Also p-value is less than 0.05 and this indicates this correlation value is significantly meaningfull.To conclude,we can say PPI and Interest Rate indicators can affects each other moderatly.
+
+**4-PRODUCER PRICE INDEX VS CONSUMER CONFIDENCE INDEX**
+
+This study analyzes the relationship between the Producer Price Index (PPI) and the Consumer Confidence Index (CCI). While PPI measures changes in the prices of goods and services at the producer level, the Consumer Confidence Index reflects the sentiment and expectations of consumers regarding the economy. Understanding the interaction between these two indicators is crucial for assessing the impact of price changes on consumer perceptions and behavior. Using historical data, the study examines how changes in PPI influence consumer confidence and evaluates the direction and magnitude of this relationship through various statistical methods.
+
+First let's take a look at our data frame:
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+data_yusuf <- read_excel("data_rhapsody.xlsx", sheet = "Sheet1")
+data_yusuf <- data_yusuf[, c("DATE", "CPI", "IR", "CCI")]
+colnames(data_yusuf) <- c("DATE", "PPI", "IR", "CCI")
+data_yusuf$DATE <- as.Date(paste0(data_yusuf$DATE, "-01"), format = "%Y-%m-%d")
+data_yusuf1<-data_yusuf[, c("DATE","PPI","CCI")]
+```
+
+```{r}
+head(data_yusuf1,10)
+```
+
+And again as we have done all above we will sketch a line graph:
+
+```{r}
+ggplot(data=data_yusuf, aes(x=DATE)) +
+  geom_line(aes(y=PPI, color="PPI"), size=1) +
+  geom_line(aes(y=CCI, color="Consumer Confidence Index (CCI)"), size=1, linetype="dashed") +
+  labs(title="PPI vs Consumer Confidence Index Over Time", x="Date", y="Values", color="Legend") +
+  theme_economist() +
+  scale_color_economist()
+
+```
+
+We can not clearly see their relation by just looking at it therefore we will conduct a correlation test again.
+
+```{r}
+cor_confidence <- cor(data_yusuf$PPI, data_yusuf$CCI)
+print(cor_confidence)
+cortest_confidence <- cor.test(data_yusuf$PPI, data_yusuf$CCI)
+print(cortest_confidence$p.value)
+```
+
+0.326 is too low to say these indicators has a notable relation and also p-value is low enough to be statisticaly meaningful but it is lower than our other correlation p-values.So we can easily say we can not confirm that there is a strong relation bewteen PPI and CCI.
+
 ```{r}
 library(readxl)      
 library(ggplot2)     
@@ -302,5 +392,56 @@ cor_ppi_import$correlation
 ```
 
 ```{r}
+
+```
+
+**INDICATORS WHICH HAS MOST STRONG RELATİON WITH PPI**
+
+**Korelasyon katsayıları:**
+
+• Exchange Rates- Producer Price Index (PPI)= 0.30804
+
+• Energy Price Index- Producer Price Index (PPI)= 0.25689
+
+• Housing Price Index- Producer Price Index (PPI)= 0.88859
+
+• Import Price Index- Producer Price Index (PPI)= 0.41490
+
+• Interest Rates- Producer Price Index (PPI)= : 0.63844
+
+• Consumer Confidence Index- Producer Price Index (PPI)= 0.32652
+
+• Consumer Price Index- Producer Price Index (PPI)= 0.7959363
+
+• Credit Card Usage- Producer Price Index (PPI)= 0.60305
+
+We can choose the four most important and influential variables from the dataset we are using, then run a regression analysis to see which factors have the biggest effects on the PPI. We may learn more about the characteristics of the models we should concentrate on and how to enhance them to increase their efficacy or predictive power after performing this regression study. Our best 4 atrribute:
+
+-   Consumer Price Index- Producer Price Index (PPI)= 0.7959363
+
+-   Housing Price Index- Producer Price Index (PPI)= 0.888596687452896
+
+-   Interest Rates- Producer Price Index (PPI)= : 0.63844
+
+-   Credit Card Usage- Producer Price Index (PPI)= 0.60305
+
+**PIE CHART FOR CORRELATION VALUES BETWEEN PPI AND FOUR INDICATORS**
+
+```{r}
+labels <- c("Consumer Price Index", "Housing Price Index", 
+            "Interest Rates", "Consumer Confidence Index")
+correlations <- c(0.7959363, 0.88859, 0.63844,0.30305)
+total <- sum(correlations)
+percentages <- (correlations / total) * 100
+
+
+par(mar = c(2, 2, 2, 2))  
+pie(
+  percentages, 
+  labels = paste0(labels, "\n", sprintf("%.1f%%", percentages)), 
+  main = ("Etki Yuzdeleri: PPI ile Korelasyon"),
+  col = rainbow(length(labels)),
+  cex = 0.8  
+)
 
 ```

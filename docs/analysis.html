@@ -436,14 +436,119 @@ F-statistic: 119.3 on 1 and 69 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>As the lag time increases, the correlation value increases. After the 4th and 5th delay, the rate of increase slows down.So we can say PPI values causes CCU Therefore, we can say that PPI has a delayed effect on credit card usage which is higher than correlation value without time lag.</p>
+<p><strong>3-PRODUCER PRICE INDEX VS INTEREST RATE</strong></p>
+<p>In this study, the relationship between the Producer Price Index (PPI) and interest rates has been analyzed. While PPI measures changes in the prices of goods and services at the producer level, interest rates are a critical macroeconomic indicator influencing economic growth, consumption, and investment decisions. The interaction between these two variables is significant for understanding inflation dynamics and supporting economic policy decisions. Using historical data, the study evaluates the impact of changes in PPI on interest rates and examines the direction and magnitude of this relationship through various statistical methods.First let’s take a look at our data table:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)      </span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)     </span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)       </span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_yusuf0,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   DATE         PPI    IR
+   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;
+ 1 2019-01-01 20.4   30.5
+ 2 2019-02-01 19.7   26.2
+ 3 2019-03-01 19.7   22.8
+ 4 2019-04-01 19.5   24.3
+ 5 2019-05-01 18.7   27.8
+ 6 2019-06-01 15.7   28.6
+ 7 2019-07-01 16.6   26.9
+ 8 2019-08-01 15.0   21.2
+ 9 2019-09-01  9.26  18.2
+10 2019-10-01  8.55  17.2</code></pre>
+</div>
+</div>
+<p>Now we will sketch a graph line for visualization purposes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>data_yusuf, <span class="fu">aes</span>(<span class="at">x=</span>DATE)) <span class="sc">+</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>PPI, <span class="at">color=</span><span class="st">"PPI"</span>), <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>IR, <span class="at">color=</span><span class="st">"Interest Rate (IR)"</span>), <span class="at">size=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"PPI vs Interest Rate Over Time"</span>, <span class="at">x=</span><span class="st">"Date"</span>, <span class="at">y=</span><span class="st">"Values"</span>, <span class="at">color=</span><span class="st">"Legend"</span>) <span class="sc">+</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">+</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_economist</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Because we need analytical data we will implement a correlation test for this two economic indicators.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>cor_interest <span class="ot">&lt;-</span> <span class="fu">cor</span>(data_yusuf<span class="sc">$</span>PPI, data_yusuf<span class="sc">$</span>IR)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_interest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6384482</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>cortest_interest <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(data_yusuf<span class="sc">$</span>PPI, data_yusuf<span class="sc">$</span>IR)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cortest_interest<span class="sc">$</span>p.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.099621e-09</code></pre>
+</div>
+</div>
+<p>Correlation value is 0.638 which means these two indicators has a moderatly strong relation.Also p-value is less than 0.05 and this indicates this correlation value is significantly meaningfull.To conclude,we can say PPI and Interest Rate indicators can affects each other moderatly.</p>
+<p><strong>4-PRODUCER PRICE INDEX VS CONSUMER CONFIDENCE INDEX</strong></p>
+<p>This study analyzes the relationship between the Producer Price Index (PPI) and the Consumer Confidence Index (CCI). While PPI measures changes in the prices of goods and services at the producer level, the Consumer Confidence Index reflects the sentiment and expectations of consumers regarding the economy. Understanding the interaction between these two indicators is crucial for assessing the impact of price changes on consumer perceptions and behavior. Using historical data, the study examines how changes in PPI influence consumer confidence and evaluates the direction and magnitude of this relationship through various statistical methods.</p>
+<p>First let’s take a look at our data frame:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_yusuf1,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   DATE         PPI   CCI
+   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;
+ 1 2019-01-01 20.4   127.
+ 2 2019-02-01 19.7   131.
+ 3 2019-03-01 19.7   140.
+ 4 2019-04-01 19.5   139.
+ 5 2019-05-01 18.7   143.
+ 6 2019-06-01 15.7   153.
+ 7 2019-07-01 16.6   148.
+ 8 2019-08-01 15.0   130.
+ 9 2019-09-01  9.26  139.
+10 2019-10-01  8.55  142.</code></pre>
+</div>
+</div>
+<p>And again as we have done all above we will sketch a line graph:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>data_yusuf, <span class="fu">aes</span>(<span class="at">x=</span>DATE)) <span class="sc">+</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>PPI, <span class="at">color=</span><span class="st">"PPI"</span>), <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>CCI, <span class="at">color=</span><span class="st">"Consumer Confidence Index (CCI)"</span>), <span class="at">size=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"PPI vs Consumer Confidence Index Over Time"</span>, <span class="at">x=</span><span class="st">"Date"</span>, <span class="at">y=</span><span class="st">"Values"</span>, <span class="at">color=</span><span class="st">"Legend"</span>) <span class="sc">+</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>() <span class="sc">+</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_economist</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can not clearly see their relation by just looking at it therefore we will conduct a correlation test again.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cor_confidence <span class="ot">&lt;-</span> <span class="fu">cor</span>(data_yusuf<span class="sc">$</span>PPI, data_yusuf<span class="sc">$</span>CCI)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cor_confidence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3265229</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>cortest_confidence <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(data_yusuf<span class="sc">$</span>PPI, data_yusuf<span class="sc">$</span>CCI)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cortest_confidence<span class="sc">$</span>p.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.00545086</code></pre>
+</div>
+</div>
+<p>0.326 is too low to say these indicators has a notable relation and also p-value is low enough to be statisticaly meaningful but it is lower than our other correlation p-values.So we can easily say we can not confirm that there is a strong relation bewteen PPI and CCI.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)      </span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)     </span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)       </span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dataefe, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dataefe, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 4
    Date       `PPI (%)`   USD `Import Unit Value Index (TL)`
@@ -461,77 +566,119 @@ F-statistic: 119.3 on 1 and 69 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>scale_usd <span class="ot">&lt;-</span> <span class="fu">max</span>(dataefe<span class="sc">$</span><span class="st">`</span><span class="at">PPI (%)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">max</span>(dataefe<span class="sc">$</span>USD, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>scale_import <span class="ot">&lt;-</span> <span class="fu">max</span>(dataefe<span class="sc">$</span><span class="st">`</span><span class="at">PPI (%)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">max</span>(dataefe<span class="sc">$</span><span class="st">`</span><span class="at">Import Unit Value Index (TL)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>scale_usd <span class="ot">&lt;-</span> <span class="fu">max</span>(dataefe<span class="sc">$</span><span class="st">`</span><span class="at">PPI (%)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">max</span>(dataefe<span class="sc">$</span>USD, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>scale_import <span class="ot">&lt;-</span> <span class="fu">max</span>(dataefe<span class="sc">$</span><span class="st">`</span><span class="at">PPI (%)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">max</span>(dataefe<span class="sc">$</span><span class="st">`</span><span class="at">Import Unit Value Index (TL)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>graph_usd <span class="ot">&lt;-</span> dataefe <span class="sc">|&gt;</span> </span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date)) <span class="sc">+</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="st">`</span><span class="at">PPI (%)</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">"PPI (%)"</span>)) <span class="sc">+</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> USD <span class="sc">*</span> scale_usd, <span class="at">color =</span> <span class="st">"Exchange Rate (USD)"</span>)) <span class="sc">+</span></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"PPI (%)"</span>,</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span> . <span class="sc">/</span> scale_usd, <span class="at">name =</span> <span class="st">"Exchange Rate (USD)"</span>)</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"PPI (%)"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"Exchange Rate (USD)"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PPI (%) vs Exchange Rate (USD) Over Time"</span>,</span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Date"</span>,</span>
-<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"PPI (%)"</span>,</span>
-<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Variables"</span>) <span class="sc">+</span></span>
-<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>()</span>
-<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>graph_usd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>graph_usd <span class="ot">&lt;-</span> dataefe <span class="sc">|&gt;</span> </span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date)) <span class="sc">+</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="st">`</span><span class="at">PPI (%)</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">"PPI (%)"</span>)) <span class="sc">+</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> USD <span class="sc">*</span> scale_usd, <span class="at">color =</span> <span class="st">"Exchange Rate (USD)"</span>)) <span class="sc">+</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"PPI (%)"</span>,</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span> . <span class="sc">/</span> scale_usd, <span class="at">name =</span> <span class="st">"Exchange Rate (USD)"</span>)</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"PPI (%)"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"Exchange Rate (USD)"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PPI (%) vs Exchange Rate (USD) Over Time"</span>,</span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"PPI (%)"</span>,</span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Variables"</span>) <span class="sc">+</span></span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb60-15"><a href="#cb60-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>()</span>
+<span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a>graph_usd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>graph_import <span class="ot">&lt;-</span> dataefe <span class="sc">|&gt;</span> </span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date)) <span class="sc">+</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="st">`</span><span class="at">PPI (%)</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">"PPI (%)"</span>)) <span class="sc">+</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="st">`</span><span class="at">Import Unit Value Index (TL)</span><span class="st">`</span> <span class="sc">*</span> scale_import, <span class="at">color =</span> <span class="st">"Import Price Index (TL)"</span>)) <span class="sc">+</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"PPI (%)"</span>,</span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span> . <span class="sc">/</span> scale_import, <span class="at">name =</span> <span class="st">"Import Price Index (TL)"</span>)</span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"PPI (%)"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"Import Price Index (TL)"</span> <span class="ot">=</span> <span class="st">"orange"</span>)) <span class="sc">+</span></span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PPI (%) vs Import Price Index (TL) Over Time"</span>,</span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Date"</span>,</span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"PPI (%)"</span>,</span>
-<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Variables"</span>) <span class="sc">+</span></span>
-<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>()</span>
-<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>graph_import</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>graph_import <span class="ot">&lt;-</span> dataefe <span class="sc">|&gt;</span> </span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date)) <span class="sc">+</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="st">`</span><span class="at">PPI (%)</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">"PPI (%)"</span>)) <span class="sc">+</span></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="st">`</span><span class="at">Import Unit Value Index (TL)</span><span class="st">`</span> <span class="sc">*</span> scale_import, <span class="at">color =</span> <span class="st">"Import Price Index (TL)"</span>)) <span class="sc">+</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"PPI (%)"</span>,</span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span> . <span class="sc">/</span> scale_import, <span class="at">name =</span> <span class="st">"Import Price Index (TL)"</span>)</span>
+<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"PPI (%)"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"Import Price Index (TL)"</span> <span class="ot">=</span> <span class="st">"orange"</span>)) <span class="sc">+</span></span>
+<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PPI (%) vs Import Price Index (TL) Over Time"</span>,</span>
+<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb61-12"><a href="#cb61-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"PPI (%)"</span>,</span>
+<span id="cb61-13"><a href="#cb61-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Variables"</span>) <span class="sc">+</span></span>
+<span id="cb61-14"><a href="#cb61-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb61-15"><a href="#cb61-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>()</span>
+<span id="cb61-16"><a href="#cb61-16" aria-hidden="true" tabindex="-1"></a>graph_import</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>cor_ppi_usd <span class="ot">&lt;-</span> dataefe <span class="sc">%&gt;%</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(<span class="st">`</span><span class="at">PPI (%)</span><span class="st">`</span>, USD, <span class="at">use =</span> <span class="st">"complete.obs"</span>, <span class="at">method =</span> <span class="st">"pearson"</span>))</span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>cor_ppi_import <span class="ot">&lt;-</span> dataefe <span class="sc">%&gt;%</span></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(<span class="st">`</span><span class="at">PPI (%)</span><span class="st">`</span>, <span class="st">`</span><span class="at">Import Unit Value Index (TL)</span><span class="st">`</span>, <span class="at">use =</span> <span class="st">"complete.obs"</span>, <span class="at">method =</span> <span class="st">"pearson"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>cor_ppi_usd <span class="ot">&lt;-</span> dataefe <span class="sc">%&gt;%</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(<span class="st">`</span><span class="at">PPI (%)</span><span class="st">`</span>, USD, <span class="at">use =</span> <span class="st">"complete.obs"</span>, <span class="at">method =</span> <span class="st">"pearson"</span>))</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>cor_ppi_import <span class="ot">&lt;-</span> dataefe <span class="sc">%&gt;%</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(<span class="st">`</span><span class="at">PPI (%)</span><span class="st">`</span>, <span class="st">`</span><span class="at">Import Unit Value Index (TL)</span><span class="st">`</span>, <span class="at">use =</span> <span class="st">"complete.obs"</span>, <span class="at">method =</span> <span class="st">"pearson"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>cor_ppi_usd<span class="sc">$</span>correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>cor_ppi_usd<span class="sc">$</span>correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3080418</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>cor_ppi_import<span class="sc">$</span>correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>cor_ppi_import<span class="sc">$</span>correlation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4149023</code></pre>
+</div>
+</div>
+<p><strong>INDICATORS WHICH HAS MOST STRONG RELATİON WITH PPI</strong></p>
+<p><strong>Korelasyon katsayıları:</strong></p>
+<p>• Exchange Rates- Producer Price Index (PPI)= 0.30804</p>
+<p>• Energy Price Index- Producer Price Index (PPI)= 0.25689</p>
+<p>• Housing Price Index- Producer Price Index (PPI)= 0.88859</p>
+<p>• Import Price Index- Producer Price Index (PPI)= 0.41490</p>
+<p>• Interest Rates- Producer Price Index (PPI)= : 0.63844</p>
+<p>• Consumer Confidence Index- Producer Price Index (PPI)= 0.32652</p>
+<p>• Consumer Price Index- Producer Price Index (PPI)= 0.7959363</p>
+<p>• Credit Card Usage- Producer Price Index (PPI)= 0.60305</p>
+<p>We can choose the four most important and influential variables from the dataset we are using, then run a regression analysis to see which factors have the biggest effects on the PPI. We may learn more about the characteristics of the models we should concentrate on and how to enhance them to increase their efficacy or predictive power after performing this regression study. Our best 4 atrribute:</p>
+<ul>
+<li><p>Consumer Price Index- Producer Price Index (PPI)= 0.7959363</p></li>
+<li><p>Housing Price Index- Producer Price Index (PPI)= 0.888596687452896</p></li>
+<li><p>Interest Rates- Producer Price Index (PPI)= : 0.63844</p></li>
+<li><p>Credit Card Usage- Producer Price Index (PPI)= 0.60305</p></li>
+</ul>
+<p><strong>PIE CHART FOR CORRELATION VALUES BETWEEN PPI AND FOUR INDICATORS</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Consumer Price Index"</span>, <span class="st">"Housing Price Index"</span>, </span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Interest Rates"</span>, <span class="st">"Consumer Confidence Index"</span>)</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.7959363</span>, <span class="fl">0.88859</span>, <span class="fl">0.63844</span>,<span class="fl">0.30305</span>)</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> <span class="fu">sum</span>(correlations)</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>percentages <span class="ot">&lt;-</span> (correlations <span class="sc">/</span> total) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>))  </span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(</span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>  percentages, </span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">paste0</span>(labels, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">sprintf</span>(<span class="st">"%.1f%%"</span>, percentages)), </span>
+<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> (<span class="st">"Etki Yuzdeleri: PPI ile Korelasyon"</span>),</span>
+<span id="cb67-13"><a href="#cb67-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="fu">length</span>(labels)),</span>
+<span id="cb67-14"><a href="#cb67-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.8</span>  </span>
+<span id="cb67-15"><a href="#cb67-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 
