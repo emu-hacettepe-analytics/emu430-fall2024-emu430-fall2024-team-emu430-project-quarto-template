@@ -2,6 +2,9 @@
 title: "Team Rhapsody"
 sidebar: false 
 ---
+![]("C:\r\GitHub\emu430-fall2024-team-r-hapsody\giphy.gif")
+
+
 
 This is our project webpage.
 
