@@ -73,7 +73,17 @@ The cleaned data set was organized into the following thematic groups for analys
 
 [**You can access these modified Excel files by clicking this link.**](https://drive.google.com/drive/folders/1XD91Kzkd74GY1_iuuhg32hsk93ZFlIO_?usp=sharing)
 
-\
-The final cleaned and grouped data set was also stored in `.RData` format to facilitate analysis in R.\
-You can download the file from our repository using the link below:\
-[Download the cleaned dataset file in .RData format](#).
+To convert the data into **.RData** format, we performed the following steps:
+
+1.  First, we loaded the original data set into R from an Excel file using the `readxl` package:\
+    `library(readxl)
+    file_path <- "C:/Users/bugra/OneDrive/Belgeler/veri_proje/veri_dataset/total_deaths.xlsx"
+    total_deaths <- read_excel(file_path)`
+
+2.  After processing and cleaning the data set, the modified data (total_deaths in this case) was saved in the .RData format using the `save()` function. This format preserves the R objects, making it easier to load and analyze later.
+
+    `save(total_deaths, file = "C:/Users/bugra/OneDrive/Belgeler/veri_proje/veri_dataset/total_deaths.RData")`
+
+    The final data set is now available in the .RData format and you can access final cleaned and grouped files that stored in .RData format below:
+
+    [.RData Files](https://drive.google.com/drive/folders/1xH4i0-jM0OMhSljotZpxiy-VuX3_etGw?usp=sharing).
