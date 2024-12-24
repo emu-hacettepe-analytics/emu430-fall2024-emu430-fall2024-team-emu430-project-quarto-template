@@ -126,9 +126,9 @@ These graphs compares the total deaths over the years for Turkey, More Developed
 ![**Fig.1** shows Turkey's Total Deaths by Year\
 ](images/WhatsApp%20Image%202024-12-22%20at%2000.44.17.jpeg){fig-align="left" width="266"}
 
-![**Fig.2**](images/WhatsApp%20Image%202024-12-22%20at%2000.50.32-01.jpeg){fig-align="left" width="277"}
+![**Fig.2** shows More Developed country's Total Deaths by Year](images/WhatsApp%20Image%202024-12-22%20at%2000.50.32-01.jpeg){fig-align="left" width="277"}
 
-![**Fig.3**](images/WhatsApp%20Image%202024-12-22%20at%2000.54.10.jpeg){width="317"}
+![**Fig.3** shows Less Developed country's Total Deaths by Year](images/WhatsApp%20Image%202024-12-22%20at%2000.54.10.jpeg){fig-align="left" width="317"}
 
 //////bu grafiklerin analizlerini yapmadım.
 
@@ -137,3 +137,106 @@ These graphs compares the total deaths over the years for Turkey, More Developed
 -   **Demographic Alignment**: From a demographic perspective, we can assess if Turkey's total deaths trend shows more similarity to that of more developed countries, which generally experience lower death rates due to better healthcare, or if it is closer to less developed countries with potentially higher mortality rates due to limited healthcare access.
 
 -   **Conclusions**: Drawing on these trends, Turkey may either resemble developed countries more closely (suggesting improvements in health systems) or share characteristics with less developed regions (highlighting areas that need improvement in public health and healthcare access).\
+
+### **Births by Women Aged 15-19: Turkey vs. More Developed vs. Less Developed Countries**
+
+This graph compares the birth rate among women aged 15-19 in Turkey, More Developed countries, and Less Developed countries.
+
+This code block visualizes the graph:
+
+```{r}
+library(tidyverse)  # veya library(dplyr)
+ldeveloped_data_other <- other_parameters %>%
+  filter(Country == "Less developed regions")
+library(ggplot2)
+# Turkey veri setine Source sütunu ekleyin
+data1 <- turkey_data_other
+data1$Source <- "Turkey"
+
+# More developed veri setine Source sütunu ekleyin
+data2 <- mdeveloped_data_other
+data2$Source <- "More developed"
+
+data3 <- ldeveloped_data_other
+data3$Source <- "Less developed"
+
+# İki veri setini birleştirme
+combined_data <- rbind(data1, data2,data3)
+ggplot(combined_data, aes(x = Year, y = `Births by women aged 15 to 19 (thousands)`, color = Source)) +
+  geom_line(linewidth = 1) +  # Çizgileri ekleyin
+  labs(
+    title = "Births by women aged 15 to 19 (thousands) Over Years",
+    x = "Year",
+    y = "Births by women aged 15 to 19 (thousands)"
+  ) +
+  theme_minimal()
+
+
+```
+
+#### **Suggested Interpretation:**
+
+-   **Teen Birth Rates and Socioeconomic Factors**: Teen births are often influenced by socioeconomic, educational, and healthcare factors. Less developed countries typically have higher rates of teen births due to lower access to education and family planning services. By comparing Turkey to both developed and less developed countries, we can analyze where Turkey stands in terms of policies surrounding family planning, education, and access to healthcare.
+
+-   **Trends in Turkey**: If Turkey's teen birth rates are closer to those of less developed countries, it might suggest that certain cultural or social factors, or lack of effective health education, contribute to higher teen pregnancies. On the other hand, if Turkey's rates are closer to those of developed countries, it may reflect effective policy interventions such as better education for young women and improved access to contraception and reproductive health services.
+
+-   **Implications for Policy**: The results could lead to insights on how Turkey can improve its healthcare and education systems to lower teen pregnancies. Comparative analysis with developed countries might reveal strategies and policies that Turkey could adopt to further reduce teen birth rates.
+
+### **Analysis of Life Expectancy at Birth Over the Years**
+
+The following graph illustrates the life expectancy at birth over the years for Turkey, More Developed, and Less Developed countries:\
+\
+This code block visualizes the graph:
+
+```{r}
+library(readxl)
+life_expectancy <- read_excel("C:/Users/HP/Desktop/life_expectancy.xlsx")
+colnames(life_expectancy)
+View(life_expectancy)
+unique(life_expectancy$Country)
+
+library(tidyverse)  # veya library(dplyr)
+turkey_expectancy <- life_expectancy %>%
+  filter(Region == "Turkiye")
+colnames(turkey_expectancy)
+head(turkey_expectancy)
+Less_expectancy <- life_expectancy %>%
+  filter(Region == "Less developed regions")
+More_expectancy <- life_expectancy %>%
+  filter(Region == "More developed regions")
+
+data1 <- turkey_expectancy
+data1$Source <- "Turkey"
+
+# More developed veri setine Source sütunu ekleyin
+data2 <- More_expectancy
+data2$Source <- "More developed"
+
+data3 <- Less_expectancy
+data3$Source <- "Less developed"
+
+# İki veri setini birleştirme
+combined_data <- rbind(data1, data2,data3)
+ggplot(combined_data, aes(x = Year, y = `Life Expectancy at Birth`, color = Source)) +
+  geom_line(linewidth = 1) +  # Çizgileri ekleyin
+  labs(
+    title = "Life Expectancy at Birth Over Years",
+    x = "Year",
+    y = "Life Expectancy at Birth"
+  ) +
+  theme_minimal()
+```
+
+-   The plot shows the trends in **life expectancy at birth** for three distinct groups: **Turkey**, **More Developed** countries, and **Less Developed** countries.
+
+-   The **X-axis** represents the **years**, while the **Y-axis** shows **life expectancy at birth** in years.
+
+-   Each group (Turkey, More Developed, Less Developed) is represented with different colored lines, allowing for easy comparison.
+
+By examining the graph:
+
+-   **Turkey's life expectancy** appears to follow a similar upward trajectory as **More Developed countries**, especially in the recent years. This indicates that Turkey has made substantial progress in terms of healthcare and living conditions, aligning more closely with the developed regions.
+
+-   **Less Developed countries**, on the other hand, generally show a slower increase in life expectancy. This suggests that they still face significant challenges in improving healthcare and living standards.
+
+This analysis indicates that Turkey is steadily closing the gap with more developed regions, showcasing positive demographic developments in terms of life expectancy.
