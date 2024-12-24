@@ -2,4 +2,78 @@
 title: "Data"
 ---
 
-Data source: xxx
+Data source: [UN Demographic Indicators Compact (XLSX)](https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/EXCEL_FILES/1_General/WPP2024_GEN_F01_DEMOGRAPHIC_INDICATORS_COMPACT.xlsx)\
+\
+This dataset provides demographic insights such as population trends, mortality rates, fertility rates, and life expectancy across countries and regions over several decades.
+
+**Objective and Selection Rationale**\
+The objective of our analysis is to compare Turkey's demographic indicators year by year with "More Developed," "Less Developed," and "Least Developed" regions to assess its development status. The dataset was chosen due to its comprehensive nature and reliability as an authoritative source.
+
+**Accomplishments**\
+By organizing, cleaning, and processing the data, we aimed to create a streamlined version that enables targeted analysis of specific indicators such as population trends, death rates, life expectancy, and other demographic parameters.\
+
+**Initial Cleaning Process**
+
+-   We focused on Turkey, "More Developed," "Less Developed," and "Least Developed" groups by removing data related to other countries and regions.
+
+-   Columns that were irrelevant to our objectives were removed, including:
+
+    -   Estimates (Variant)
+
+    -   Notes
+
+    -   ISO Codes (Alpha-2, Alpha-3, SDmx, Parent)
+
+    -   Population Annual Doubling Time (years)
+
+    -   Crude Birth Rate (births per 1,000 population)
+
+    -   All columns related to migration.
+
+**Simplifications**
+
+-   Redundant columns for gender-separated data were aggregated into general metrics where possible. For example:
+
+    -   Life Expectancy and Deaths columns for males and females were replaced by general life expectancy and total deaths metrics.
+
+    -   Metrics such as population density, sex ratios, and mortality rates for specific age groups were excluded to streamline the data set.
+
+**Custom Metrics**
+
+-   A new Death Rate (%) column was created by calculating the ratio of total deaths to total population. We calculated this ratio on the Excel file.
+
+**Data Grouping**\
+The cleaned data set was organized into the following thematic groups for analysis:
+
+-   **Change in Population**:\
+    Includes metrics like natural change, population growth rate, and birth counts.
+
+-   **Child Demographics**:\
+    Focuses on infant and under-five mortality rates, survival rates, and child-specific metrics.
+
+-   **Death Rate**:\
+    Consists of total population, total deaths, and the newly calculated death rate.
+
+-   **Life Expectancy**:\
+    Contains life expectancy data directly provided in the original data set.
+
+-   **Mortality**:\
+    Includes general mortality rates without detailed gender or age group segmentation.
+
+-   **Population Dynamics**:\
+    Covers total population data, broken down by year, as well as male and female distributions.
+
+-   **Other Parameters**:\
+    Includes indicators such as fertility rates, mean age at childbearing, and sex ratio at birth.
+
+-   **Total Deaths**:\
+    Contains data on total deaths and crude death rates.
+
+**Storing the Processed Data**
+
+[**You can access these modified Excel files by clicking this link.**](https://drive.google.com/drive/folders/1XD91Kzkd74GY1_iuuhg32hsk93ZFlIO_?usp=sharing)
+
+\
+The final cleaned and grouped data set was also stored in `.RData` format to facilitate analysis in R.\
+You can download the file from our repository using the link below:\
+[Download the cleaned dataset file in .RData format](#).

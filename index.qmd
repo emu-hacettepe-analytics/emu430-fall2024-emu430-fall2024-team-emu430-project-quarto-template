@@ -1,5 +1,5 @@
 ---
-title: "Team XXX"
+title: "Team quantr"
 sidebar: false 
 ---
 
@@ -11,14 +11,53 @@ This is our template.
 
 # Team Members
 
-1.  [Edin_Džeko](https://tr.wikipedia.org/wiki/Edin_D%C5%BEeko)
+1.  Tarık Buğra Koç
 
-2.  [Dušan Tadić](https://tr.wikipedia.org/wiki/Du%C5%A1an_Tadi%C4%87)
+2.  Batuhan Turhan Büyükkurt
 
-3.  [Frederico Rodrigues de Paula Santos](https://tr.wikipedia.org/wiki/Fred_(1993_do%C4%9Fumlu_futbolcu))
+3.  Ömer Meral
 
-4.  [Sebastian Szymański](https://tr.wikipedia.org/wiki/Sebastian_Szyma%C5%84ski)
+4.  Yavuz Sami Gürsoy
 
 # Project Topic
 
+**Comparative Analysis of Turkey's Development Using Key Demographic Indicators**
+
+In this project, we analyze Turkey's development status compared to more developed, less developed, and least developed countries. The comparison is conducted on a year-by-year basis, focusing on key demographic indicators such as mortality rates, birth rates, population trends, and other relevant factors.
+
 # Data Set
+
+We obtained the data set from the United Nations Department of Economic and Social Affairs, Population Division. You can access the relevant data set from the link below:
+
+<https://population.un.org/wpp/Download/Files/1_Indicator%20(Standard)/EXCEL_FILES/1_General/WPP2024_GEN_F01_DEMOGRAPHIC_INDICATORS_COMPACT.xlsx>
+
+The original data set required a thorough cleaning process to ensure reliability and clarity for analysis.
+
+**Cleaning Process and Grouping**
+
+1.  **Cleaning Process:**
+
+    -   Missing or incomplete data entries were identified and addressed to maintain the dataset's integrity.
+
+    -   Duplicates and irrelevant rows were removed.
+
+    -   Relevant data for "Turkey," "More Developed," "Less Developed," and "Least Developed" groups were extracted for focused analysis.
+
+2.  **Grouping Process:**\
+    To simplify and enhance our analysis, the cleaned data set was divided into several key groups based on demographic parameters:
+
+    -   **Change in Population**: Trends and shifts in population size over the years.
+
+    -   **Child Demographics**: Birth rates and child-related population indicators.
+
+    -   **Death Rate**: Annual death rates across groups.
+
+    -   **Life Expectancy**: Average life expectancy trends over time.
+
+    -   **Mortality**: Mortality rates segmented by different age groups and causes.
+
+    -   **Population Dynamics**: Overall population trends and growth patterns.
+
+    -   **Total Deaths**: Aggregate death counts across years.
+
+    -   **Other Parameters**: Additional indicators relevant to the demographic and economic development of regions.
