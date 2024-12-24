@@ -284,12 +284,13 @@ head(data_yusuf1,10)
 And again as we have done all above we will sketch a line graph:
 
 ```{r}
-ggplot(data=data_yusuf, aes(x=DATE)) +
+graph_yusuf1<-ggplot(data=data_yusuf, aes(x=DATE)) +
   geom_line(aes(y=PPI, color="PPI"), size=1) +
   geom_line(aes(y=CCI, color="Consumer Confidence Index (CCI)"), size=1, linetype="dashed") +
   labs(title="PPI vs Consumer Confidence Index Over Time", x="Date", y="Values", color="Legend") +
   theme_economist() +
   scale_color_economist()
+graph_yusuf1
 
 ```
 
@@ -303,6 +304,110 @@ print(cortest_confidence$p.value)
 ```
 
 0.422 is relatively low to say these indicators has a notable relation but p-value is low enough to be statisticaly meaningful.So we can easily say we can confirm that there is a relation bewteen PPI and CCI and this relation is not strong.
+
+**5-PRODUCER PRICE INDEX VS HOUSUNG PRICE INDEX**
+
+This study examines the relationship between the Producer Price Index (PPI) and the Housing Price Index (HPI). While PPI tracks changes in the prices of goods and services at the producer level, HPI reflects fluctuations in residential property prices. Understanding the interaction between these two indices is essential for analyzing how changes in production costs influence the housing market. Using historical data, the study investigates the impact of PPI on housing prices and evaluates the direction and strength of this relationship through various statistical methods.
+
+Let's take a look at our table!
+
+```{r include=FALSE}
+library(readxl)      
+library(tidyverse)     
+library(ggthemes)
+```
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+housing <- read_excel("konut.xlsx")
+housing$Tarih <- as.Date(paste0(housing$Tarih, "-01"), format = "%Y-%m-%d")
+colnames(housing) <- c("Tarih", "Housing_Percentage_Change")
+UFE <- read_excel("ufe.xlsx")
+UFE$Tarih <- as.Date(paste0("01-", UFE$Tarih), format = "%d-%m-%Y")
+ppi_housing <- merge(UFE, housing, by = "Tarih", all = TRUE)
+
+```
+
+```{r}
+head(ppi_housing,10)
+```
+
+Now we will plot a graph line:
+
+```{r}
+ppi_housing_graph <- ggplot(ppi_housing, aes(x = Tarih)) +      
+  geom_line(aes(y = PPI, color = "PPI")) +  
+  geom_line(aes(y = Housing_Percentage_Change, color = "Housing Change")) +  
+  scale_color_manual(values = c("PPI" = "red", "Housing Change" = "blue")) +
+  labs(title = "PPI & Housing Change Graph",
+       x = "Tarih",
+       y = "Variable",
+       color = "Variables") + 
+  theme_minimal() +
+  theme_economist()
+print(ppi_housing_graph)
+```
+
+We can see in the graph that this tho index values are almost stick to each other.Now let's do a correlation test and see if we can verify that.
+
+```{r}
+correlation_house <- cor(ppi_housing$PPI, ppi_housing$Housing_Percentage_Change, use = "complete.obs")
+print(paste("Korelasyon Katsayısı: ", correlation_house))
+
+```
+
+According to this correlation value,these two indicators has a ver powerful relation which verify our visual observatoin.And p-value is too low which means this relation is statistically meaningful.
+
+**6-PRODUCER PRICE INDEX and ENERGY PRICE INDEX**
+
+This study explores the relationship between the Producer Price Index (PPI) and Brent Oil prices. PPI measures changes in the prices of goods and services at the producer level, while Brent Crude Oil serves as a benchmark for global oil prices, influencing production costs across various industries. The interaction between these two indicators is critical for understanding the impact of energy price fluctuations on broader economic price dynamics. Using historical data, the study investigates how changes in Brent Crude Oil prices affect PPI and evaluates the direction and magnitude of this relationship through various statistical methods.
+
+Let's take a look our data frame!
+
+```{r include=FALSE}
+library(readxl)      
+library(tidyverse)       
+library(ggthemes)
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+petrol <- read_excel("petrol.xlsx")
+petrol$Tarih <- as.Date(paste0(petrol$Tarih, "-01"), format = "%Y-%m-%d")
+colnames(petrol) <- c("Tarih", "TP_BrentPetrol")
+UFE <- read_excel("ufe.xlsx")
+UFE$Tarih <- as.Date(paste0("01-", UFE$Tarih), format = "%d-%m-%Y")
+ppi_petrol <- merge(UFE, petrol, by = "Tarih", all = TRUE)
+
+```
+
+```{r}
+head(ppi_petrol,10)
+```
+
+Now let's sketch a graph line and then calculate correlation value to see these two indicator's relation.
+
+```{r}
+ppi_petrol_graph <- ggplot(ppi_petrol, aes(x = Tarih)) +      
+  geom_line(aes(y = PPI, color = "PPI")) +  
+  geom_line(aes(y = TP_BrentPetrol, color = "Petrol Change")) +  
+  scale_color_manual(values = c("PPI" = "red", "Petrol Change" = "blue")) +
+  labs(title = "PPI & Petrol Change Graph",
+       x = "Tarih",
+       y = "Variable",
+       color = "Variables") + 
+  theme_minimal() +
+  theme_economist()
+print(ppi_petrol_graph)
+```
+
+Correlation for PPI and Brent Oil prices:
+
+```{r}
+correlation_petrol <- cor(ppi_petrol$PPI, ppi_petrol$TP_BrentPetrol, use = "complete.obs")
+print(paste("Korelasyon Katsayısı: ", correlation_petrol))
+cortest_petrol<-cor.test(ppi_petrol$PPI, ppi_petrol$TP_BrentPetrol)
+print(paste("P-Value: ",cortest_petrol$p.value))
+```
+
+Correlation valu for PPI and Brent Oil prices is 0.603 which is moderatly high.P-value is 0.03 means this correlation test is statistically meaningful.We can say that there is a relation between these two economic indicators.
 
 ```{r}
 library(readxl)      
@@ -421,7 +526,7 @@ We can choose the four most important and influential variables from the dataset
 
 -   Housing Price Index- Producer Price Index (PPI)= 0.888596687452896
 
--    Consumer Confidence Index- Producer Price Index (PPI)= 0.42212
+-   Consumer Confidence Index- Producer Price Index (PPI)= 0.42212
 
 -   Credit Card Usage- Producer Price Index (PPI)= 0.60305
 
@@ -445,3 +550,5 @@ pie(
 )
 
 ```
+
+**REGRESSION ANALYSIS**
