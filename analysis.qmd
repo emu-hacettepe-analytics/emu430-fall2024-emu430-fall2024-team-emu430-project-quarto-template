@@ -5,7 +5,7 @@ title: "Analysis"
 About this site
 
 ```{r}
-options(repos = c(CRAN = "https://cloud.r-project.org"))  # CRAN Mirror ayarı
+
 ```
 
 ### **Analysis Overview:**
@@ -21,10 +21,10 @@ First, we generated the "Total Deaths by Year" graphs for Turkey, More Developed
 Code block for the Turkey's graph:
 
 ```{r}
-install.packages("tidyverse")
+
 
 # dplyr paketini yükle (eğer sadece dplyr kullanılacaksa)
-install.packages("dplyr")
+
 
 # Yüklenen kütüphaneyi aktif hale getir
 library(tidyverse)  # veya library(dplyr)
@@ -145,9 +145,17 @@ This graph compares the birth rate among women aged 15-19 in Turkey, More Develo
 This code block visualizes the graph:
 
 ```{r}
+library(readxl)
+other_parameters <- read_excel("C:/Users/HP/Desktop/other_parameters.xlsx")
 library(tidyverse)  # veya library(dplyr)
 ldeveloped_data_other <- other_parameters %>%
   filter(Country == "Less developed regions")
+turkey_data_other <- other_parameters %>%
+  filter(Country == "Turkiye")
+ldeveloped_data_other <- other_parameters %>%
+  filter(Country == "Less developed regions")
+mdeveloped_data_other <- other_parameters %>%
+  filter(Country == "More developed regions")
 library(ggplot2)
 # Turkey veri setine Source sütunu ekleyin
 data1 <- turkey_data_other
