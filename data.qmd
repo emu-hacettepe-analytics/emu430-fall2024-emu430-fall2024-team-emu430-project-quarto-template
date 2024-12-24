@@ -113,7 +113,7 @@ We did this for all data frames to visualize them.This is the only preprocessing
 
 -   This study explores the relationship between the Producer Price Index (PPI) and other key economic indicators in Turkey.
 
--    The data was sourced from TCMB, covering variables like exchange rates, energy prices, and consumer expenditures.
+-   The data was sourced from TCMB, covering variables like exchange rates, energy prices, and consumer expenditures.
 
 -   PPI was selected as the baseline index due to its predictive power and causal relationship with CPI.We treat PPI as inflation rate.
 
