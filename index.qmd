@@ -3,7 +3,7 @@ title: "Team quantr"
 sidebar: false 
 ---
 
-![](images/c48bdbb6-b799-4662-b2a9-1ceecd4e8b77.jpg)
+![](images/aiworldmap.jpeg)
 
 This is our project webpage.
 
