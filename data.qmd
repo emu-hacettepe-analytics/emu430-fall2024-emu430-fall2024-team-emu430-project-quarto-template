@@ -2,4 +2,119 @@
 title: "Data"
 ---
 
-Data source: xxxxx
+### R’HAPSODY: A Data Analysis Project
+
+**Exploring Economic Dynamics Through PPI**
+
+The R’HAPSODY project embarks on a journey to decode one of the Turkish economy’s pivotal macroeconomic indicators: the Producer Price Index (PPI). Serving as a benchmark for tracking inflation and price shifts in consumer goods, PPI is essential for understanding economic health. However, to gain a more holistic view of economic trends, our project extends its focus to explore how PPI interacts with a range of influential variables.
+
+**Data and Sources**\
+We have incorporated multiple economic indicators into our analysis, including:
+
+-   Producer Price Index (PPI)
+
+-   Exchange Rates
+
+-   Energy Prices
+
+-   Housing Prices
+
+-   Import Prices
+
+-   Interest Rates
+
+-   Consumer Confidence
+
+-   Consumer Price Index(CPI)
+
+-   Credit Card Usage(CCU)
+
+The dataset, collected from a very trusted source such as the the Central Bank of the Republic of Turkey (TCMB), provides a robust foundation for discovering meaningful patterns and relationships.
+
+**Why This Data?**\
+The Turkish economy is characterized by its complexity, where factors like volatile exchange rates and fluctuating energy prices play outsized roles. By combining PPI with these auxiliary indicators, our project aims to offer fresh perspectives on the intricate web of economic interactions, enhancing our understanding of what drives inflation and consumer behavior in Turkey.
+
+**Project Objectives**
+
+-   **Understanding Influences:** To identify which factors significantly impact PPI.
+
+-   **Mapping Relationships:** To examine the interplay between PPI and other economic variables.
+
+-   **Deriving Insights:** To provide a data-backed interpretation of Turkey’s macroeconomic structure, highlighting critical influences like exchange rates and energy prices.
+
+**Key Milestones Achieved**
+
+-   Cleaned and integrated diverse datasets to establish a comprehensive analytical framework.
+
+-   Conducted statistical evaluations to reveal correlations and causal links.
+
+-   Highlighted the unique dynamics shaping Turkey’s inflationary trends, such as the strong ties between PPI and energy price shifts.
+
+### Which Index Should We Choose as Our Baseline?
+
+When deciding on a baseline index for our analysis, we initially considered both the Consumer Price Index (CPI) and the Producer Price Index (PPI). Both indices are critical tools for measuring inflation, but they offer different perspectives on economic dynamics. While CPI focuses on the changes in prices faced by consumers, PPI measures the changes in prices at the production stage, capturing the cost dynamics experienced by producers.
+
+To make an informed decision, we conducted a comparative analysis of CPI and PPI as part of the initial phase of our project. This analysis aimed to determine which index would provide deeper insights into the relationships we intended to explore.
+
+**Why Did We Choose PPI Over CPI?**\
+Our analysis revealed several key factors that guided our choice:
+
+1.  **Closer Link to Input Costs:** PPI reflects the prices of goods at earlier stages of production, making it more sensitive to fluctuations in raw material costs, energy prices, and other input factors. This characteristic allows PPI to provide more direct insights into the production side of the economy.
+
+2.  **Predictive Power for Inflation Trends:** PPI often serves as a leading indicator for CPI, as changes in producer prices can eventually influence consumer prices. By focusing on PPI, we can capture upstream economic dynamics that may precede broader inflationary trends.
+
+3.  **Data Alignment with Objectives:** The scope of our project emphasizes the relationships between economic indicators such as energy prices, import prices, and exchange rates—factors that strongly impact PPI. This alignment made PPI a more suitable choice for our baseline.
+
+**Key Findings from Statistical Tests**\
+To reinforce our decision, we conducted correlation, Granger causality, and regression tests:
+
+-   **Correlation Analysis:** We found a strong positive correlation of 0.80 between PPI and CPI, indicating a significant relationship between the two indices.
+
+-   **Granger Causality Test:** The results showed that PPI has a causal influence on CPI, meaning changes in producer prices tend to precede changes in consumer prices.
+
+-   **Regression Analysis:** Regression results further supported that PPI significantly impacts CPI, underlining its predictive power for consumer-level price changes.
+
+Through this robust comparative and statistical analysis, we determined that PPI offers a more comprehensive foundation for understanding the economic dynamics central to our project. While CPI remains a valuable measure of inflation, PPI’s closer ties to production-level costs, predictive capabilities, and causal influence on CPI made it the ideal choice for our baseline index.
+
+This decision ensures that our analysis is aligned with the project’s goals and enhances our ability to uncover meaningful relationships in Turkey’s economic structure.
+
+**HOW DID WE IMPORT OUR DATA?**
+
+We collect our data from database of the Central Bank of the Republic of Turkey (TCMB).
+
+<https://evds2.tcmb.gov.tr/>
+
+We selected the data from last 6 years,starting from 2019.We choose last 6 years and not more than that because we didn't want to our data frames be so large and cause long process times.Also we didn't want to choose less than 6 year because we want to be sure we have enough data to make our analysis meaningful.
+
+As you can understand from above our data frames has a date column.For example:
+
+```{r include=FALSE}
+library(tidyverse)
+library(readxl)
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+ppi <- read_excel("ppi.xlsx")
+
+```
+
+```{r}
+head(ppi,10)
+```
+
+But,this format for date is not recognizable for R,therefore we had to transform it to suitable format with this code:
+
+```{r}
+ppi$Tarih <- as.Date(paste0("01-", ppi$Tarih), format = "%d-%m-%Y")
+head(ppi,10)
+```
+
+We did this for all data frames to visualize them.This is the only preprocessing we conducted for our data.
+
+**KEY TAKEAWAYS**
+
+-   This study explores the relationship between the Producer Price Index (PPI) and other key economic indicators in Turkey.
+
+-    The data was sourced from TCMB, covering variables like exchange rates, energy prices, and consumer expenditures.
+
+-   PPI was selected as the baseline index due to its predictive power and causal relationship with CPI.We treat PPI as inflation rate.
+
+-   We aimed to understand which indicators has a strong relation with inflation rate.

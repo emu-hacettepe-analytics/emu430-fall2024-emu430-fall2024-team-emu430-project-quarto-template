@@ -31,6 +31,7 @@ table_ppi_cpi$Tarih <- as.Date(paste0("01-", table_ppi_cpi$Tarih), format = "%d-
 First let's look the table we will use for analysis.We used annual percentage changes of the variables as index values.
 
 ```{r}
+
 head(table_ppi_cpi,10)
 ```
 
@@ -158,6 +159,10 @@ table_ppi_ccu$Tarih <- as.Date(paste0("01-", table_ppi_ccu$Tarih), format = "%d-
 head(table_ppi_ccu,10)
 ```
 
+*PPI=PRODUCER PRICE INDEX*
+
+*USAGE=CREDİT CART USAGE AMOUNT*
+
 We will plot a line graph where we will show both index as a variable over time.This will help us to visualize their relation.
 
 ```{r}
@@ -175,6 +180,7 @@ ggp2 <- ggplot(table_ppi_ccu, aes(x = Tarih)) +
 ggp2
 
 ```
+
 We can make a legitimate guess about their relation with this visualized data.But we need analytical results to interpret the results.Therefore, we will do a correlation test between them.
 
 ```{r}
@@ -184,6 +190,7 @@ print(cor_ppi_ccu)
 print(cortest_ppi_ccu$p.value)
 
 ```
+
 Correlation value for PPI and CCU is 0.603 which is pretty high.This means there is a relaively strong relation between them.Also p-value is less than 0.05 which means it is statistically meaningful.We also will do a correlation test with time lag to go deeper.
 
 ```{r}
@@ -204,9 +211,8 @@ print(cor_lag3_ppi_ccu)
 print(cor_lag4_ppi_ccu)
 print(cor_lag5_ppi_ccu)
 ```
+
 As the lag time increases, the correlation value increases. After the 4th and 5th delay, the rate of increase slows down.So we can say PPI values causes CCU Therefore, we can say that PPI has a delayed effect on credit card usage which is higher than correlation value without time lag.
-
-
 
 ```{r}
 library(readxl)      
