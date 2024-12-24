@@ -2,13 +2,11 @@
 title: "Team Rhapsody"
 sidebar: false 
 ---
-![]("C:\r\GitHub\emu430-fall2024-team-r-hapsody\giphy.gif")
+![](images\giphy.gif)
 
+ Once upon a time a group of wise men said "Is this the real life?Is this just a fantasy?" Well,we say our work can show which is it!
 
-
-This is our project webpage.
-
-Please stay tuned!e to follow our project activities.
+Please stay tuned to follow our project activities.
 
 # Team Members
 
