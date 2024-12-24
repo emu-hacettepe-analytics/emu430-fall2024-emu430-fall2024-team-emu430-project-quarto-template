@@ -76,9 +76,7 @@ The cleaned data set was organized into the following thematic groups for analys
 To convert the data into **.RData** format, we performed the following steps:
 
 1.  First, we loaded the original data set into R from an Excel file using the `readxl` package:\
-    `library(readxl)
-    file_path <- "C:/Users/bugra/OneDrive/Belgeler/veri_proje/veri_dataset/total_deaths.xlsx"
-    total_deaths <- read_excel(file_path)`
+    `library(readxl)     file_path <- "C:/Users/bugra/OneDrive/Belgeler/veri_proje/veri_dataset/total_deaths.xlsx"     total_deaths <- read_excel(file_path)`
 
 2.  After processing and cleaning the data set, the modified data (total_deaths in this case) was saved in the .RData format using the `save()` function. This format preserves the R objects, making it easier to load and analyze later.
 

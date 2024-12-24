@@ -7,3 +7,133 @@ About this site
 ```{r}
 1 + 1
 ```
+
+### **Analysis Overview:**
+
+This analysis seeks to explore and compare Turkey's demographic indicators with those of more developed and less developed regions, based on data provided by the **UN Demographic Indicators Dataset**. By examining critical parameters such as total deaths, crude death rates, and fertility trends, we aim to gain valuable insights into Turkey’s demographic status in relation to other regions with varying levels of development.
+
+We will examine these indicators over time to assess whether Turkey’s demographic patterns are more aligned with developed countries, which generally experience better healthcare outcomes, or with less developed countries, where healthcare access may be limited, resulting in different mortality and fertility trends.\
+
+### **Total Deaths Comparison: Turkey vs. More Developed vs. Less Developed Countries**
+
+First, we generated the "Total Deaths by Year" graphs for Turkey, More Developed countries, and Less Developed countries. For this, we used specific R codes to filter the data and create the visualizations.
+
+Code block for the Turkey's graph:
+
+```{r}
+install.packages("tidyverse")
+
+# dplyr paketini yükle (eğer sadece dplyr kullanılacaksa)
+install.packages("dplyr")
+
+# Yüklenen kütüphaneyi aktif hale getir
+library(tidyverse)  # veya library(dplyr)
+library(readxl)
+total_deaths <- read_excel("C:/Users/HP/Desktop/total_deaths.xlsx")
+View(total_deaths)
+colnames(total_deaths)
+unique(total_deaths$`Country`)
+# Gerekli kütüphaneler
+# Türkiye'ye ait verileri filtreleme
+library(tidyverse)  # veya library(dply
+turkey_data <- total_deaths %>%
+  filter(Country == "Turkiye")
+colnames(turkey_data)
+
+# Türkiye verisinin kontrolü
+print(head(turkey_data))  # İlk birkaç satırı görüntüleyerek kontrol edin
+
+# Grafik çizimi
+library(ggplot2)
+ggplot(turkey_data, aes(x = Year, y = `Total Deaths (thousands)`)) +
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "red") +
+  labs(
+    title = "Turkey's Total Deaths by Year",  
+    x = "Year",
+    y = "Total Deaths (Thousands)"
+  ) +
+  theme_minimal()
+```
+
+Code block for More Developed countries graph:
+
+```{r}
+library(tidyverse)  # veya library(dplyr)
+library(readxl)
+total_deaths <- read_excel("C:/Users/HP/Desktop/total_deaths.xlsx")
+View(total_deaths)
+colnames(total_deaths)
+unique(total_deaths$`Country`)
+# Gerekli kütüphaneler
+# Türkiye'ye ait verileri filtreleme
+library(tidyverse)  # veya library(dply
+More_developed <- total_deaths %>%
+  filter(Country == "More developed regions")
+colnames(More_developed)
+
+# Türkiye verisinin kontrolü
+print(head(More_developed))  # İlk birkaç satırı görüntüleyerek kontrol edin
+
+# Grafik çizimi
+library(ggplot2)
+ggplot(More_developed, aes(x = Year, y = `Total Deaths (thousands)`)) +
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "red") +
+  labs(
+    title = "More_developed country's Total Deaths by Year",  
+    x = "Year",
+    y = "Total Deaths (Thousands)"
+  ) +
+  theme_minimal()
+
+```
+
+Code block for More Developed countries graph:
+
+```{r}
+library(tidyverse)  # veya library(dplyr)
+library(readxl)
+total_deaths <- read_excel("C:/Users/HP/Desktop/total_deaths.xlsx")
+View(total_deaths)
+colnames(total_deaths)
+unique(total_deaths$`Country`)
+
+
+library(tidyverse)  
+Less_developed <- total_deaths %>%
+  filter(Country == "Less developed regions")
+colnames(More_developed)
+
+
+print(head(More_developed)) 
+
+library(ggplot2)
+ggplot(Less_developed, aes(x = Year, y = `Total Deaths (thousands)`)) +
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "red") +
+  labs(
+    title = "Less_developed's Total Deaths by Year",  
+    x = "Year",
+    y = "Total Deaths (Thousands)"
+  ) +
+  theme_minimal()
+
+```
+
+These graphs compares the total deaths over the years for Turkey, More Developed countries, and Less Developed countries.
+
+![**Fig.1** shows Turkey's Total Deaths by Year\
+](images/WhatsApp%20Image%202024-12-22%20at%2000.44.17.jpeg){fig-align="left" width="266"}
+
+![**Fig.2**](images/WhatsApp%20Image%202024-12-22%20at%2000.50.32-01.jpeg){fig-align="left" width="277"}
+
+![**Fig.3**](images/WhatsApp%20Image%202024-12-22%20at%2000.54.10.jpeg){width="317"}
+
+//////bu grafiklerin analizlerini yapmadım.
+
+-   **Trend Analysis**: We can observe the trends in total deaths for each group across the years. By comparing the curves, we can analyze whether Turkey's death rate aligns more closely with the trend of more developed countries or less developed ones. Factors like healthcare improvements, aging population, and socio-economic conditions may influence these trends.
+
+-   **Demographic Alignment**: From a demographic perspective, we can assess if Turkey's total deaths trend shows more similarity to that of more developed countries, which generally experience lower death rates due to better healthcare, or if it is closer to less developed countries with potentially higher mortality rates due to limited healthcare access.
+
+-   **Conclusions**: Drawing on these trends, Turkey may either resemble developed countries more closely (suggesting improvements in health systems) or share characteristics with less developed regions (highlighting areas that need improvement in public health and healthcare access).\
