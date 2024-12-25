@@ -1,9 +1,18 @@
 ---
 title: "Team quantr"
 sidebar: false 
+format:
+  pdf:
+    colorlinks: true
+    papersize: a4
+    fontsize: 11pt
+    margin-left: 2cm
+    margin-right: 2cm
+    margin-top: 2cm
+    margin-bottom: 2cm
 ---
 
-![](images/aiworldmap.jpeg)
+![](images/aiworldmap.jpeg){fig-align="center" width="441"}
 
 This is our project webpage.
 
@@ -15,9 +24,7 @@ Please stay tuned to follow our project activities.
 
 2.  [Batuhan Turhan Büyükkurt](https://github.com/emu-hacettepe-analytics/emu430-fall2024-btbuyukkurt)
 
-3.  Ömer Meral
-
-4.  Yavuz Sami Gürsoy
+3.  [Ömer Meral](https://github.com/omeral7)
 
 # Project Topic
 
@@ -32,32 +39,3 @@ We obtained the data set from the United Nations Department of Economic and Soci
 <https://population.un.org/wpp/Download/Files/1_Indicator%20(Standard)/EXCEL_FILES/1_General/WPP2024_GEN_F01_DEMOGRAPHIC_INDICATORS_COMPACT.xlsx>
 
 The original data set required a thorough cleaning process to ensure reliability and clarity for analysis.
-
-**Cleaning Process and Grouping**
-
-1.  **Cleaning Process:**
-
-    -   Missing or incomplete data entries were identified and addressed to maintain the dataset's integrity.
-
-    -   Duplicates and irrelevant rows were removed.
-
-    -   Relevant data for "Turkey," "More Developed," "Less Developed," and "Least Developed" groups were extracted for focused analysis.
-
-2.  **Grouping Process:**\
-    To simplify and enhance our analysis, the cleaned data set was divided into several key groups based on demographic parameters:
-
-    -   **Change in Population**: Trends and shifts in population size over the years.
-
-    -   **Child Demographics**: Birth rates and child-related population indicators.
-
-    -   **Death Rate**: Annual death rates across groups.
-
-    -   **Life Expectancy**: Average life expectancy trends over time.
-
-    -   **Mortality**: Mortality rates segmented by different age groups and causes.
-
-    -   **Population Dynamics**: Overall population trends and growth patterns.
-
-    -   **Total Deaths**: Aggregate death counts across years.
-
-    -   **Other Parameters**: Additional indicators relevant to the demographic and economic development of regions.
