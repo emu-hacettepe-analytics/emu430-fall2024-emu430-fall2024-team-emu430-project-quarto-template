@@ -1,20 +1,47 @@
 ---
 title: "Data"
+format:
+  pdf:
+    colorlinks: true
+    papersize: a4
+    fontsize: 11pt
+    margin-left: 2cm
+    margin-right: 2cm
+    margin-top: 2cm
+    margin-bottom: 2cm
 ---
 
 Data source: [UN Demographic Indicators Compact (XLSX)](https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/EXCEL_FILES/1_General/WPP2024_GEN_F01_DEMOGRAPHIC_INDICATORS_COMPACT.xlsx)\
 \
 This dataset provides demographic insights such as population trends, mortality rates, fertility rates, and life expectancy across countries and regions over several decades.
 
-**Objective and Selection Rationale**\
-The objective of our analysis is to compare Turkey's demographic indicators year by year with "More Developed," "Less Developed," and "Least Developed" regions to assess its development status. The dataset was chosen due to its comprehensive nature and reliability as an authoritative source.
+![](C:/Users/bugra/Downloads/aicrowdedcity.jpeg){fig-align="center" width="400"}
+
+### Objective of Our Analysis
+
+\
+The objective of our analysis is to conduct a detailed comparison of Turkey's demographic indicators on a yearly basis, contrasting them with those of regions categorized as "More Developed," "Less Developed," and "Least Developed." By examining these indicators over time, we aim to evaluate Turkey's development status relative to other global regions.
+
+### Reason for Choosing This Dataset
+
+The primary reason for selecting this dataset is its reliability and comprehensiveness, provided by the United Nations.
+
+![](C:/Users/bugra/Downloads/Flag_of_the_United_Nations.jpeg){fig-align="center" width="371"}
+
+As a globally recognized institution, the United Nations collects and analyzes demographic, economic, and social data that is trusted internationally. Therefore, the data they provide is not only highly reliable but also widely accepted and verified.
+
+The United Nations collects demographic data from national statistics offices and reliable sources, such as censuses and surveys. The data is then analyzed using standardized methods to ensure accuracy and comparability across regions and countries. This process allows the UN to create reliable demographic indicators used for global development analysis.
+
+In addition to its trustworthiness, this dataset is exceptionally detailed and extensive. The data is presented on an annual basis, which allows us to observe demographic changes over time and provides a sufficient amount of data for conducting comparative analyses. This enables us to assess Turkey's development status by comparing it with "More Developed," "Less Developed," and "Least Developed" regions, offering a robust foundation for in-depth analysis.
+
+![](C:/Users/bugra/OneDrive/Belgeler/emu430-fall2024-team-quantr/images/comparison.jpeg){fig-align="center" width="605"}
 
 **Accomplishments**\
 By organizing, cleaning, and processing the data, we aimed to create a streamlined version that enables targeted analysis of specific indicators such as population trends, death rates, life expectancy, and other demographic parameters.\
 
 **Initial Cleaning Process**
 
--   We focused on Turkey, "More Developed," "Less Developed," and "Least Developed" groups by removing data related to other countries and regions.
+-   We focused on Turkey, as well as the "More Developed," "Less Developed," and "Least Developed" groups by removing data related to other countries and regions.
 
 -   Columns that were irrelevant to our objectives were removed, including:
 
@@ -40,34 +67,34 @@ By organizing, cleaning, and processing the data, we aimed to create a streamlin
 
 **Custom Metrics**
 
--   A new Death Rate (%) column was created by calculating the ratio of total deaths to total population. We calculated this ratio on the Excel file.
+-   A new Death Rate (%) column was created by calculating the ratio of total deaths to the total population. We calculated this ratio using the Excel file.
 
 **Data Grouping**\
 The cleaned data set was organized into the following thematic groups for analysis:
 
 -   **Change in Population**:\
-    Includes metrics like natural change, population growth rate, and birth counts.
+    Metrics include metrics like natural change, population growth rate, and birth counts.
 
 -   **Child Demographics**:\
-    Focuses on infant and under-five mortality rates, survival rates, and child-specific metrics.
+    This section focuses on infant and under-five mortality rates, survival rates, and child-specific metrics.
 
 -   **Death Rate**:\
-    Consists of total population, total deaths, and the newly calculated death rate.
+    This metric consists of the total population, total deaths, and the newly calculated death rate.
 
 -   **Life Expectancy**:\
-    Contains life expectancy data directly provided in the original data set.
+    The data set contains life expectancy data that was directly provided in the original data set.
 
 -   **Mortality**:\
-    Includes general mortality rates without detailed gender or age group segmentation.
+    It includes general mortality rates without detailed gender or age group segmentation.
 
 -   **Population Dynamics**:\
-    Covers total population data, broken down by year, as well as male and female distributions.
+    The covers include total population data, which is broken down by year, as well as the distributions ofmale and female populations.
 
 -   **Other Parameters**:\
-    Includes indicators such as fertility rates, mean age at childbearing, and sex ratio at birth.
+    The date includes indicators such as fertility rates, mean age at childbearing, and sex ratio at birth.
 
 -   **Total Deaths**:\
-    Contains data on total deaths and crude death rates.
+    The section contains data on total deaths and crude death rates.
 
 **Storing the Processed Data**
 
@@ -82,6 +109,6 @@ To convert the data into **.RData** format, we performed the following steps:
 
     `save(total_deaths, file = "C:/Users/bugra/OneDrive/Belgeler/veri_proje/veri_dataset/total_deaths.RData")`
 
-    The final data set is now available in the .RData format and you can access final cleaned and grouped files that stored in .RData format below:
+    The final data set is now available in the .RData format, and you can access the final cleaned and grouped files stored in .RData format below:
 
     [.RData Files](https://drive.google.com/drive/folders/1xH4i0-jM0OMhSljotZpxiy-VuX3_etGw?usp=sharing).
