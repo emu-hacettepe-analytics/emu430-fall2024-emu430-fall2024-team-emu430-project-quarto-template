@@ -11,6 +11,7 @@ format:
     margin-top: 2cm
     margin-bottom: 2cm
 ---
+![Logo]("images/indir.jpg")
 
 ![](images/aiworldmap.jpeg){fig-align="center" width="441"}
 
