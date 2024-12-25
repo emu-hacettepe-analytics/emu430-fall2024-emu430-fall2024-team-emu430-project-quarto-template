@@ -6,7 +6,7 @@ Data source: [UN Demographic Indicators Compact (XLSX)](https://population.un.or
 \
 This dataset provides demographic insights such as population trends, mortality rates, fertility rates, and life expectancy across countries and regions over several decades.
 
-![](C:/Users/bugra/Downloads/aicrowdedcity.jpeg){fig-align="center" width="400"}
+![](images/9c7f7564-7982-4e10-baea-6dcab0ea78b5.jpg){fig-align="center" width="481"}
 
 ### Objective of Our Analysis
 
@@ -17,7 +17,7 @@ The objective of our analysis is to conduct a detailed comparison of Turkey's de
 
 The primary reason for selecting this dataset is its reliability and comprehensiveness, provided by the United Nations.
 
-![](C:/Users/bugra/Downloads/Flag_of_the_United_Nations.jpeg){fig-align="center" width="371"}
+![](images/Flag_of_the_United_Nations.jpeg){fig-align="center" width="538"}
 
 As a globally recognized institution, the United Nations collects and analyzes demographic, economic, and social data that is trusted internationally. Therefore, the data they provide is not only highly reliable but also widely accepted and verified.
 
@@ -25,7 +25,7 @@ The United Nations collects demographic data from national statistics offices an
 
 In addition to its trustworthiness, this dataset is exceptionally detailed and extensive. The data is presented on an annual basis, which allows us to observe demographic changes over time and provides a sufficient amount of data for conducting comparative analyses. This enables us to assess Turkey's development status by comparing it with "More Developed," "Less Developed," and "Least Developed" regions, offering a robust foundation for in-depth analysis.
 
-![](C:/Users/bugra/OneDrive/Belgeler/emu430-fall2024-team-quantr/images/comparison.jpeg){fig-align="center" width="605"}
+![](images/comparison.jpeg){fig-align="center"}
 
 **Accomplishments**\
 By organizing, cleaning, and processing the data, we aimed to create a streamlined version that enables targeted analysis of specific indicators such as population trends, death rates, life expectancy, and other demographic parameters.\

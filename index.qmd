@@ -1,5 +1,5 @@
 ---
-title: "Team quantr"
+title: "Team quantr's project"
 sidebar: false 
 ---
 
