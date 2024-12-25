@@ -21,24 +21,29 @@ First, we generated the "Total Deaths by Year" graphs for Turkey, More Developed
 Code block for the Turkey's graph:
 
 ```{r}
+# Load required libraries
+library(tidyverse)  # For data manipulation
+library(readxl)     # For reading Excel files
+library(ggplot2)    # For plotting
 
+# Load the data from the Excel file
+total_deaths <- read_excel("data/total_deaths.xlsx")
 
-
-
-
-library(tidyverse)  # Calling the libraries
-library(readxl)
-total_deaths <- read_excel("C:/Users/HP/Desktop/total_deaths.xlsx")
+# View the loaded dataset and check columns
 View(total_deaths)
 colnames(total_deaths)
-unique(total_deaths$`Country`)
-# filtering the Turkey data
+
+# Check unique countries in the dataset
+unique(total_deaths$`Region, subregion, country or area *`)
+
+# Filter the data for Turkey
 turkey_data <- total_deaths %>%
-  filter(Country == "Turkiye")
-library(ggplot2) #Drawing the graph
+  filter(`Region, subregion, country or area *` == "Turkey")
+
+# Plotting the graph for Turkey's total deaths by year
 ggplot(turkey_data, aes(x = Year, y = `Total Deaths (thousands)`)) +
-  geom_line(color = "blue", linewidth = 1) +
-  geom_point(color = "red") +
+  geom_line(color = "blue", linewidth = 1) +  # Line plot with blue color
+  geom_point(color = "red") +  # Red points for each data point
   labs(
     title = "Turkey's Total Deaths by Year",  
     x = "Year",
@@ -50,22 +55,31 @@ ggplot(turkey_data, aes(x = Year, y = `Total Deaths (thousands)`)) +
 Code block for More Developed countries graph:
 
 ```{r}
-library(tidyverse)  # Calling the libraries
-library(readxl)
-total_deaths <- read_excel("C:/Users/HP/Desktop/total_deaths.xlsx")
+# Load required libraries
+library(tidyverse)  # For data manipulation
+library(readxl)     # For reading Excel files
+library(ggplot2)    # For plotting
+
+# Load the data from the Excel file
+total_deaths <- read_excel("data/total_deaths.xlsx")
+
+# View the loaded dataset and check columns
 View(total_deaths)
 colnames(total_deaths)
-unique(total_deaths$`Country`)
-library(tidyverse)  # veya library(dply
-More_developed <- total_deaths %>%
-  filter(Country == "More developed regions")
-# Drawing the graphs
-library(ggplot2)
-ggplot(More_developed, aes(x = Year, y = `Total Deaths (thousands)`)) +
-  geom_line(color = "blue", linewidth = 1) +
-  geom_point(color = "red") +
+
+# Check unique values in the Region column
+unique(total_deaths$`Region, subregion, country or area *`)
+
+# Filter the data for More Developed regions
+more_developed_data <- total_deaths %>%
+  filter(`Region, subregion, country or area *` == "More developed regions")
+
+# Plotting the graph for More Developed countries' total deaths by year
+ggplot(more_developed_data, aes(x = Year, y = `Total Deaths (thousands)`)) +
+  geom_line(color = "blue", linewidth = 1) +  # Line plot with blue color
+  geom_point(color = "red") +  # Red points for each data point
   labs(
-    title = "More_developed country's Total Deaths by Year",  
+    title = "More Developed Countries' Total Deaths by Year",  
     x = "Year",
     y = "Total Deaths (Thousands)"
   ) +
@@ -73,21 +87,34 @@ ggplot(More_developed, aes(x = Year, y = `Total Deaths (thousands)`)) +
 
 ```
 
-Code block for More Developed countries graph:
+Code block for Less Developed countries graph:
 
 ```{r}
-library(tidyverse)  # Calling hte libraries
-library(readxl)
-total_deaths <- read_excel("C:/Users/HP/Desktop/total_deaths.xlsx")
+# Load required libraries
+library(tidyverse)  # For data manipulation
+library(readxl)     # For reading Excel files
+library(ggplot2)    # For plotting
+
+# Load the data from the Excel file
+total_deaths <- read_excel("data/total_deaths.xlsx")
+
+# View the loaded dataset and check columns
 View(total_deaths)
-Less_developed <- total_deaths %>%
-  filter(Country == "Less developed regions")
-library(ggplot2)
-ggplot(Less_developed, aes(x = Year, y = `Total Deaths (thousands)`)) +
-  geom_line(color = "blue", linewidth = 1) +
-  geom_point(color = "red") +
+colnames(total_deaths)
+
+# Check unique values in the Region column
+unique(total_deaths$`Region, subregion, country or area *`)
+
+# Filter the data for Less Developed regions
+less_developed_data <- total_deaths %>%
+  filter(`Region, subregion, country or area *` == "Less developed regions")
+
+# Plotting the graph for Less Developed countries' total deaths by year
+ggplot(less_developed_data, aes(x = Year, y = `Total Deaths (thousands)`)) +
+  geom_line(color = "blue", linewidth = 1) +  # Line plot with blue color
+  geom_point(color = "red") +  # Red points for each data point
   labs(
-    title = "Less_developed's Total Deaths by Year",  
+    title = "Less Developed Countries' Total Deaths by Year",  
     x = "Year",
     y = "Total Deaths (Thousands)"
   ) +
@@ -119,39 +146,45 @@ This graph compares the birth rate among women aged 15-19 in Turkey, More Develo
 This code block visualizes the graph:
 
 ```{r}
-library(readxl)
-other_parameters <- read_excel("C:/Users/HP/Desktop/other_parameters.xlsx")
-library(tidyverse)  # veya library(dplyr)
-ldeveloped_data_other <- other_parameters %>%
-  filter(Country == "Less developed regions")
+# Load required libraries
+library(readxl)   # For reading Excel files
+library(tidyverse) # For data manipulation
+library(ggplot2)   # For plotting
+
+# Load the data from the Excel file
+other_parameters <- read_excel("data/other_parameters.xlsx")
+
+# View the loaded dataset and check columns
+View(other_parameters)
+colnames(other_parameters)
+
+# Filter the data for Turkey, More Developed, and Less Developed regions
 turkey_data_other <- other_parameters %>%
-  filter(Country == "Turkiye")
-ldeveloped_data_other <- other_parameters %>%
-  filter(Country == "Less developed regions")
-mdeveloped_data_other <- other_parameters %>%
-  filter(Country == "More developed regions")
-library(ggplot2)
-# Turkey veri setine Source sütunu ekleyin
-data1 <- turkey_data_other
-data1$Source <- "Turkey"
+  filter(`Region, subregion, country or area *` == "Turkey")
 
-# More developed veri setine Source sütunu ekleyin
-data2 <- mdeveloped_data_other
-data2$Source <- "More developed"
+more_developed_data_other <- other_parameters %>%
+  filter(`Region, subregion, country or area *` == "More developed regions")
 
-data3 <- ldeveloped_data_other
-data3$Source <- "Less developed"
+less_developed_data_other <- other_parameters %>%
+  filter(`Region, subregion, country or area *` == "Less developed regions")
 
-# İki veri setini birleştirme
-combined_data <- rbind(data1, data2,data3)
+# Adding a "Source" column to each dataset for identification
+turkey_data_other$Source <- "Turkey"
+more_developed_data_other$Source <- "More developed"
+less_developed_data_other$Source <- "Less developed"
+
+# Combine the datasets into one
+combined_data <- rbind(turkey_data_other, more_developed_data_other, less_developed_data_other)
+
+# Plotting the graph for Births by women aged 15 to 19 (thousands)
 ggplot(combined_data, aes(x = Year, y = `Births by women aged 15 to 19 (thousands)`, color = Source)) +
-  geom_line(linewidth = 1) +  # Çizgileri ekleyin
+  geom_line(linewidth = 1) +  # Add lines
   labs(
-    title = "Births by women aged 15 to 19 (thousands) Over Years",
+    title = "Births by Women Aged 15 to 19 (Thousands) Over Years",
     x = "Year",
-    y = "Births by women aged 15 to 19 (thousands)"
+    y = "Births by Women Aged 15 to 19 (Thousands)"
   ) +
-  theme_minimal()
+  theme_minimal()  # Clean theme
 
 
 ```
@@ -171,38 +204,49 @@ The following graph illustrates the life expectancy at birth over the years for 
 This code block visualizes the graph:
 
 ```{r}
-library(readxl)
-life_expectancy <- read_excel("C:/Users/HP/Desktop/life_expectancy.xlsx")
-colnames(life_expectancy)
-View(life_expectancy)
-unique(life_expectancy$Country)
+# Load required libraries
+library(readxl)   # For reading Excel files
+library(tidyverse) # For data manipulation
+library(ggplot2)   # For plotting
 
-library(tidyverse)  
+# Load the data from the Excel file
+life_expectancy <- read_excel("data/life_expectancy.xlsx")
+
+# View the loaded dataset and check columns
+View(life_expectancy)
+colnames(life_expectancy)
+
+# Check unique values in the `Region, subregion, country or area *` column
+unique(life_expectancy$`Region, subregion, country or area *`)
+
+# Filter the data for Turkey, More Developed, and Less Developed regions
 turkey_expectancy <- life_expectancy %>%
-  filter(Region == "Turkiye")
-colnames(turkey_expectancy)
-head(turkey_expectancy)
-Less_expectancy <- life_expectancy %>%
-  filter(Region == "Less developed regions")
-More_expectancy <- life_expectancy %>%
-  filter(Region == "More developed regions")
-# Creating the datasets
-data1 <- turkey_expectancy
-data1$Source <- "Turkey"
-data2 <- More_expectancy
-data2$Source <- "More developed"
-data3 <- Less_expectancy
-data3$Source <- "Less developed"
-# Combining the datasets
-combined_data <- rbind(data1, data2,data3)
-ggplot(combined_data, aes(x = Year, y = `Life Expectancy at Birth`, color = Source)) +
-  geom_line(linewidth = 1) +  # Çizgileri ekleyin
+  filter(`Region, subregion, country or area *` == "Turkey")
+
+more_developed_expectancy <- life_expectancy %>%
+  filter(`Region, subregion, country or area *` == "More developed regions")
+
+less_developed_expectancy <- life_expectancy %>%
+  filter(`Region, subregion, country or area *` == "Less developed regions")
+
+# Adding a "Source" column to each dataset for identification
+turkey_expectancy$Source <- "Turkey"
+more_developed_expectancy$Source <- "More developed regions"
+less_developed_expectancy$Source <- "Less developed regions"
+
+# Combine the datasets into one
+combined_data <- rbind(turkey_expectancy, more_developed_expectancy, less_developed_expectancy)
+
+# Plotting the graph for Life Expectancy at Birth (both sexes) Over Years
+ggplot(combined_data, aes(x = Year, y = `Life Expectancy at Birth, both sexes (years)`, color = Source)) +
+  geom_line(linewidth = 1) +  # Add lines for each group
   labs(
-    title = "Life Expectancy at Birth Over Years",
+    title = "Life Expectancy at Birth, Both Sexes (Years) Over Years",
     x = "Year",
-    y = "Life Expectancy at Birth"
+    y = "Life Expectancy at Birth, Both Sexes (Years)"
   ) +
-  theme_minimal()
+  theme_minimal()  # Clean and minimal theme for the plot
+
 ```
 
 -   The plot shows the trends in **life expectancy at birth** for three distinct groups: **Turkey**, **More Developed** countries, and **Less Developed** countries.

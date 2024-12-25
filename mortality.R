@@ -1,4 +1,6 @@
 library(readxl)
-file_path <- "C:/Users/bugra/OneDrive/Belgeler/veri_proje/veri_dataset/mortality.xlsx"
+
+file_path <- "data/mortality.xlsx"
 mortality <- read_excel(file_path)
-save(mortality, file = "C:/Users/bugra/OneDrive/Belgeler/veri_proje/veri_dataset/mortality.RData")
+
+save(mortality, file = "data/mortality.RData")
