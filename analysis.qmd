@@ -23,28 +23,19 @@ Code block for the Turkey's graph:
 ```{r}
 
 
-# dplyr paketini yükle (eğer sadece dplyr kullanılacaksa)
 
 
-# Yüklenen kütüphaneyi aktif hale getir
-library(tidyverse)  # veya library(dplyr)
+
+library(tidyverse)  # Calling the libraries
 library(readxl)
 total_deaths <- read_excel("C:/Users/HP/Desktop/total_deaths.xlsx")
 View(total_deaths)
 colnames(total_deaths)
 unique(total_deaths$`Country`)
-# Gerekli kütüphaneler
-# Türkiye'ye ait verileri filtreleme
-library(tidyverse)  # veya library(dply
+# filtering the Turkey data
 turkey_data <- total_deaths %>%
   filter(Country == "Turkiye")
-colnames(turkey_data)
-
-# Türkiye verisinin kontrolü
-print(head(turkey_data))  # İlk birkaç satırı görüntüleyerek kontrol edin
-
-# Grafik çizimi
-library(ggplot2)
+library(ggplot2) #Drawing the graph
 ggplot(turkey_data, aes(x = Year, y = `Total Deaths (thousands)`)) +
   geom_line(color = "blue", linewidth = 1) +
   geom_point(color = "red") +
@@ -59,23 +50,16 @@ ggplot(turkey_data, aes(x = Year, y = `Total Deaths (thousands)`)) +
 Code block for More Developed countries graph:
 
 ```{r}
-library(tidyverse)  # veya library(dplyr)
+library(tidyverse)  # Calling the libraries
 library(readxl)
 total_deaths <- read_excel("C:/Users/HP/Desktop/total_deaths.xlsx")
 View(total_deaths)
 colnames(total_deaths)
 unique(total_deaths$`Country`)
-# Gerekli kütüphaneler
-# Türkiye'ye ait verileri filtreleme
 library(tidyverse)  # veya library(dply
 More_developed <- total_deaths %>%
   filter(Country == "More developed regions")
-colnames(More_developed)
-
-# Türkiye verisinin kontrolü
-print(head(More_developed))  # İlk birkaç satırı görüntüleyerek kontrol edin
-
-# Grafik çizimi
+# Drawing the graphs
 library(ggplot2)
 ggplot(More_developed, aes(x = Year, y = `Total Deaths (thousands)`)) +
   geom_line(color = "blue", linewidth = 1) +
@@ -92,22 +76,12 @@ ggplot(More_developed, aes(x = Year, y = `Total Deaths (thousands)`)) +
 Code block for More Developed countries graph:
 
 ```{r}
-library(tidyverse)  # veya library(dplyr)
+library(tidyverse)  # Calling hte libraries
 library(readxl)
 total_deaths <- read_excel("C:/Users/HP/Desktop/total_deaths.xlsx")
 View(total_deaths)
-colnames(total_deaths)
-unique(total_deaths$`Country`)
-
-
-library(tidyverse)  
 Less_developed <- total_deaths %>%
   filter(Country == "Less developed regions")
-colnames(More_developed)
-
-
-print(head(More_developed)) 
-
 library(ggplot2)
 ggplot(Less_developed, aes(x = Year, y = `Total Deaths (thousands)`)) +
   geom_line(color = "blue", linewidth = 1) +
@@ -203,7 +177,7 @@ colnames(life_expectancy)
 View(life_expectancy)
 unique(life_expectancy$Country)
 
-library(tidyverse)  # veya library(dplyr)
+library(tidyverse)  
 turkey_expectancy <- life_expectancy %>%
   filter(Region == "Turkiye")
 colnames(turkey_expectancy)
@@ -212,18 +186,14 @@ Less_expectancy <- life_expectancy %>%
   filter(Region == "Less developed regions")
 More_expectancy <- life_expectancy %>%
   filter(Region == "More developed regions")
-
+# Creating the datasets
 data1 <- turkey_expectancy
 data1$Source <- "Turkey"
-
-# More developed veri setine Source sütunu ekleyin
 data2 <- More_expectancy
 data2$Source <- "More developed"
-
 data3 <- Less_expectancy
 data3$Source <- "Less developed"
-
-# İki veri setini birleştirme
+# Combining the datasets
 combined_data <- rbind(data1, data2,data3)
 ggplot(combined_data, aes(x = Year, y = `Life Expectancy at Birth`, color = Source)) +
   geom_line(linewidth = 1) +  # Çizgileri ekleyin
