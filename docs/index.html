@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -35,12 +35,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-29157be7fd9d7ebceb8ec4a118ca4576.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-5c6cf2b4aae133ce9cff2cdb072437d7.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -151,7 +151,11 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><img src="images/aiworldmap.jpeg" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/aiworldmap.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="441"></p>
+</figure>
+</div>
 <p>This is our project webpage.</p>
 <p>Please stay tuned to follow our project activities.</p>
 <section id="team-members" class="level1">
@@ -159,8 +163,7 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li><p><a href="https://github.com/emu-hacettepe-analytics/emu430-fall2024-tarikbugrakoc">Tarık Buğra Koç</a></p></li>
 <li><p><a href="https://github.com/emu-hacettepe-analytics/emu430-fall2024-btbuyukkurt">Batuhan Turhan Büyükkurt</a></p></li>
-<li><p>Ömer Meral</p></li>
-<li><p>Yavuz Sami Gürsoy</p></li>
+<li><p><a href="https://github.com/omeral7">Ömer Meral</a></p></li>
 </ol>
 </section>
 <section id="project-topic" class="level1">
@@ -173,27 +176,6 @@ ul.task-list li input[type="checkbox"] {
 <p>We obtained the data set from the United Nations Department of Economic and Social Affairs, Population Division. You can access the relevant data set from the link below:</p>
 <p><a href="https://population.un.org/wpp/Download/Files/1_Indicator%20(Standard)/EXCEL_FILES/1_General/WPP2024_GEN_F01_DEMOGRAPHIC_INDICATORS_COMPACT.xlsx" class="uri">https://population.un.org/wpp/Download/Files/1_Indicator%20(Standard)/EXCEL_FILES/1_General/WPP2024_GEN_F01_DEMOGRAPHIC_INDICATORS_COMPACT.xlsx</a></p>
 <p>The original data set required a thorough cleaning process to ensure reliability and clarity for analysis.</p>
-<p><strong>Cleaning Process and Grouping</strong></p>
-<ol type="1">
-<li><p><strong>Cleaning Process:</strong></p>
-<ul>
-<li><p>Missing or incomplete data entries were identified and addressed to maintain the dataset’s integrity.</p></li>
-<li><p>Duplicates and irrelevant rows were removed.</p></li>
-<li><p>Relevant data for “Turkey,” “More Developed,” “Less Developed,” and “Least Developed” groups were extracted for focused analysis.</p></li>
-</ul></li>
-<li><p><strong>Grouping Process:</strong><br>
-To simplify and enhance our analysis, the cleaned data set was divided into several key groups based on demographic parameters:</p>
-<ul>
-<li><p><strong>Change in Population</strong>: Trends and shifts in population size over the years.</p></li>
-<li><p><strong>Child Demographics</strong>: Birth rates and child-related population indicators.</p></li>
-<li><p><strong>Death Rate</strong>: Annual death rates across groups.</p></li>
-<li><p><strong>Life Expectancy</strong>: Average life expectancy trends over time.</p></li>
-<li><p><strong>Mortality</strong>: Mortality rates segmented by different age groups and causes.</p></li>
-<li><p><strong>Population Dynamics</strong>: Overall population trends and growth patterns.</p></li>
-<li><p><strong>Total Deaths</strong>: Aggregate death counts across years.</p></li>
-<li><p><strong>Other Parameters</strong>: Additional indicators relevant to the demographic and economic development of regions.</p></li>
-</ul></li>
-</ol>
 
 
 </section>
@@ -425,8 +407,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -537,7 +517,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
