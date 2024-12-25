@@ -2,6 +2,7 @@
 title: "Team quantr"
 sidebar: false 
 ---
+![Logo]("images/indir.jpg")
 
 This is our project webpage.
 
