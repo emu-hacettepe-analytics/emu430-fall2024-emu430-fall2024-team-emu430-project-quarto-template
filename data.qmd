@@ -1,14 +1,5 @@
 ---
 title: "Data"
-format:
-  pdf:
-    colorlinks: true
-    papersize: a4
-    fontsize: 11pt
-    margin-left: 2cm
-    margin-right: 2cm
-    margin-top: 2cm
-    margin-bottom: 2cm
 ---
 
 Data source: [UN Demographic Indicators Compact (XLSX)](https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/EXCEL_FILES/1_General/WPP2024_GEN_F01_DEMOGRAPHIC_INDICATORS_COMPACT.xlsx)\
