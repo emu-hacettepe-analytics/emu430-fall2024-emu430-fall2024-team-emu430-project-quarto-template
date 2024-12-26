@@ -5,5 +5,260 @@ title: "Analysis"
 About this site
 
 ```{r}
-1 + 1
+
 ```
+
+### **Analysis Overview:**
+
+This analysis seeks to explore and compare Turkey's demographic indicators with those of more developed and less developed regions, based on data provided by the **UN Demographic Indicators Dataset**. By examining critical parameters such as total deaths, crude death rates, and fertility trends, we aim to gain valuable insights into Turkey’s demographic status in relation to other regions with varying levels of development.
+
+We will examine these indicators over time to assess whether Turkey’s demographic patterns are more aligned with developed countries, which generally experience better healthcare outcomes, or with less developed countries, where healthcare access may be limited, resulting in different mortality and fertility trends.\
+
+### **Total Deaths Comparison: Turkey vs. More Developed vs. Less Developed Countries**
+
+First, we generated the "Total Deaths by Year" graphs for Turkey, More Developed countries, and Less Developed countries. For this, we used specific R codes to filter the data and create the visualizations.
+
+Code block for the Turkey's graph:
+
+```{r}
+# Load required libraries
+library(tidyverse)  # For data manipulation
+library(readxl)     # For reading Excel files
+library(ggplot2)    # For plotting
+
+# Load the data from the Excel file
+total_deaths <- read_excel("data/total_deaths.xlsx")
+
+# View the loaded dataset and check columns
+View(total_deaths)
+colnames(total_deaths)
+
+# Check unique countries in the dataset
+unique(total_deaths$`Region, subregion, country or area *`)
+
+# Filter the data for Turkey
+turkey_data <- total_deaths %>%
+  filter(`Region, subregion, country or area *` == "Turkey")
+
+# Plotting the graph for Turkey's total deaths by year
+ggplot(turkey_data, aes(x = Year, y = `Total Deaths (thousands)`)) +
+  geom_line(color = "blue", linewidth = 1) +  # Line plot with blue color
+  geom_point(color = "red") +  # Red points for each data point
+  labs(
+    title = "Turkey's Total Deaths by Year",  
+    x = "Year",
+    y = "Total Deaths (Thousands)"
+  ) +
+  theme_minimal()
+```
+
+Code block for More Developed countries graph:
+
+```{r}
+# Load required libraries
+library(tidyverse)  # For data manipulation
+library(readxl)     # For reading Excel files
+library(ggplot2)    # For plotting
+
+# Load the data from the Excel file
+total_deaths <- read_excel("data/total_deaths.xlsx")
+
+# View the loaded dataset and check columns
+View(total_deaths)
+colnames(total_deaths)
+
+# Check unique values in the Region column
+unique(total_deaths$`Region, subregion, country or area *`)
+
+# Filter the data for More Developed regions
+more_developed_data <- total_deaths %>%
+  filter(`Region, subregion, country or area *` == "More developed regions")
+
+# Plotting the graph for More Developed countries' total deaths by year
+ggplot(more_developed_data, aes(x = Year, y = `Total Deaths (thousands)`)) +
+  geom_line(color = "blue", linewidth = 1) +  # Line plot with blue color
+  geom_point(color = "red") +  # Red points for each data point
+  labs(
+    title = "More Developed Countries' Total Deaths by Year",  
+    x = "Year",
+    y = "Total Deaths (Thousands)"
+  ) +
+  theme_minimal()
+
+```
+
+Code block for Less Developed countries graph:
+
+```{r}
+# Load required libraries
+library(tidyverse)  # For data manipulation
+library(readxl)     # For reading Excel files
+library(ggplot2)    # For plotting
+
+# Load the data from the Excel file
+total_deaths <- read_excel("data/total_deaths.xlsx")
+
+# View the loaded dataset and check columns
+View(total_deaths)
+colnames(total_deaths)
+
+# Check unique values in the Region column
+unique(total_deaths$`Region, subregion, country or area *`)
+
+# Filter the data for Less Developed regions
+less_developed_data <- total_deaths %>%
+  filter(`Region, subregion, country or area *` == "Less developed regions")
+
+# Plotting the graph for Less Developed countries' total deaths by year
+ggplot(less_developed_data, aes(x = Year, y = `Total Deaths (thousands)`)) +
+  geom_line(color = "blue", linewidth = 1) +  # Line plot with blue color
+  geom_point(color = "red") +  # Red points for each data point
+  labs(
+    title = "Less Developed Countries' Total Deaths by Year",  
+    x = "Year",
+    y = "Total Deaths (Thousands)"
+  ) +
+  theme_minimal()
+
+```
+
+These graphs compares the total deaths over the years for Turkey, More Developed countries, and Less Developed countries.
+
+![**Fig.1** shows Turkey's Total Deaths by Year\
+](images/WhatsApp%20Image%202024-12-22%20at%2000.44.17.jpeg){fig-align="left" width="266"}
+
+![**Fig.2** shows More Developed country's Total Deaths by Year](images/WhatsApp%20Image%202024-12-22%20at%2000.50.32-01.jpeg){fig-align="left" width="277"}
+
+![**Fig.3** shows Less Developed country's Total Deaths by Year](images/WhatsApp%20Image%202024-12-22%20at%2000.54.10.jpeg){fig-align="left" width="317"}
+
+//////bu grafiklerin analizlerini yapmadım.
+
+-   **Trend Analysis**: We can observe the trends in total deaths for each group across the years. By comparing the curves, we can analyze whether Turkey's death rate aligns more closely with the trend of more developed countries or less developed ones. Factors like healthcare improvements, aging population, and socio-economic conditions may influence these trends.
+
+-   **Demographic Alignment**: From a demographic perspective, we can assess if Turkey's total deaths trend shows more similarity to that of more developed countries, which generally experience lower death rates due to better healthcare, or if it is closer to less developed countries with potentially higher mortality rates due to limited healthcare access.
+
+-   **Conclusions**: Drawing on these trends, Turkey may either resemble developed countries more closely (suggesting improvements in health systems) or share characteristics with less developed regions (highlighting areas that need improvement in public health and healthcare access).\
+
+### **Births by Women Aged 15-19: Turkey vs. More Developed vs. Less Developed Countries**
+
+This graph compares the birth rate among women aged 15-19 in Turkey, More Developed countries, and Less Developed countries.
+
+This code block visualizes the graph:
+
+```{r}
+# Load required libraries
+library(readxl)   # For reading Excel files
+library(tidyverse) # For data manipulation
+library(ggplot2)   # For plotting
+
+# Load the data from the Excel file
+other_parameters <- read_excel("data/other_parameters.xlsx")
+
+# View the loaded dataset and check columns
+View(other_parameters)
+colnames(other_parameters)
+
+# Filter the data for Turkey, More Developed, and Less Developed regions
+turkey_data_other <- other_parameters %>%
+  filter(`Region, subregion, country or area *` == "Turkey")
+
+more_developed_data_other <- other_parameters %>%
+  filter(`Region, subregion, country or area *` == "More developed regions")
+
+less_developed_data_other <- other_parameters %>%
+  filter(`Region, subregion, country or area *` == "Less developed regions")
+
+# Adding a "Source" column to each dataset for identification
+turkey_data_other$Source <- "Turkey"
+more_developed_data_other$Source <- "More developed"
+less_developed_data_other$Source <- "Less developed"
+
+# Combine the datasets into one
+combined_data <- rbind(turkey_data_other, more_developed_data_other, less_developed_data_other)
+
+# Plotting the graph for Births by women aged 15 to 19 (thousands)
+ggplot(combined_data, aes(x = Year, y = `Births by women aged 15 to 19 (thousands)`, color = Source)) +
+  geom_line(linewidth = 1) +  # Add lines
+  labs(
+    title = "Births by Women Aged 15 to 19 (Thousands) Over Years",
+    x = "Year",
+    y = "Births by Women Aged 15 to 19 (Thousands)"
+  ) +
+  theme_minimal()  # Clean theme
+
+
+```
+
+#### **Suggested Interpretation:**
+
+-   **Teen Birth Rates and Socioeconomic Factors**: Teen births are often influenced by socioeconomic, educational, and healthcare factors. Less developed countries typically have higher rates of teen births due to lower access to education and family planning services. By comparing Turkey to both developed and less developed countries, we can analyze where Turkey stands in terms of policies surrounding family planning, education, and access to healthcare.
+
+-   **Trends in Turkey**: If Turkey's teen birth rates are closer to those of less developed countries, it might suggest that certain cultural or social factors, or lack of effective health education, contribute to higher teen pregnancies. On the other hand, if Turkey's rates are closer to those of developed countries, it may reflect effective policy interventions such as better education for young women and improved access to contraception and reproductive health services.
+
+-   **Implications for Policy**: The results could lead to insights on how Turkey can improve its healthcare and education systems to lower teen pregnancies. Comparative analysis with developed countries might reveal strategies and policies that Turkey could adopt to further reduce teen birth rates.
+
+### **Analysis of Life Expectancy at Birth Over the Years**
+
+The following graph illustrates the life expectancy at birth over the years for Turkey, More Developed, and Less Developed countries:\
+\
+This code block visualizes the graph:
+
+```{r}
+# Load required libraries
+library(readxl)   # For reading Excel files
+library(tidyverse) # For data manipulation
+library(ggplot2)   # For plotting
+
+# Load the data from the Excel file
+life_expectancy <- read_excel("data/life_expectancy.xlsx")
+
+# View the loaded dataset and check columns
+View(life_expectancy)
+colnames(life_expectancy)
+
+# Check unique values in the `Region, subregion, country or area *` column
+unique(life_expectancy$`Region, subregion, country or area *`)
+
+# Filter the data for Turkey, More Developed, and Less Developed regions
+turkey_expectancy <- life_expectancy %>%
+  filter(`Region, subregion, country or area *` == "Turkey")
+
+more_developed_expectancy <- life_expectancy %>%
+  filter(`Region, subregion, country or area *` == "More developed regions")
+
+less_developed_expectancy <- life_expectancy %>%
+  filter(`Region, subregion, country or area *` == "Less developed regions")
+
+# Adding a "Source" column to each dataset for identification
+turkey_expectancy$Source <- "Turkey"
+more_developed_expectancy$Source <- "More developed regions"
+less_developed_expectancy$Source <- "Less developed regions"
+
+# Combine the datasets into one
+combined_data <- rbind(turkey_expectancy, more_developed_expectancy, less_developed_expectancy)
+
+# Plotting the graph for Life Expectancy at Birth (both sexes) Over Years
+ggplot(combined_data, aes(x = Year, y = `Life Expectancy at Birth, both sexes (years)`, color = Source)) +
+  geom_line(linewidth = 1) +  # Add lines for each group
+  labs(
+    title = "Life Expectancy at Birth, Both Sexes (Years) Over Years",
+    x = "Year",
+    y = "Life Expectancy at Birth, Both Sexes (Years)"
+  ) +
+  theme_minimal()  # Clean and minimal theme for the plot
+
+```
+
+-   The plot shows the trends in **life expectancy at birth** for three distinct groups: **Turkey**, **More Developed** countries, and **Less Developed** countries.
+
+-   The **X-axis** represents the **years**, while the **Y-axis** shows **life expectancy at birth** in years.
+
+-   Each group (Turkey, More Developed, Less Developed) is represented with different colored lines, allowing for easy comparison.
+
+By examining the graph:
+
+-   **Turkey's life expectancy** appears to follow a similar upward trajectory as **More Developed countries**, especially in the recent years. This indicates that Turkey has made substantial progress in terms of healthcare and living conditions, aligning more closely with the developed regions.
+
+-   **Less Developed countries**, on the other hand, generally show a slower increase in life expectancy. This suggests that they still face significant challenges in improving healthcare and living standards.
+
+This analysis indicates that Turkey is steadily closing the gap with more developed regions, showcasing positive demographic developments in terms of life expectancy.
