@@ -2,9 +2,10 @@
 title: "Team Rhapsody"
 sidebar: false 
 ---
+
 ![](images\giphy.gif)
 
- Once upon a time a group of wise men said "Is this the real life?Is this just a fantasy?" Well,we say our work can show which is it!
+Once upon a time a group of wise men said "Is this the real life?Is this just a fantasy?" Well,we say our work can show which is it!
 
 Please stay tuned to follow our project activities.
 
@@ -38,13 +39,15 @@ The data utilized in the project consists of the following indices and indicator
 
 • Import Price Index
 
-• Interest Rates
+• Interest Rates(IR)
 
-• Consumer Confidence Index
+• Consumer Confidence Index(CCI)
 
-• Consumer Price Index
+• Consumer Price Index(CPI)
 
-• Credit Card Usage
+• Credit Card Usage(CCU)
+
+<https://github.com/emu-hacettepe-analytics/emu430-fall2024-team-r-hapsody/blob/master/final_dataset.RData>
 
 The data for the analysis is sourced from reliable institutions such as the Turkish Statistical Institute (TUİK) and the Central Bank of the Republic of Turkey (TCMB). The dataset is sufficiently large and up-to-date, enabling meaningful relationships to be established between economic indicators.
 
