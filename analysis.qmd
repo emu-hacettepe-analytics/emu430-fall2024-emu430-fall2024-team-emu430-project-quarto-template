@@ -2,8 +2,930 @@
 title: "Analysis"
 ---
 
-About this site
+**KEY TAKEAWAYS**
+
+-   We calculated for correlation coefficients for all indicators and highest correlation coefficient is 0.88 between PPI and Housing Price Index.
+
+-   We make a polynomial regression analysis for PPI and Credit Card Usage by taking a furter step analysis and it was a perfect fit for these two indicator.
+
+-   We made a multiple regression analysis as our dependent variable PPI and our independent variables as Credit Card Usage,Housing Price Index and Consumer Confidence Index.And this model explains about **80.12%** of the variability in **PPI**, which is strong.
+
+**1-Producer Price Index vs Consumer Price Index**
+
+In this study, the relationship between the Producer Price Index (PPI) and the Consumer Price Index (CPI) has been analyzed. While PPI measures changes in the prices of goods and services at the producer level, CPI reflects changes in the prices paid by consumers. The interaction between these indices is crucial for understanding price formation processes, as changes in production costs (PPI) can often translate into consumer prices (CPI). This analysis examines how changes in PPI affect CPI and evaluates the interaction between these two economic indicators. Using historical data and various statistical methods, the direction and magnitude of this relationship have been revealed.
+
+Based on this analysis we will choose PPI or CPI as our baseline to compare it's effects on other economic indicators.
+
+First let's look the table we will use for analysis.We used annual percentage changes of the variables as index values.
+
+```{r include=FALSE}
+library(tidyverse)
+library(readxl)
+library(ggthemes)
+library(lmtest)
+
+```
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+ppi <- read_excel("ppi.xlsx")
+cpi <- read_excel("cpı.xlsx")
+table_ppi_cpi <- left_join(ppi,cpi, by ="Tarih")
+table_ppi_cpi$Tarih <- as.Date(paste0("01-", table_ppi_cpi$Tarih), format = "%d-%m-%Y")
+
+
+```
+
+First let's look the table we will use for analysis.We used annual percentage changes of the variables as index values.
 
 ```{r}
-1 + 1
+
+head(table_ppi_cpi,10)
 ```
+
+We will plot a line graph where we will show both index as a variable over time.This will help us to visualize their relation.
+
+```{r}
+
+graph_line1 <- ggplot(table_ppi_cpi, aes(x = Tarih)) +      
+  geom_line(aes(y = PPI, color = "PP Index(%)" )) +
+  geom_line(aes(y = CPI, color = "Cp Index(%)")) +
+  scale_color_manual(values = c("PP Index(%)" = "black", "Cp Index(%)" = "blue")) +
+  labs(title = "PPI&CPI Graph",
+       x = "Tarih",
+       y = "Variable",
+       color = "Variables") + 
+  theme_minimal()+theme_economist()
+graph_line1
+
+```
+
+As you can see in the graph above,it seems both indexes have a similar behaviour over time.By just looking at this graph,we may think there is a strong relation between them.They track each others movement on the graph.But just visuality may not be enough therefore we will do a correlation test.
+
+```{r}
+cor_ppi_cpi <- cor(table_ppi_cpi$PPI, table_ppi_cpi$CPI)
+print(cor_ppi_cpi)
+cortest_ppi_cpi <- cor.test(table_ppi_cpi$PPI, table_ppi_cpi$CPI)
+print(cortest_ppi_cpi$p.value)
+
+```
+
+This correlation value supports visual data and says there is really strong relation between them.Also, p-value(1.087791e-16) is very low.Usually,results are considered significant if they are less than 0.5.In this case, the probability of the course of the situation arising by chance is extremely low.But what happens if there is some lag between interaction.Let's do some lagged correlation tests.
+
+```{r}
+data_ppi_cpi<- table_ppi_cpi %>%
+  mutate(PPI_lag1 = lag(PPI, 1),
+        PPI_lag2 = lag(PPI, 2),
+         PPI_lag3 = lag(PPI, 3),
+         PPI_lag4 = lag(PPI, 4),PPI_lag5 = lag(PPI, 5))
+
+cor_lag1_ppi_cpi <- cor(data_ppi_cpi$PPI_lag1, data_ppi_cpi$CPI, use = "complete.obs")
+cor_lag2_ppi_cpi <- cor(data_ppi_cpi$PPI_lag2, data_ppi_cpi$CPI, use = "complete.obs")
+cor_lag3_ppi_cpi <- cor(data_ppi_cpi$PPI_lag3, data_ppi_cpi$CPI, use = "complete.obs")
+cor_lag4_ppi_cpi <- cor(data_ppi_cpi$PPI_lag4, data_ppi_cpi$CPI, use = "complete.obs")
+print(cor_lag1_ppi_cpi)
+print(cor_lag2_ppi_cpi)
+print(cor_lag3_ppi_cpi)
+print(cor_lag4_ppi_cpi)
+```
+
+Highest correlation is 0.809 with a 1 unit time lag.More than 1 unit time lag,correlation values is decreasing and they are less than original correlation value.There is not an obvious increase on values with lag.But still it's proves there is a strong relation between two index.But which index affects the other?Which index should we use as a independent variable to analyse other economic indicators's behaviours?We should Grenger casuality test to decide.
+
+```{r}
+grangertest(PPI ~ CPI, order = 2, data = table_ppi_cpi)
+grangertest(CPI ~ PPI, order = 2, data = table_ppi_cpi)
+
+
+```
+
+First Granger test examines if CPI affects PPI values and it has a p-value as 0.1019 which is too high.That means CPI values does not have a effect on PPI values. On the other hand,second Granger test examinse if PPI affects CPI values and it has a p-value as 6.712e-05 which is very low.Generally p-values less than 0.05 considered statistically meaningful.Thus,we can say PPI values does affect CPI values. Finally we can say PPI can be independent variable for our further analysis.That's why we choose PPI as our inflation rate. Before continue on further analysis we will do a regression analysis between PPI and CPI to better understanding of their relation.
+
+```{r}
+reg_model <- lm(CPI ~ PPI, data = data_ppi_cpi)
+summary(reg_model)
+```
+
+Let's analyse this result.
+
+**Intercept:13.99**
+
+This represents the predicted value of CPI when PPI (index) is zero.Practically, it indicates the starting point.
+
+**PPI Coefficient (index):0.49669**
+
+This coefficient shows that a one-unit increase in PPI leads to an average increase of 0.497 units in CPI. The positive sign indicates that an increase in PPI results in an increase in CPI.
+
+**P-values (for coefficients):**
+
+**Intercept:p=8.8𝑒-0.6 PPI coefficient=p\<2𝑒-16**
+
+Since the p-values for both coefficients are less than 0.05, they are statistically significant. This supports the conclusion that the independent variable (PPI) has a significant effect on the dependent variable (CPI).
+
+**Multiple R-squared:0.6335**
+
+This value indicates that the model explains 63.35% of the total variation in the CPI variable. This suggests a strong relationship, although 36.65% of the variation remains unexplained. The model has reasonable explanatory power.
+
+**F-Statistic:119.3, p\< 2.2𝑒- 16**
+
+This test evaluates the overall significance of the model. It shows that PPI is a significant variable for predicting CPI. The very small p-value (\< 0.05) confirms that the model as a whole is statistically significant.
+
+**Regression equation:**
+
+**CPI = 13.99 + 0.49669.PPI**
+
+And there is graph with regression line.
+
+```{r}
+data_ppi_cpi$Tarih <- as.Date(paste0("01-", data_ppi_cpi$Tarih), format = "%d-%m-%Y")
+reg_graph<-ggplot(data_ppi_cpi, aes(x = PPI, y = CPI)) +
+  geom_point(color = "blue") + 
+  geom_smooth(method = "lm", color = "red", se = TRUE) 
+  labs(title = "Regression Analysis: PPI vs CPI",
+       x = "Producer Price Index (PPI)",
+       y = "Consumer Price Index (CPI)")
+  
+```
+
+```{r}
+reg_graph
+```
+
+**2-Producer Price Index vs Credit Card Usage**
+
+In this study, the relationship between the Producer Price Index (PPI) and credit card usage has been analyzed. PPI measures changes in the prices of goods and services at the producer level, while credit card usage is an important indicator reflecting consumer spending habits and economic activity. The interaction between these two variables is critical for understanding the impact of economic fluctuations and price changes on consumer behavior. Using historical data, the study examines how changes in PPI affect credit card usage and evaluates the direction and magnitude of this relationship through various statistical methods.
+
+Data we will use is again annual percentage changes for both variables and it accounts last 6 years since 2019.
+
+First let's take a look our data frame!
+
+```{r include=FALSE}
+library(readxl)      
+library(tidyverse)     
+library(ggthemes)
+```
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+ccu <- read_excel("credit.xlsx")
+ppi <- read_excel("ppi.xlsx")
+table_ppi_ccu <- left_join(ppi,ccu, by ="Tarih")
+table_ppi_ccu$Tarih <- as.Date(paste0("01-", table_ppi_ccu$Tarih), format = "%d-%m-%Y")
+
+```
+
+```{r}
+head(table_ppi_ccu,10)
+```
+
+*PPI=PRODUCER PRICE INDEX*
+
+*USAGE=CREDİT CART USAGE AMOUNT*
+
+We will plot a line graph where we will show both index as a variable over time.This will help us to visualize their relation.
+
+```{r}
+ggp2 <- ggplot(table_ppi_ccu, aes(x = Tarih)) +      
+  geom_line(aes(y = PPI, color = "PP Index")) +
+  geom_line(aes(y = usage, color = "CC Usage")) +
+  scale_color_manual(values = c("PP Index" = "black", "CC Usage" = "blue")) +
+  labs(title = "PPI&CCU Graph",
+       x = "Date",
+       y = "Variables(%)",
+       color = "Variables") + 
+  theme_minimal()+theme_economist()
+
+
+ggp2
+
+```
+
+We can make a legitimate guess about their relation with this visualized data.But we need analytical results to interpret the results.Therefore, we will do a correlation test between them.
+
+```{r}
+cor_ppi_ccu <- cor(table_ppi_ccu$PPI, table_ppi_ccu$usage)
+cortest_ppi_ccu <- cor.test(table_ppi_ccu$PPI, table_ppi_ccu$usage)
+print(cor_ppi_ccu)
+print(cortest_ppi_ccu$p.value)
+
+```
+
+Correlation value for PPI and CCU is 0.603 which is pretty high.This means there is a relaively strong relation between them.Also p-value is less than 0.05 which means it is statistically meaningful.We also will do a correlation test with time lag to go deeper.
+
+```{r}
+data_ppi_ccu <- table_ppi_ccu %>%
+  mutate(PPI_lag1 = lag(PPI, 1),
+         PPI_lag2 = lag(PPI, 2),
+         PPI_lag3 = lag(PPI, 3),
+         PPI_lag4=lag(PPI,4),
+         PPI_lag5=lag(PPI,5))
+cor_lag1_ppi_ccu <- cor(data_ppi_ccu$PPI_lag1, data_ppi_ccu$usage, use = "complete.obs")
+cor_lag2_ppi_ccu <- cor(data_ppi_ccu$PPI_lag2, data_ppi_ccu$usage, use = "complete.obs")
+cor_lag3_ppi_ccu <- cor(data_ppi_ccu$PPI_lag3, data_ppi_ccu$usage, use = "complete.obs")
+cor_lag4_ppi_ccu <- cor(data_ppi_ccu$PPI_lag4, data_ppi_ccu$usage, use = "complete.obs")
+cor_lag5_ppi_ccu <- cor(data_ppi_ccu$PPI_lag5, data_ppi_ccu$usage, use = "complete.obs")
+print(cor_lag1_ppi_ccu)
+print(cor_lag2_ppi_ccu)
+print(cor_lag3_ppi_ccu)
+print(cor_lag4_ppi_ccu)
+print(cor_lag5_ppi_ccu)
+```
+
+As the lag time increases, the correlation value increases. After the 4th and 5th delay, the rate of increase slows down.So we can say PPI values causes CCU Therefore, we can say that PPI has a delayed effect on credit card usage which is higher than correlation value without time lag.
+
+**3-PRODUCER PRICE INDEX VS INTEREST RATE**
+
+In this study, the relationship between the Producer Price Index (PPI) and interest rates has been analyzed. While PPI measures changes in the prices of goods and services at the producer level, interest rates are a critical macroeconomic indicator influencing economic growth, consumption, and investment decisions. The interaction between these two variables is significant for understanding inflation dynamics and supporting economic policy decisions. Using historical data, the study evaluates the impact of changes in PPI on interest rates and examines the direction and magnitude of this relationship through various statistical methods.First let's take a look at our data table:
+
+```{r include=FALSE}
+library(readxl)      
+library(tidyverse)       
+library(ggthemes)
+```
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+data_yusuf <- read_excel("data_rhapsody.xlsx", sheet = "Sheet1")
+data_yusuf <- data_yusuf[, c("DATE", "PPI", "IR", "CCI")]
+colnames(data_yusuf) <- c("DATE", "PPI", "IR", "CCI")
+data_yusuf$DATE <- as.Date(paste0(data_yusuf$DATE, "-01"), format = "%Y-%m-%d")
+data_yusuf0<-data_yusuf[, c("DATE","PPI","IR")]
+
+```
+
+```{r}
+head(data_yusuf0,10)
+
+```
+
+Now we will sketch a graph line for visualization purposes.
+
+```{r}
+ggplot(data=data_yusuf, aes(x=DATE)) +
+  geom_line(aes(y=PPI, color="PPI"), size=1) +
+  geom_line(aes(y=IR, color="Interest Rate (IR)"), size=1, linetype="dashed") +
+  labs(title="PPI vs Interest Rate Over Time", x="Date", y="Values", color="Legend") +
+  theme_economist() +
+  scale_color_economist()
+```
+
+Because we need analytical data we will implement a correlation test for this two economic indicators.
+
+```{r}
+cor_interest <- cor(data_yusuf$PPI, data_yusuf$IR)
+print(cor_interest)
+cortest_interest <- cor.test(data_yusuf$PPI, data_yusuf$IR)
+print(cortest_interest$p.value)
+
+```
+
+Correlation value is 0.119 which means these two indicators does not have a strong relation.Also p-value is more than 0.05 and this indicates this correlation value is NOT significantly meaningfull.To conclude,we can say we did not find a clue about relation between PPI and Interest Rate indicators.
+
+**4-PRODUCER PRICE INDEX VS CONSUMER CONFIDENCE INDEX**
+
+This study analyzes the relationship between the Producer Price Index (PPI) and the Consumer Confidence Index (CCI). While PPI measures changes in the prices of goods and services at the producer level, the Consumer Confidence Index reflects the sentiment and expectations of consumers regarding the economy. Understanding the interaction between these two indicators is crucial for assessing the impact of price changes on consumer perceptions and behavior. Using historical data, the study examines how changes in PPI influence consumer confidence and evaluates the direction and magnitude of this relationship through various statistical methods.
+
+First let's take a look at our data frame:
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+data_yusuf <- read_excel("data_rhapsody.xlsx", sheet = "Sheet1")
+data_yusuf <- data_yusuf[, c("DATE", "PPI", "IR", "CCI")]
+colnames(data_yusuf) <- c("DATE", "PPI", "IR", "CCI")
+data_yusuf$DATE <- as.Date(paste0(data_yusuf$DATE, "-01"), format = "%Y-%m-%d")
+data_yusuf1<-data_yusuf[, c("DATE","PPI","CCI")]
+```
+
+```{r}
+head(data_yusuf1,10)
+```
+
+And again as we have done all above we will sketch a line graph:
+
+```{r}
+graph_yusuf1<-ggplot(data=data_yusuf, aes(x=DATE)) +
+  geom_line(aes(y=PPI, color="PPI"), size=1) +
+  geom_line(aes(y=CCI, color="Consumer Confidence Index (CCI)"), size=1, linetype="dashed") +
+  labs(title="PPI vs Consumer Confidence Index Over Time", x="Date", y="Values", color="Legend") +
+  theme_economist() +
+  scale_color_economist()
+graph_yusuf1
+
+```
+
+We can not clearly see their relation by just looking at it therefore we will conduct a correlation test again.
+
+```{r}
+cor_confidence <- cor(data_yusuf$PPI, data_yusuf$CCI)
+print(cor_confidence)
+cortest_confidence <- cor.test(data_yusuf$PPI, data_yusuf$CCI)
+print(cortest_confidence$p.value)
+```
+
+0.422 is relatively low to say these indicators has a notable relation but p-value is low enough to be statisticaly meaningful.So we can easily say we can confirm that there is a relation bewteen PPI and CCI and this relation is not strong.
+
+**5-PRODUCER PRICE INDEX VS HOUSUNG PRICE INDEX**
+
+This study examines the relationship between the Producer Price Index (PPI) and the Housing Price Index (HPI). While PPI tracks changes in the prices of goods and services at the producer level, HPI reflects fluctuations in residential property prices. Understanding the interaction between these two indices is essential for analyzing how changes in production costs influence the housing market. Using historical data, the study investigates the impact of PPI on housing prices and evaluates the direction and strength of this relationship through various statistical methods.
+
+Let's take a look at our table!
+
+```{r include=FALSE}
+library(readxl)      
+library(tidyverse)     
+library(ggthemes)
+```
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+housing <- read_excel("konut.xlsx")
+housing$Tarih <- as.Date(paste0(housing$Tarih, "-01"), format = "%Y-%m-%d")
+colnames(housing) <- c("Tarih", "Housing_Percentage_Change")
+UFE <- read_excel("ufe.xlsx")
+UFE$Tarih <- as.Date(paste0("01-", UFE$Tarih), format = "%d-%m-%Y")
+ppi_housing <- merge(UFE, housing, by = "Tarih", all = TRUE)
+
+```
+
+```{r}
+head(ppi_housing,10)
+```
+
+Now we will plot a graph line:
+
+```{r}
+ppi_housing_graph <- ggplot(ppi_housing, aes(x = Tarih)) +      
+  geom_line(aes(y = PPI, color = "PPI")) +  
+  geom_line(aes(y = Housing_Percentage_Change, color = "Housing Change")) +  
+  scale_color_manual(values = c("PPI" = "red", "Housing Change" = "blue")) +
+  labs(title = "PPI & Housing Change Graph",
+       x = "Tarih",
+       y = "Variable",
+       color = "Variables") + 
+  theme_minimal() +
+  theme_economist()
+print(ppi_housing_graph)
+```
+
+We can see in the graph that this tho index values are almost stick to each other.Now let's do a correlation test and see if we can verify that.
+
+```{r}
+correlation_house <- cor(ppi_housing$PPI, ppi_housing$Housing_Percentage_Change, use = "complete.obs")
+print(paste("Korelasyon Katsayısı: ", correlation_house))
+
+```
+
+According to this correlation value,these two indicators has a ver powerful relation which verify our visual observatoin.And p-value is too low which means this relation is statistically meaningful.
+
+**6-PRODUCER PRICE INDEX and ENERGY PRICE INDEX**
+
+This study explores the relationship between the Producer Price Index (PPI) and Brent Oil prices. PPI measures changes in the prices of goods and services at the producer level, while Brent Crude Oil serves as a benchmark for global oil prices, influencing production costs across various industries. The interaction between these two indicators is critical for understanding the impact of energy price fluctuations on broader economic price dynamics. Using historical data, the study investigates how changes in Brent Crude Oil prices affect PPI and evaluates the direction and magnitude of this relationship through various statistical methods.
+
+Let's take a look our data frame!
+
+```{r include=FALSE}
+library(readxl)      
+library(tidyverse)       
+library(ggthemes)
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+petrol <- read_excel("petrol.xlsx")
+petrol$Tarih <- as.Date(paste0(petrol$Tarih, "-01"), format = "%Y-%m-%d")
+colnames(petrol) <- c("Tarih", "TP_BrentPetrol")
+UFE <- read_excel("ufe.xlsx")
+UFE$Tarih <- as.Date(paste0("01-", UFE$Tarih), format = "%d-%m-%Y")
+ppi_petrol <- merge(UFE, petrol, by = "Tarih", all = TRUE)
+
+```
+
+```{r}
+head(ppi_petrol,10)
+```
+
+Now let's sketch a graph line and then calculate correlation value to see these two indicator's relation.
+
+```{r}
+ppi_petrol_graph <- ggplot(ppi_petrol, aes(x = Tarih)) +      
+  geom_line(aes(y = PPI, color = "PPI")) +  
+  geom_line(aes(y = TP_BrentPetrol, color = "Petrol Change")) +  
+  scale_color_manual(values = c("PPI" = "red", "Petrol Change" = "blue")) +
+  labs(title = "PPI & Petrol Change Graph",
+       x = "Tarih",
+       y = "Variable",
+       color = "Variables") + 
+  theme_minimal() +
+  theme_economist()
+print(ppi_petrol_graph)
+```
+
+Correlation for PPI and Brent Oil prices:
+
+```{r}
+correlation_petrol <- cor(ppi_petrol$PPI, ppi_petrol$TP_BrentPetrol, use = "complete.obs")
+print(paste("Korelasyon Katsayısı: ", correlation_petrol))
+cortest_petrol<-cor.test(ppi_petrol$PPI, ppi_petrol$TP_BrentPetrol)
+print(paste("P-Value: ",cortest_petrol$p.value))
+```
+
+Correlation valu for PPI and Brent Oil prices is 0.603 which is moderatly high.P-value is 0.03 means this correlation test is statistically meaningful.We can say that there is a relation between these two economic indicators.
+
+**7-PRODEUCER PRICE INDEX and EXCHANGE RATE(USD)**
+
+In this study, we will compare PPI with 2 of our economic metrics and examine the relationship between them both visually with line charts and with our correlation calculations. We collected our data from the Central Bank of the Republic of Turkey's website for 4 years with monthly periods and combined them in a file. Our data consists of 4 columns in an Excel file. The first row contains the date, the second column PPI, the third column USD and the fourth column Import Price Index. Let's start our study by examining the first 10 rows of our data.
+
+```{r include=FALSE}
+library(readxl)      
+library(ggplot2)     
+library(dplyr)       
+library(ggthemes)
+```
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+dataefe <- read_excel("DATA.xlsx")
+dataefe$Date <- as.Date(paste0("01-", dataefe$Date), format = "%d-%m-%Y")
+```
+
+```{r}
+head(dataefe, n = 10)
+```
+
+```{r include=FALSE}
+scale_usd <- max(dataefe$`PPI (%)`, na.rm = TRUE) / max(dataefe$USD, na.rm = TRUE)
+scale_import <- max(dataefe$`PPI (%)`, na.rm = TRUE) / max(dataefe$`Import Unit Value Index (TL)`, na.rm = TRUE)
+
+```
+
+Chart shows how the PPI (blue) and the exchange rate (USD, red) change over time. In mid-2021, the PPI rises sharply, while the USD exchange rate increases more gradually. Entering 2022, the PPI rises rapidly, but the exchange rate does not quite keep pace over the same period. After 2023, the exchange rate continues to rise, but the PPI starts to fall. This suggests that PPI can be driven by factors other than the exchange rate.
+
+```{r}
+graph_usd <- dataefe |> 
+  ggplot(aes(x = Date)) +
+  geom_line(aes(y = `PPI (%)`, color = "PPI (%)")) +
+  geom_line(aes(y = USD * scale_usd, color = "Exchange Rate (USD)")) +
+  scale_y_continuous(
+    name = "PPI (%)",
+    sec.axis = sec_axis(~ . / scale_usd, name = "Exchange Rate (USD)")
+  ) +
+  scale_color_manual(values = c("PPI (%)" = "blue", "Exchange Rate (USD)" = "red")) +
+  labs(title = "PPI (%) vs Exchange Rate (USD) Over Time",
+       x = "Date",
+       y = "PPI (%)",
+       color = "Variables") +
+  theme_minimal() +
+  theme_economist()
+graph_usd
+```
+
+The relationship between the PPI (blue) and the Import Price Index (orange) is clearer and more harmonized. Both indicators follow a similar pattern, moving almost together between 2021 and 2022. Towards the end of 2021 they both peak, but the PPI then falls sharply, while the Import Price Index continues to rise at a more steady pace. This could mean that rising import prices are affecting the PPI, but it may take some time for the effect to be seen.
+
+```{r}
+graph_import <- dataefe |> 
+  ggplot(aes(x = Date)) +
+  geom_line(aes(y = `PPI (%)`, color = "PPI (%)")) +
+  geom_line(aes(y = `Import Unit Value Index (TL)` * scale_import, color = "Import Price Index (TL)")) +
+  scale_y_continuous(
+    name = "PPI (%)",
+    sec.axis = sec_axis(~ . / scale_import, name = "Import Price Index (TL)")
+  ) +
+  scale_color_manual(values = c("PPI (%)" = "blue", "Import Price Index (TL)" = "orange")) +
+  labs(title = "PPI (%) vs Import Price Index (TL) Over Time",
+       x = "Date",
+       y = "PPI (%)",
+       color = "Variables") +
+  theme_minimal() +
+  theme_economist()
+graph_import
+```
+
+```{r}
+library(dplyr)
+
+cor_ppi_usd <- dataefe %>%
+  summarize(correlation = cor(`PPI (%)`, USD, use = "complete.obs", method = "pearson"))
+cor_ppi_import <- dataefe %>%
+  summarize(correlation = cor(`PPI (%)`, `Import Unit Value Index (TL)`, use = "complete.obs", method = "pearson"))
+cor_ppi_usd$correlation
+cor_ppi_import$correlation
+
+```
+
+The correlation between PPI and the exchange rate is 0.308, indicating a weak but positive relationship. This suggests that while exchange rate changes affect PPI, the effect may not be very strong or other economic factors play a larger role.
+
+The correlation between PPI and Import Price Index is 0.415, indicating a stronger link between the two compared to the exchange rate.
+
+
+
+
+**INDICATORS WHICH HAS MOST STRONG RELATİON WITH PPI**
+
+**Correlation Coefficient:**
+
+• Exchange Rates- Producer Price Index (PPI)= 0.30804
+
+• Energy Price Index- Producer Price Index (PPI)= 0.25689
+
+• Housing Price Index- Producer Price Index (PPI)= 0.88859
+
+• Import Price Index- Producer Price Index (PPI)= 0.41490
+
+• Interest Rates- Producer Price Index (PPI)= 0.11986
+
+• Consumer Confidence Index- Producer Price Index (PPI)= 0.42212
+
+• Consumer Price Index- Producer Price Index (PPI)= 0.7959363
+
+• Credit Card Usage- Producer Price Index (PPI)= 0.60305
+
+We can choose the four most important and influential variables from the dataset we are using, then run a regression analysis to see which factors have the biggest effects on the PPI. We may learn more about the characteristics of the models we should concentrate on and how to enhance them to increase their efficacy or predictive power after performing this regression study. Our best 4 atrribute:
+
+-   Consumer Price Index- Producer Price Index (PPI)= 0.7959363
+
+-   Housing Price Index- Producer Price Index (PPI)= 0.888596687452896
+
+-   Consumer Confidence Index- Producer Price Index (PPI)= 0.42212
+
+-   Credit Card Usage- Producer Price Index (PPI)= 0.60305
+
+**PIE CHART FOR CORRELATION VALUES BETWEEN PPI AND FOUR INDICATORS**
+
+```{r}
+labels <- c("Consumer Price Index", "Housing Price Index", 
+            "Interest Rates", "Consumer Confidence Index")
+correlations <- c(0.7959363, 0.88859, 0.42212,0.60305)
+total <- sum(correlations)
+percentages <- (correlations / total) * 100
+
+
+par(mar = c(2, 2, 2, 2))  
+pie(
+  percentages, 
+  labels = paste0(labels, "\n", sprintf("%.1f%%", percentages)), 
+  main = ("Etki Yuzdeleri: PPI ile Korelasyon"),
+  col = rainbow(length(labels)),
+  cex = 0.8  
+)
+
+```
+
+**REGRESSION ANALYSIS**
+
+**PPI and CREDIT CARD USAGE**
+
+On our previous analysis we have seen that credit card usage and PPI has a relatively strong relation.An increasing on PPI cause an increase on CCU usually.We will take a further step and make a regression analysis for them.Our purpose is have a better understanding about this two indicators relation.
+
+```{r include=FALSE}
+library(tidyverse)
+library(readxl)
+library(ggthemes)
+```
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+ccu <- read_excel("credit.xlsx")
+ppi <- read_excel("ppi.xlsx")
+table1 <- left_join(ppi,ccu, by ="Tarih")
+table1$Tarih <- as.Date(paste0("01-", table1$Tarih), format = "%d-%m-%Y")
+
+```
+
+```{r}
+regmodel_ppiccu <- lm(usage ~ PPI, data = table1)
+summary(regmodel_ppiccu)
+```
+
+The regression analysis output provides insights into the relationship between **CCU** (dependent variable) and **PPI** (independent variable). Here's the detailed interpretation:
+
+### 1. **Regression Equation**
+
+From the coefficients:
+
+-   **Intercept:** 31.3077
+
+-   **PPI Coefficient:** 0.78660
+
+The regression equation is:
+
+**CCU=31.31+0.7866⋅PPI**
+
+This indicates:
+
+-   For every 1-unit increase in **PPI**, the predicted **CCU** increases by approximately **0.787 units**.
+
+-   When **PPI** is zero, the predicted **usage** is approximately **31.31**.
+
+### 2. **Significance of Coefficients**
+
+-   The **p-value** for the intercept is **0.00022**, and for the PPI coefficient, it is **2.62e-08**. Both are much smaller than **0.05**, indicating that the coefficients are statistically significant.
+
+-   This means that **PPI** has a meaningful effect on **CCU**
+
+### 3. **Model Fit**
+
+-   **Multiple R-squared:** 0.3637
+
+    -   This value suggests that the model explains **36.37% of the variation** in **usage**.
+
+    -   While this indicates a moderate relationship, a significant portion of variation in **CCU** (%63.63) remains unexplained by **PPI** alone.
+
+-   **Adjusted R-squared:** 0.35440
+
+    -   This accounts for the number of predictors in the model and indicates a similar level of explanatory power.
+
+### 4. **Overall Model Significance**
+
+-   **F-statistic:** 39.43 with a **p-value** of 2.615e-08
+
+    -   This shows that the model as a whole is statistically significant, meaning that **PPI** is a significant predictor of **CCU**.
+
+### 5. **Residual Analysis**
+
+-   The residuals range from -74.31 to 102.6, with a residual standard error of 42.66.
+
+    -   This indicates the variability of the predicted values around the observed values.
+
+### Conclusion:
+
+The regression analysis suggests a **moderate and statistically significant relationship** between **PPI** and **CCU.** While the model demonstrates that PPI has a meaningful impact on usage, additional predictors or variables may be needed to better explain the variability in usage.
+
+```{r}
+ggplot(table1, aes(x = PPI, y = usage)) +
+  geom_point(color = "blue") + 
+  geom_smooth(method = "lm", color = "red", se = TRUE) + 
+  labs(title = "Regression Analysis: PPI vs CCU",
+       x = "Producer Price Index (PPI)",
+       y = "Credit Card Usage (CCU)")
+
+```
+
+Linear regression analysis indicates that these two indicators has a relation but we also try polynomial regression analysis.
+
+```{r}
+modelpoly_ccu <- lm(usage ~ poly(PPI, 2), data = table1)
+summary(modelpoly_ccu)
+
+```
+
+### 1. **Regression Equation**
+
+The model includes a quadratic term:
+
+**CCU=70.416 + ( 267.905 x poly(PPI,2) + ( -192.397 x poly(PPI,2) 2 )**
+
+**2.Significance of Coefficients**
+
+-   **Intercept (70.416):** Highly significant (p \< 2e -1 6)
+
+-   **First-degree term (267.905):** Highly significant (p = 2.44e-10)
+
+-   **Second-degree term (-192.397):** Highly significant (p = 1.20e - 06)
+
+Both polynomial terms are statistically significant, confirming the nonlinear relationship between **CCU** and **PPI**.
+
+### 3. **Model Fit**
+
+-   **Multiple R-squared:** 0.5512
+
+    -   The model explains **55.12% of the variation** in **CCU**, which is a substantial improvement over the linear model (%36.37)
+
+-   **Adjusted R-squared:** 0.538
+
+    -   Accounts for the number of predictors and suggests good explanatory power.
+
+### 4. **Overall Model Significance**
+
+-   **F-statistic:** 41.76 , p = 1.475e-12
+
+    -   The model is highly statistically significant overall.
+
+### 5. **Residual Analysis**
+
+-   **Residual standard error:** 36.09
+
+    -   Indicates variability in predicted values around the observed data.
+
+### Conclusion:
+
+The polynomial regression model provides a better fit compared to the linear model, explaining more variance in **CCU**. The significant quadratic term confirms that the relationship between **CCU** and **PPI** is nonlinear. This model captures the complexity of the relationship more effectively.
+
+```{r}
+ggplot(table1, aes(x = PPI, y = usage)) +
+  geom_point(color = "blue") + 
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2), color = "red", se = TRUE)+ 
+  labs(title = "Polynomial Regression: PPI vs CCU",
+       x = "Producer Price Index (PPI)",
+       y = "Credit Card Usage (CCU)")
+```
+
+**PPI and HOUSING PRICE INDEX**
+
+Our highest correlation value was 0.88 and it was between PPI and Housing Price Index.So we assume we can find a stronger relation and better understanding with regresssion analysis.
+
+```{r include=FALSE}
+library(tidyverse)
+library(readxl)
+library(ggthemes)
+```
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+housing <- read_excel("konut.xlsx")
+housing$Tarih <- as.Date(paste0(housing$Tarih, "-01"), format = "%Y-%m-%d")
+colnames(housing) <- c("Tarih", "Housing_Percentage_Change")
+UFE <- read_excel("ufe.xlsx")
+UFE$Tarih <- as.Date(paste0("01-", UFE$Tarih), format = "%d-%m-%Y")
+ppi_housing <- merge(UFE, housing, by = "Tarih", all = TRUE)
+```
+
+```{r}
+model_housing <- lm(Housing_Percentage_Change ~ PPI, data = ppi_housing)
+summary(model_housing)
+```
+
+### 1. **Regression Equation**
+
+The estimated regression equation is:
+
+PPI = 9.086 + (0.6629 X Housing Percentage Change)
+
+-   **Intercept (9.086):**
+
+    -   Represents the predicted **PPI** when **Housing Percentage Change** is zero.
+
+    -   Statistically significant (( p=0.0153 \< 0.05).
+
+-   **Housing Percentage Change Coefficient (0.6629):**
+
+    -   Indicates that for every 1% increase in housing percentage change, **PPI** is expected to increase by 0.6629 units on average.
+
+    -   Highly significant (p \< 2e - 16)
+
+### 2. **Model Fit**
+
+-   **Multiple R-squared:** 0.7896
+
+    -   The model explains **78.96% of the variation** in **PPI**, indicating a very strong relationship.
+
+-   **Adjusted R-squared:** 0.7863
+
+    -   Adjusted for the number of predictors; it also confirms a strong explanatory power.
+
+### 3. **Model Significance**
+
+-   **F-statistic:** 236.4, p\< 2.2e - 16
+
+    -   The overall model is highly statistically significant, confirming that **Housing Percentage Change** is a meaningful predictor of **PPI**.
+
+### 4. **Residual Analysis**
+
+-   **Residual Standard Error:** 19.57
+
+    -   Indicates the typical deviation of observed **PPI** values from the predicted values.
+
+-   Residuals are reasonably small, suggesting good model performance.
+
+### Conclusion:
+
+The regression results show a strong, positive, and statistically significant relationship between **Housing Percentage Change** and **PPI**. The model explains nearly 79% of the variation in **PPI**, making it a robust predictor.
+
+```{r}
+ggplot(ppi_housing, aes(x = Housing_Percentage_Change, y = PPI)) +
+  geom_point(color = "blue") +
+  geom_smooth(method = "lm", color = "red") +
+  labs(title = "Regression for Housing PI and PPI",
+       x = "Housing Price (Housing_Percentage_Change)",
+       y = "PPI (PPI)") +
+  theme_minimal()
+
+```
+
+**PPI and Consumer Confidence Index**
+
+Our previous analysis show that these two indicators has a coefficient value as 0.42.Although,this is a low value,it's still our 4th highest correlation value.So,we will me a regression analysis:
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+data_yusuf <- read_excel("data_rhapsody.xlsx", sheet = "Sheet1")
+data_yusuf <- data_yusuf[, c("DATE", "PPI", "IR", "CCI")]
+colnames(data_yusuf) <- c("DATE", "PPI", "IR", "CCI")
+data_yusuf$DATE <- as.Date(paste0(data_yusuf$DATE, "-01"), format = "%Y-%m-%d")
+data_yusuf1<-data_yusuf[, c("DATE","PPI","CCI")]
+```
+
+```{r}
+model_confidence <- lm(CCI ~ PPI, data = data_yusuf1)
+summary(model_confidence)
+```
+
+### 1. **Regression Equation**
+
+The regression equation is:
+
+CCI= 149.446+ (0.137 X PPI )
+
+-   **Intercept (149.446):**
+
+    -   Represents the predicted **CCI** when **PPI** is zero.
+
+    -   Highly statistically significant (P \< 2E -16, indicating it holds meaningful information in this context.
+
+-   **PPI Coefficient (0.137):**
+
+    -   Indicates that for every 1-unit increase in **PPI**, the **CCI** increases by 0.137 units on average.
+
+    -   Statistically significant (P = 0.000246\<0.05), showing that **PPI** has a meaningful impact on **CCI**.
+
+### 2. **Model Fit**
+
+-   **Multiple R-squared:** 0.1782
+
+    -   The model explains **17.82% of the variation** in **CCI**, which is relatively low. This suggests other factors not included in the model likely influence **CCI**.
+
+-   **Adjusted R-squared:** 0.1663
+
+    -   Adjusted for the number of predictors, it confirms the limited explanatory power of the model.
+
+### 3. **Model Significance**
+
+-   **F-statistic:** 14.96,P = 0.0002457
+
+    -   The model is statistically significant overall, indicating that **PPI** is a meaningful predictor of **CCI**.
+
+### 4. **Residual Analysis**
+
+-   **Residual Standard Error:** 12.02
+
+    -   Represents the typical deviation of the observed **CCI** values from the predicted values.
+
+-   Residuals show some spread, indicating potential unexplained variability in the model.
+
+### Conclusion:
+
+While the regression identifies a statistically significant positive relationship between **PPI** and **CCI**, the low R^2^ value suggests that **PPI** alone is not a strong predictor of **CCI**. Other variables likely influence **CCI**, and incorporating them could improve the model's explanatory power.
+
+```{r}
+ggplot(data_yusuf1, aes(x = CCI, y = PPI)) +
+  geom_point(color = "blue") +
+  geom_smooth(method = "lm", color = "red") +
+  labs(title = "Regression for CCI and PPI",
+       x ="CCI",
+       y = "PPI") +
+  theme_minimal()
+
+```
+
+**MULTIPLE REGRESSION ANALYSIS**
+
+We will implement a multıple regression analysis as our dependent variable is PPI and our independent variables is CCI,CCU and Housing PI.
+
+```{r include=FALSE}
+setwd("C:/Users/Barış/Desktop/vfdbcbcv")
+ppi00 <- read_excel("ppi2.xlsx")
+```
+
+```{r}
+multi_reg_model <- lm(PPI ~ CCI + House + CCU, data = ppi00)
+
+summary(multi_reg_model)
+```
+
+#### 1. **Model Overview**
+
+-   The regression model predicts **PPI** (dependent variable) using **CCI**, **House PI**, and **CCU** (independent variables).
+
+-   The overall model is statistically significant with a **p-value \< 2.2e-16**, indicating that at least one of the predictors significantly contributes to explaining the variability in PPI.
+
+#### 2. **Residuals**
+
+-   The residuals represent the differences between the observed and predicted values of **PPI**. They range from **-33.286** to **32.000**, with the median close to zero (**3.037**), indicating that the model predictions are reasonably centered around the actual values.
+
+#### 3. **Coefficients**
+
+| Predictor | Estimate  | Std. Error | t-value | p-value  | Significance |
+|-----------|-----------|------------|---------|----------|--------------|
+| Intercept | -60.59278 | 28.57316   | -2.121  | 0.0380   | \*           |
+| CCI       | 0.47421   | 0.18971    | 2.500   | 0.0151   | \*           |
+| House     | 0.66670   | 0.06205    | 10.745  | 1.06e-15 | \*\*\*       |
+| CCU       | -0.06419  | 0.06391    | -1.004  | 0.3192   |              |
+
+-   **Intercept (-60.593):** When all predictors (**CCI**, **House**, and **CCU**) are zero, the expected value of **PPI** is **-60.593**. This may not have practical significance but serves as the model's baseline.
+
+-   **CCI (0.474):** A one-unit increase in **CCI** is associated with an average increase of **0.474** units in **PPI**, holding other variables constant. This effect is statistically significant (**p = 0.0151**).
+
+-   **House (0.667):** A one-unit increase in **House** is associated with an average increase of **0.667** units in **PPI**, holding other variables constant. This predictor is highly significant (**p = 1.06e-15**).
+
+-   **CCU (-0.064):** A one-unit increase in **CCU** is associated with an average decrease of **0.064** units in **PPI**, but this effect is not statistically significant (**p = 0.3192**).
+
+#### 4. **Model Performance**
+
+-   **Residual Standard Error:** 18.87, indicating the typical deviation of observed **PPI** values from the predicted values.
+
+-   **Multiple R-squared (0.8105):** The model explains approximately **81.05%** of the variability in **PPI**.
+
+-   **Adjusted R-squared (0.8012):** After adjusting for the number of predictors, the model still explains about **80.12%** of the variability in **PPI**, which is strong.
+
+#### 5. **Summary**
+
+-   The model is effective in explaining variations in **PPI**, particularly due to the significant contributions of **CCI** and **House**.
+
+-   The predictor **CCU** does not significantly contribute to the model, and removing it might improve simplicity without sacrificing much explanatory power.
+
+-   The high R^2^ value and adjusted R^2^ indicate a strong fit, but there may still be room for improvement by exploring additional predictors or refining the existing ones.
