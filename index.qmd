@@ -1,13 +1,15 @@
 ---
 title: "Team quantr's project"
-sidebar: false 
+sidebar: false
 ---
 
-![](images/aiworldmap.jpeg){fig-align="center" width="441"}
+![](images/Team_quantr.gif){fig-align="center"}
 
 This is our project webpage.
 
 Please stay tuned to follow our project activities.
+
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
 
 # Team Members
 
@@ -17,11 +19,15 @@ Please stay tuned to follow our project activities.
 
 3.  [Ömer Meral](https://github.com/omeral7)
 
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
+
 # Project Topic
 
 **Comparative Analysis of Turkey's Development Using Key Demographic Indicators**
 
 In this project, we analyze Turkey's development status compared to more developed, less developed, and least developed countries. The comparison is conducted on a year-by-year basis, focusing on key demographic indicators such as mortality rates, birth rates, population trends, and other relevant factors.
+
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
 
 # Data Set
 
@@ -30,3 +36,5 @@ We obtained the data set from the United Nations Department of Economic and Soci
 [United Nations Demographic Indicators Dataset](https://population.un.org/wpp/Download/Files/1_Indicator%20(Standard)/EXCEL_FILES/1_General/WPP2024_GEN_F01_DEMOGRAPHIC_INDICATORS_COMPACT.xlsx){.uri}
 
 The original data set required a thorough cleaning process to ensure reliability and clarity for analysis.
+
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}

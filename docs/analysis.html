@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#analysis-overview" id="toc-analysis-overview" class="nav-link active" data-scroll-target="#analysis-overview"><strong>Analysis Overview:</strong></a></li>
-  <li><a href="#births-by-women-aged-15-19-turkey-vs.-more-developed-vs.-less-developed-countries" id="toc-births-by-women-aged-15-19-turkey-vs.-more-developed-vs.-less-developed-countries" class="nav-link" data-scroll-target="#births-by-women-aged-15-19-turkey-vs.-more-developed-vs.-less-developed-countries"><strong>Births by Women Aged 15-19: Turkey vs.&nbsp;More Developed vs.&nbsp;Less Developed Countries</strong></a></li>
+  <li><a href="#analysis-of-birth-rate-among-women-aged-15-19-over-the-years" id="toc-analysis-of-birth-rate-among-women-aged-15-19-over-the-years" class="nav-link" data-scroll-target="#analysis-of-birth-rate-among-women-aged-15-19-over-the-years"><strong>Analysis Of Birth Rate Among Women Aged 15-19 Over The Years</strong></a></li>
   <li><a href="#analysis-of-life-expectancy-at-birth-over-the-years" id="toc-analysis-of-life-expectancy-at-birth-over-the-years" class="nav-link" data-scroll-target="#analysis-of-life-expectancy-at-birth-over-the-years"><strong>Analysis of Life Expectancy at Birth Over the Years</strong></a></li>
   <li><a href="#analysis-of-median-age-over-the-years" id="toc-analysis-of-median-age-over-the-years" class="nav-link" data-scroll-target="#analysis-of-median-age-over-the-years"><strong>Analysis of Median Age Over the Years</strong></a></li>
   <li><a href="#analysis-of-rate-of-natural-change-over-the-years" id="toc-analysis-of-rate-of-natural-change-over-the-years" class="nav-link" data-scroll-target="#analysis-of-rate-of-natural-change-over-the-years"><strong>Analysis of Rate Of Natural Change Over the Years</strong></a></li>
@@ -190,89 +190,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="analysis-overview" class="level3">
 <h3 class="anchored" data-anchor-id="analysis-overview"><strong>Analysis Overview:</strong></h3>
-<p>This analysis seeks to explore and compare Turkey’s demographic indicators with those of more developed and less developed regions, based on data provided by the <strong>UN Demographic Indicators Dataset</strong>. By examining critical parameters such as total deaths, crude death rates, and fertility trends, we aim to gain valuable insights into Turkey’s demographic status in relation to other regions with varying levels of development.</p>
-<p>We will examine these indicators over time to assess whether Turkey’s demographic patterns are more aligned with developed countries, which generally experience better healthcare outcomes, or with less developed countries, where healthcare access may be limited, resulting in different mortality and fertility trends.<br>
+<p>This analysis seeks to explore and compare Turkey’s demographic indicators with those of more developed and less developed regions, based on data provided by the UN Demographic Indicators Dataset. By examining critical parameters such as total deaths, crude death rates, and fertility trends, we aim to gain valuable insights into Turkey’s demographic status in relation to other regions with varying levels of development.</p>
+<p>We will examine these indicators over time to assess whether Turkey’s demographic patterns are more aligned with developed countries, which generally experience better healthcare outcomes, or with less developed countries, where healthcare access may be limited, resulting in different development trends.<br>
 </p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/blackline.jpg" class="quarto-figure quarto-figure-center figure-img" width="600" height="20"></p>
+</figure>
+</div>
 </section>
-<section id="births-by-women-aged-15-19-turkey-vs.-more-developed-vs.-less-developed-countries" class="level3">
-<h3 class="anchored" data-anchor-id="births-by-women-aged-15-19-turkey-vs.-more-developed-vs.-less-developed-countries"><strong>Births by Women Aged 15-19: Turkey vs.&nbsp;More Developed vs.&nbsp;Less Developed Countries</strong></h3>
-<p>This graph compares the birth rate among women aged 15-19 in Turkey, More Developed countries, and Less Developed countries.</p>
-<p>This code block visualizes the graph:</p>
+<section id="analysis-of-birth-rate-among-women-aged-15-19-over-the-years" class="level3">
+<h3 class="anchored" data-anchor-id="analysis-of-birth-rate-among-women-aged-15-19-over-the-years"><strong>Analysis Of Birth Rate Among Women Aged 15-19 Over The Years</strong></h3>
+<p>Teen birth rates are shaped by factors like education, healthcare, and family planning. Less developed countries often have higher rates due to limited access to these services. Comparing Turkey to developed and less developed countries helps us understand its progress in these areas.</p>
+<p>We created a graph aiming to compare the birth rate among women aged 15-19 in Turkey, More Developed countries, and Less Developed countries.</p>
+<p>This code block is used to visualize the graph:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)   <span class="co"># For reading Excel files</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'readxl' was built under R version 4.4.2</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># For data manipulation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tidyverse' was built under R version 4.4.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tidyr' was built under R version 4.4.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'readr' was built under R version 4.4.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'purrr' was built under R version 4.4.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'dplyr' was built under R version 4.4.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'stringr' was built under R version 4.4.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'forcats' was built under R version 4.4.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'lubridate' was built under R version 4.4.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   <span class="co"># For plotting</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data from the Excel file</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>other_parameters <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/other_parameters.xlsx"</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for Turkey, More Developed, and Less Developed regions</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>turkey_data_other <span class="ot">&lt;-</span> other_parameters <span class="sc">%&gt;%</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>more_developed_data_other <span class="ot">&lt;-</span> other_parameters <span class="sc">%&gt;%</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"More developed regions"</span>)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>less_developed_data_other <span class="ot">&lt;-</span> other_parameters <span class="sc">%&gt;%</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Less developed regions"</span>)</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding a "Source" column to each dataset for identification</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>turkey_data_other<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Turkey"</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>more_developed_data_other<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"More developed"</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>less_developed_data_other<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Less developed"</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the datasets into one</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(turkey_data_other, more_developed_data_other, less_developed_data_other)</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the graph for Teenage Birth Percentage</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Teenage Birth Percentage</span><span class="st">`</span>, <span class="at">color =</span> Source)) <span class="sc">+</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># Add lines</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Teenage Birth Percentage Over Years"</span>,</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Teenage Birth Percentage"</span></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  <span class="co"># Clean theme</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Clik to Show code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)   </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>other_parameters <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/other_parameters.xlsx"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>turkey_data_other <span class="ot">&lt;-</span> other_parameters <span class="sc">%&gt;%</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>more_developed_data_other <span class="ot">&lt;-</span> other_parameters <span class="sc">%&gt;%</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"More developed regions"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>less_developed_data_other <span class="ot">&lt;-</span> other_parameters <span class="sc">%&gt;%</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Less developed regions"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>turkey_data_other<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Turkey"</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>more_developed_data_other<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"More developed"</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>less_developed_data_other<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Less developed"</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(turkey_data_other, more_developed_data_other, less_developed_data_other)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Teenage Birth Percentage</span><span class="st">`</span>, <span class="at">color =</span> Source)) <span class="sc">+</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>  </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Teenage Birth Percentage Over Years"</span>,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Teenage Birth Percentage"</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -282,51 +251,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li><p><strong>Teen Birth Rates and Socioeconomic Factors</strong>: Teen births are often influenced by socioeconomic, educational, and healthcare factors. Less developed countries typically have higher rates of teen births due to lower access to education and family planning services. By comparing Turkey to both developed and less developed countries, we can analyze where Turkey stands in terms of policies surrounding family planning, education, and access to healthcare.</p></li>
 <li><p>Unfortunately, in the 1950s, Turkey was behind even the less developed countries in terms of childbirth. However, since the 1990s, it has first caught up with them and nowadays it has reached the level of more developed countries.</p></li>
+<li><p>The graph highlights Turkey’s transition from having teenage birth rates similar to those of less developed countries in the 1950s to reaching levels comparable to more developed countries in recent years. This trend serves as evidence of Turkey’s status as a developing country. The significant reduction in teenage birth rates reflects advancements in socioeconomic development, infrastructure, and access to resources, which are key indicators of a nation progressing toward greater development.</p></li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/blackline.jpg" class="quarto-figure quarto-figure-center figure-img" width="600" height="20"></p>
+</figure>
+</div>
 </section>
 <section id="analysis-of-life-expectancy-at-birth-over-the-years" class="level3">
 <h3 class="anchored" data-anchor-id="analysis-of-life-expectancy-at-birth-over-the-years"><strong>Analysis of Life Expectancy at Birth Over the Years</strong></h3>
-<p>The following graph illustrates the life expectancy at birth over the years for Turkey, More Developed, and Less Developed countries:<br>
+<p>Life expectancy is a key indicator of a population’s overall health and well-being. It reflects the average number of years a person can expect to live, considering factors such as healthcare quality, living conditions, sanitation, and nutrition.</p>
+<p>In More Developed regions, life expectancy is typically higher due to advanced healthcare systems, better access to medical treatments, and overall higher standards of living.</p>
+<p>The following graph illustrates the life expectancy at birth over the years for Turkey, More Developed, and Less Developed countries.<br>
 <br>
-This code block visualizes the graph:</p>
+This code block is used to visualize the graph:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)   <span class="co"># For reading Excel files</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># For data manipulation</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   <span class="co"># For plotting</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data from the Excel file</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>life_expectancy <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/life_expectancy.xlsx"</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for Turkey, More Developed, and Less Developed regions</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>turkey_expectancy <span class="ot">&lt;-</span> life_expectancy <span class="sc">%&gt;%</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>more_developed_expectancy <span class="ot">&lt;-</span> life_expectancy <span class="sc">%&gt;%</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"More developed regions"</span>)</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>less_developed_expectancy <span class="ot">&lt;-</span> life_expectancy <span class="sc">%&gt;%</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Less developed regions"</span>)</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding a "Source" column to each dataset for identification</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>turkey_expectancy<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Turkey"</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>more_developed_expectancy<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"More developed regions"</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>less_developed_expectancy<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Less developed regions"</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the datasets into one</span></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(turkey_expectancy, more_developed_expectancy, less_developed_expectancy)</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the graph for Life Expectancy at Birth (both sexes) Over Years</span></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Life Expectancy at Birth, both sexes (years)</span><span class="st">`</span>, <span class="at">color =</span> Source)) <span class="sc">+</span></span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># Add lines for each group</span></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Life Expectancy at Birth, Both Sexes (Years) Over Years"</span>,</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Life Expectancy at Birth, Both Sexes (Years)"</span></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  <span class="co"># Clean and minimal theme for the plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Clik to Show code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)  </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>life_expectancy <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/life_expectancy.xlsx"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>turkey_expectancy <span class="ot">&lt;-</span> life_expectancy <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>more_developed_expectancy <span class="ot">&lt;-</span> life_expectancy <span class="sc">%&gt;%</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"More developed regions"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>less_developed_expectancy <span class="ot">&lt;-</span> life_expectancy <span class="sc">%&gt;%</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Less developed regions"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>turkey_expectancy<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Turkey"</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>more_developed_expectancy<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"More developed regions"</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>less_developed_expectancy<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Less developed regions"</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(turkey_expectancy, more_developed_expectancy, less_developed_expectancy)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Life Expectancy at Birth, both sexes (years)</span><span class="st">`</span>, <span class="at">color =</span> Source)) <span class="sc">+</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>  </span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Life Expectancy at Birth, Both Sexes (Years) Over Years"</span>,</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Life Expectancy at Birth, Both Sexes (Years)"</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -336,54 +314,57 @@ This code block visualizes the graph:</p>
 </div>
 </div>
 <ul>
-<li><p>The plot shows the trends in <strong>life expectancy at birth</strong> for three distinct groups: <strong>Turkey</strong>, <strong>More Developed</strong> countries, and <strong>Less Developed</strong> countries.</p></li>
-<li><p>The <strong>X-axis</strong> represents the <strong>years</strong>, while the <strong>Y-axis</strong> shows <strong>life expectancy at birth</strong> in years.</p></li>
-<li><p>Each group (Turkey, More Developed, Less Developed) is represented with different colored lines, allowing for easy comparison.</p></li>
+<li><p>By examining the graph, just like its geographical location, Turkey serves as a bridge between developed and undeveloped countries in terms of life expectancy as well. However, nowadays, Turkey is extremely close to developed countries. Also, the drops likely caused by COVID-19 in 2020 should not be overlooked.</p></li>
+<li><p>This analysis indicates that Turkey is steadily closing the gap with more developed regions, showcasing positive demographic developments in terms of life expectancy.</p></li>
 </ul>
-<p>By examining the graph:</p>
-<ul>
-<li>Just like its geographical location, Turkey serves as a bridge between developed and undeveloped countries in terms of life expectancy as well. However, nowadays, Turkey is extremely close to developed countries. Also, the drops likely caused by COVID-19 in 2020 should not be overlooked.</li>
-</ul>
-<p>This analysis indicates that Turkey is steadily closing the gap with more developed regions, showcasing positive demographic developments in terms of life expectancy.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/blackline.jpg" class="quarto-figure quarto-figure-center figure-img" width="600" height="20"></p>
+</figure>
+</div>
 </section>
 <section id="analysis-of-median-age-over-the-years" class="level3">
 <h3 class="anchored" data-anchor-id="analysis-of-median-age-over-the-years"><strong>Analysis of Median Age Over the Years</strong></h3>
+<p>A rising median age typically signals an aging population, which is common in More Developed regions due to lower birth rates and longer life expectancies. These areas often experience a larger proportion of elderly people, which can lead to challenges such as increased demand for healthcare and pension systems.</p>
+<p>This code block is used to visualize the graph:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)   <span class="co"># For reading Excel files</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># For data manipulation</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   <span class="co"># For plotting</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data from the Excel file</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>change_in_population <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/change_in_population.xlsx"</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for Turkey, More Developed, and Less Developed regions</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>turkey_median_age <span class="ot">&lt;-</span> change_in_population <span class="sc">%&gt;%</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>more_developed_median_age <span class="ot">&lt;-</span> change_in_population <span class="sc">%&gt;%</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"More developed regions"</span>)</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>less_developed_median_age <span class="ot">&lt;-</span> change_in_population <span class="sc">%&gt;%</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Less developed regions"</span>)</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding a "Source" column to each dataset for identification</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>turkey_median_age<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Turkey"</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>more_developed_median_age<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"More developed regions"</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>less_developed_median_age<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Less developed regions"</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the datasets into one</span></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(turkey_median_age, more_developed_median_age, less_developed_median_age)</span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the graph for Life Expectancy at Birth (both sexes) Over Years</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Median Age, as of 1 July (years)</span><span class="st">`</span>, <span class="at">color =</span> Source)) <span class="sc">+</span></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># Add lines for each group</span></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Median Age (years)"</span>,</span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Median Age (years)"</span></span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  <span class="co"># Clean and minimal theme for the plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Clik to Show code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)   </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>change_in_population <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/change_in_population.xlsx"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>turkey_median_age <span class="ot">&lt;-</span> change_in_population <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>more_developed_median_age <span class="ot">&lt;-</span> change_in_population <span class="sc">%&gt;%</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"More developed regions"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>less_developed_median_age <span class="ot">&lt;-</span> change_in_population <span class="sc">%&gt;%</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Less developed regions"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>turkey_median_age<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Turkey"</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>more_developed_median_age<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"More developed regions"</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>less_developed_median_age<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Less developed regions"</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(turkey_median_age, more_developed_median_age, less_developed_median_age)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Median Age, as of 1 July (years)</span><span class="st">`</span>, <span class="at">color =</span> Source)) <span class="sc">+</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>  </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Median Age (years)"</span>,</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Median Age (years)"</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -392,46 +373,59 @@ This code block visualizes the graph:</p>
 </div>
 </div>
 </div>
-<p>In the 1950s, Turkey had a very young population, even younger than less developed countries. However, even though it later came to have an older population than those countries, it still has a younger population compared to developed countries.</p>
+<ul>
+<li><p>In the 1950s, Turkey had a very young population, even younger than less developed countries. However, even though it later came to have an older population than those countries, it still has a younger population compared to developed countries.</p></li>
+<li><p>While Turkey’s population has become older than that of less developed regions, it has not yet reached the aging levels seen in more developed countries, where low birth rates and longer life expectancy have created significantly older populations.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/blackline.jpg" class="quarto-figure quarto-figure-center figure-img" width="600" height="20"></p>
+</figure>
+</div>
 </section>
 <section id="analysis-of-rate-of-natural-change-over-the-years" class="level3">
 <h3 class="anchored" data-anchor-id="analysis-of-rate-of-natural-change-over-the-years"><strong>Analysis of Rate Of Natural Change Over the Years</strong></h3>
+<p>The rate of natural change refers to the difference between the birth rate and the death rate in a population. This rate provides a clear indication of how a population is growing or shrinking, excluding the effects of migration.</p>
+<p>A high rate of natural change means a population is growing rapidly, typically due to a high birth rate and/or a low death rate. This is often observed in Less Developed regions. A low or negative rate of natural change, on the other hand, indicates either slow growth or population decline. More Developed regions often experience lower birth rates.</p>
+<p>This code block is used to visualize the graph:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)   <span class="co"># For reading Excel files</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># For data manipulation</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   <span class="co"># For plotting</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data from the Excel file</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>change_in_population <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/change_in_population.xlsx"</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for Turkey, More Developed, and Less Developed regions</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>turkey_rate_of_natural_change <span class="ot">&lt;-</span> change_in_population <span class="sc">%&gt;%</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>more_developed_rate_of_natural_change <span class="ot">&lt;-</span> change_in_population <span class="sc">%&gt;%</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"More developed regions"</span>)</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>less_developed_rate_of_natural_change <span class="ot">&lt;-</span> change_in_population <span class="sc">%&gt;%</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Less developed regions"</span>)</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding a "Source" column to each dataset for identification</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>turkey_rate_of_natural_change<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Turkey"</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>more_developed_rate_of_natural_change<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"More developed regions"</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>less_developed_rate_of_natural_change<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Less developed regions"</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the datasets into one</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(turkey_rate_of_natural_change, more_developed_rate_of_natural_change, less_developed_rate_of_natural_change)</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the graph for Life Expectancy at Birth (both sexes) Over Years</span></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Rate of Natural Change (per 1,000 population)</span><span class="st">`</span>, <span class="at">color =</span> Source)) <span class="sc">+</span></span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># Add lines for each group</span></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Rate of Natural Change Over the Years"</span>,</span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Rate of Natural Change (per 1,000 population)"</span></span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  <span class="co"># Clean and minimal theme for the plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Clik to Show code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)   </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>change_in_population <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/change_in_population.xlsx"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>turkey_rate_of_natural_change <span class="ot">&lt;-</span> change_in_population <span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>more_developed_rate_of_natural_change <span class="ot">&lt;-</span> change_in_population <span class="sc">%&gt;%</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"More developed regions"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>less_developed_rate_of_natural_change <span class="ot">&lt;-</span> change_in_population <span class="sc">%&gt;%</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Less developed regions"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>turkey_rate_of_natural_change<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Turkey"</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>more_developed_rate_of_natural_change<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"More developed regions"</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>less_developed_rate_of_natural_change<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Less developed regions"</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(turkey_rate_of_natural_change, more_developed_rate_of_natural_change, less_developed_rate_of_natural_change)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Rate of Natural Change (per 1,000 population)</span><span class="st">`</span>, <span class="at">color =</span> Source)) <span class="sc">+</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>  </span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Rate of Natural Change Over the Years"</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Rate of Natural Change (per 1,000 population)"</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -440,46 +434,59 @@ This code block visualizes the graph:</p>
 </div>
 </div>
 </div>
-<p>While Turkey had the highest population ratio among the groups we compared, its population growth rate has slowed down since the 2000s to be somewhat lower than less developed countries. However, the increase in population ratio in 2020 is noteworthy.</p>
+<ul>
+<li>While Turkey had the highest population ratio among the groups we compared, its population growth rate has slowed down since the 2000s to be somewhat lower than less developed countries. However, the increase in population ratio in 2020 is noteworthy.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/blackline.jpg" class="quarto-figure quarto-figure-center figure-img" width="600" height="20"></p>
+</figure>
+</div>
 </section>
 <section id="analysis-of-infant-mortality-rate-over-the-years" class="level3">
 <h3 class="anchored" data-anchor-id="analysis-of-infant-mortality-rate-over-the-years"><strong>Analysis of Infant Mortality Rate Over the Years</strong></h3>
+<p>The infant mortality rate refers to the number of infants who die before reaching one year of age, per 1,000 live births in a given year. It is a critical indicator of the overall health and quality of healthcare in a population, as well as the general living conditions.</p>
+<p>A high infant mortality rate typically reflects challenges such as limited access to healthcare, poor nutrition, inadequate sanitation, and high rates of infectious diseases. This is more commonly seen in Less Developed regions.</p>
+<p>The infant mortality rate is not only a measure of health but also a reflection of the effectiveness of a country’s healthcare system and its social and economic development. Reducing infant mortality is a key goal for improving public health and overall well-being.</p>
+<p>This code block is used to visualize the graph:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)   <span class="co"># For reading Excel files</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># For data manipulation</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   <span class="co"># For plotting</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data from the Excel file</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>child <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/child.xlsx"</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for Turkey, More Developed, and Less Developed regions</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>turkey_rate_of_infant_mortality <span class="ot">&lt;-</span> child <span class="sc">%&gt;%</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>more_developed_rate_of_infant_mortality <span class="ot">&lt;-</span> child <span class="sc">%&gt;%</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"More developed regions"</span>)</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>less_developed_rate_of_infant_mortality <span class="ot">&lt;-</span> child <span class="sc">%&gt;%</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Less developed regions"</span>)</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding a "Source" column to each dataset for identification</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>turkey_rate_of_infant_mortality<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Turkey"</span></span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>more_developed_rate_of_infant_mortality<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"More developed regions"</span></span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>less_developed_rate_of_infant_mortality<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Less developed regions"</span></span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the datasets into one</span></span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(turkey_rate_of_infant_mortality, more_developed_rate_of_infant_mortality, less_developed_rate_of_infant_mortality)</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the graph for Life Expectancy at Birth (both sexes) Over Years</span></span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Infant Mortality Rate (infant deaths per 1,000 live births)</span><span class="st">`</span>, <span class="at">color =</span> Source)) <span class="sc">+</span></span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># Add lines for each group</span></span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Infant Mortality Rate Over the Years"</span>,</span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Infant Mortality Rate (infant deaths per 1,000 live births)"</span></span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  <span class="co"># Clean and minimal theme for the plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Clik to Show code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>child <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/child.xlsx"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>turkey_rate_of_infant_mortality <span class="ot">&lt;-</span> child <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>more_developed_rate_of_infant_mortality <span class="ot">&lt;-</span> child <span class="sc">%&gt;%</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"More developed regions"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>less_developed_rate_of_infant_mortality <span class="ot">&lt;-</span> child <span class="sc">%&gt;%</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Region, subregion, country or area *</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Less developed regions"</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>turkey_rate_of_infant_mortality<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Turkey"</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>more_developed_rate_of_infant_mortality<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"More developed regions"</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>less_developed_rate_of_infant_mortality<span class="sc">$</span>Source <span class="ot">&lt;-</span> <span class="st">"Less developed regions"</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(turkey_rate_of_infant_mortality, more_developed_rate_of_infant_mortality, less_developed_rate_of_infant_mortality)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="st">`</span><span class="at">Infant Mortality Rate (infant deaths per 1,000 live births)</span><span class="st">`</span>, <span class="at">color =</span> Source)) <span class="sc">+</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Infant Mortality Rate Over the Years"</span>,</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Infant Mortality Rate (infant deaths per 1,000 live births)"</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -488,7 +495,9 @@ This code block visualizes the graph:</p>
 </div>
 </div>
 </div>
-<p>Although Turkey started from a rather poor point in terms of child mortality rate, with a steady improvement rate, it has now reached the level of developed countries.</p>
+<ul>
+<li>Although Turkey started from a rather poor point in terms of child mortality rate, with a steady improvement rate, it has now reached the level of developed countries.</li>
+</ul>
 
 
 </section>

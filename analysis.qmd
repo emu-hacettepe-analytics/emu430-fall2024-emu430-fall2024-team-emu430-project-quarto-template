@@ -1,5 +1,12 @@
 ---
 title: "Analysis"
+format:
+  html:
+    code-fold: true
+execute: 
+  warning: false
+  message: false
+  echo: false
 ---
 
 ```{r}
@@ -8,26 +15,33 @@ title: "Analysis"
 
 ### **Analysis Overview:**
 
-This analysis seeks to explore and compare Turkey's demographic indicators with those of more developed and less developed regions, based on data provided by the **UN Demographic Indicators Dataset**. By examining critical parameters such as total deaths, crude death rates, and fertility trends, we aim to gain valuable insights into Turkey’s demographic status in relation to other regions with varying levels of development.
+This analysis seeks to explore and compare Turkey's demographic indicators with those of more developed and less developed regions, based on data provided by the UN Demographic Indicators Dataset. By examining critical parameters such as total deaths, crude death rates, and fertility trends, we aim to gain valuable insights into Turkey’s demographic status in relation to other regions with varying levels of development.
 
-We will examine these indicators over time to assess whether Turkey’s demographic patterns are more aligned with developed countries, which generally experience better healthcare outcomes, or with less developed countries, where healthcare access may be limited, resulting in different mortality and fertility trends.\
+We will examine these indicators over time to assess whether Turkey’s demographic patterns are more aligned with developed countries, which generally experience better healthcare outcomes, or with less developed countries, where healthcare access may be limited, resulting in different development trends.\
 
-### **Births by Women Aged 15-19: Turkey vs. More Developed vs. Less Developed Countries**
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
 
-This graph compares the birth rate among women aged 15-19 in Turkey, More Developed countries, and Less Developed countries.
+### **Analysis Of Birth Rate Among Women Aged 15-19 Over The Years**
 
-This code block visualizes the graph:
+Teen birth rates are shaped by factors like education, healthcare, and family planning. Less developed countries often have higher rates due to limited access to these services. Comparing Turkey to developed and less developed countries helps us understand its progress in these areas.
+
+We created a graph aiming to compare the birth rate among women aged 15-19 in Turkey, More Developed countries, and Less Developed countries.
+
+This code block is used to visualize the graph:
 
 ```{r}
-# Load required libraries
-library(readxl)   # For reading Excel files
-library(tidyverse) # For data manipulation
-library(ggplot2)   # For plotting
+#| echo: true
+#| code-fold: true
+#| code-summary: "Clik to Show code"
 
-# Load the data from the Excel file
+library(readxl)   
+library(tidyverse) 
+library(ggplot2)   
+
+
 other_parameters <- read_excel("data/other_parameters.xlsx")
 
-# Filter the data for Turkey, More Developed, and Less Developed regions
+
 turkey_data_other <- other_parameters %>%
   filter(`Region, subregion, country or area *` == "Turkey")
 
@@ -37,47 +51,56 @@ more_developed_data_other <- other_parameters %>%
 less_developed_data_other <- other_parameters %>%
   filter(`Region, subregion, country or area *` == "Less developed regions")
 
-# Adding a "Source" column to each dataset for identification
+
 turkey_data_other$Source <- "Turkey"
 more_developed_data_other$Source <- "More developed"
 less_developed_data_other$Source <- "Less developed"
 
-# Combine the datasets into one
+
 combined_data <- rbind(turkey_data_other, more_developed_data_other, less_developed_data_other)
 
-# Plotting the graph for Teenage Birth Percentage
+
 ggplot(combined_data, aes(x = Year, y = `Teenage Birth Percentage`, color = Source)) +
-  geom_line(linewidth = 1) +  # Add lines
+  geom_line(linewidth = 1) +  
   labs(
     title = "Teenage Birth Percentage Over Years",
     x = "Year",
     y = "Teenage Birth Percentage"
   ) +
-  theme_minimal()  # Clean theme
+  theme_minimal()  
 
 
 ```
 
--   **Teen Birth Rates and Socioeconomic Factors**: Teen births are often influenced by socioeconomic, educational, and healthcare factors. Less developed countries typically have higher rates of teen births due to lower access to education and family planning services. By comparing Turkey to both developed and less developed countries, we can analyze where Turkey stands in terms of policies surrounding family planning, education, and access to healthcare.
-
 -   Unfortunately, in the 1950s, Turkey was behind even the less developed countries in terms of childbirth. However, since the 1990s, it has first caught up with them and nowadays it has reached the level of more developed countries.
+
+-   The graph highlights Turkey's transition from having teenage birth rates similar to those of less developed countries in the 1950s to reaching levels comparable to more developed countries in recent years. This trend serves as evidence of Turkey's status as a developing country. The significant reduction in teenage birth rates reflects advancements in socioeconomic development, infrastructure, and access to resources, which are key indicators of a nation progressing toward greater development.
+
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
 
 ### **Analysis of Life Expectancy at Birth Over the Years**
 
-The following graph illustrates the life expectancy at birth over the years for Turkey, More Developed, and Less Developed countries:\
+Life expectancy is a key indicator of a population's overall health and well-being. It reflects the average number of years a person can expect to live, considering factors such as healthcare quality, living conditions, sanitation, and nutrition.
+
+In More Developed regions, life expectancy is typically higher due to advanced healthcare systems, better access to medical treatments, and overall higher standards of living.
+
+The following graph illustrates the life expectancy at birth over the years for Turkey, More Developed, and Less Developed countries.\
 \
-This code block visualizes the graph:
+This code block is used to visualize the graph:
 
 ```{r}
-# Load required libraries
-library(readxl)   # For reading Excel files
-library(tidyverse) # For data manipulation
-library(ggplot2)   # For plotting
+#| echo: true
+#| code-fold: true
+#| code-summary: "Clik to Show code"
 
-# Load the data from the Excel file
+library(readxl)  
+library(tidyverse)
+library(ggplot2)  
+
+
 life_expectancy <- read_excel("data/life_expectancy.xlsx")
 
-# Filter the data for Turkey, More Developed, and Less Developed regions
+
 turkey_expectancy <- life_expectancy %>%
   filter(`Region, subregion, country or area *` == "Turkey")
 
@@ -87,50 +110,51 @@ more_developed_expectancy <- life_expectancy %>%
 less_developed_expectancy <- life_expectancy %>%
   filter(`Region, subregion, country or area *` == "Less developed regions")
 
-# Adding a "Source" column to each dataset for identification
+
 turkey_expectancy$Source <- "Turkey"
 more_developed_expectancy$Source <- "More developed regions"
 less_developed_expectancy$Source <- "Less developed regions"
 
-# Combine the datasets into one
+
 combined_data <- rbind(turkey_expectancy, more_developed_expectancy, less_developed_expectancy)
 
-# Plotting the graph for Life Expectancy at Birth (both sexes) Over Years
+
 ggplot(combined_data, aes(x = Year, y = `Life Expectancy at Birth, both sexes (years)`, color = Source)) +
-  geom_line(linewidth = 1) +  # Add lines for each group
+  geom_line(linewidth = 1) +  
   labs(
     title = "Life Expectancy at Birth, Both Sexes (Years) Over Years",
     x = "Year",
     y = "Life Expectancy at Birth, Both Sexes (Years)"
   ) +
-  theme_minimal()  # Clean and minimal theme for the plot
+  theme_minimal()  
 
 ```
 
--   The plot shows the trends in **life expectancy at birth** for three distinct groups: **Turkey**, **More Developed** countries, and **Less Developed** countries.
+-   By examining the graph, just like its geographical location, Turkey serves as a bridge between developed and undeveloped countries in terms of life expectancy as well. However, nowadays, Turkey is extremely close to developed countries. Also, the drops likely caused by COVID-19 in 2020 should not be overlooked.
 
--   The **X-axis** represents the **years**, while the **Y-axis** shows **life expectancy at birth** in years.
+-   This analysis indicates that Turkey is steadily closing the gap with more developed regions, showcasing positive demographic developments in terms of life expectancy.
 
--   Each group (Turkey, More Developed, Less Developed) is represented with different colored lines, allowing for easy comparison.
-
-By examining the graph:
-
--   Just like its geographical location, Turkey serves as a bridge between developed and undeveloped countries in terms of life expectancy as well. However, nowadays, Turkey is extremely close to developed countries. Also, the drops likely caused by COVID-19 in 2020 should not be overlooked.
-
-This analysis indicates that Turkey is steadily closing the gap with more developed regions, showcasing positive demographic developments in terms of life expectancy.
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
 
 ### **Analysis of Median Age Over the Years**
 
-```{r}
-# Load required libraries
-library(readxl)   # For reading Excel files
-library(tidyverse) # For data manipulation
-library(ggplot2)   # For plotting
+A rising median age typically signals an aging population, which is common in More Developed regions due to lower birth rates and longer life expectancies. These areas often experience a larger proportion of elderly people, which can lead to challenges such as increased demand for healthcare and pension systems.
 
-# Load the data from the Excel file
+This code block is used to visualize the graph:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Clik to Show code"
+
+library(readxl)   
+library(tidyverse) 
+library(ggplot2)   
+
+
 change_in_population <- read_excel("data/change_in_population.xlsx")
 
-# Filter the data for Turkey, More Developed, and Less Developed regions
+
 turkey_median_age <- change_in_population %>%
   filter(`Region, subregion, country or area *` == "Turkey")
 
@@ -140,42 +164,55 @@ more_developed_median_age <- change_in_population %>%
 less_developed_median_age <- change_in_population %>%
   filter(`Region, subregion, country or area *` == "Less developed regions")
 
-# Adding a "Source" column to each dataset for identification
+
 turkey_median_age$Source <- "Turkey"
 more_developed_median_age$Source <- "More developed regions"
 less_developed_median_age$Source <- "Less developed regions"
 
-# Combine the datasets into one
+
 combined_data <- rbind(turkey_median_age, more_developed_median_age, less_developed_median_age)
 
-# Plotting the graph for Life Expectancy at Birth (both sexes) Over Years
+
 ggplot(combined_data, aes(x = Year, y = `Median Age, as of 1 July (years)`, color = Source)) +
-  geom_line(linewidth = 1) +  # Add lines for each group
+  geom_line(linewidth = 1) +  
   labs(
     title = "Median Age (years)",
     x = "Year",
     y = "Median Age (years)"
   ) +
-  theme_minimal()  # Clean and minimal theme for the plot
+  theme_minimal()  
 
 
 
 ```
 
-In the 1950s, Turkey had a very young population, even younger than less developed countries. However, even though it later came to have an older population than those countries, it still has a younger population compared to developed countries.
+-   In the 1950s, Turkey had a very young population, even younger than less developed countries. However, even though it later came to have an older population than those countries, it still has a younger population compared to developed countries.
+
+-   While Turkey's population has become older than that of less developed regions, it has not yet reached the aging levels seen in more developed countries, where low birth rates and longer life expectancy have created significantly older populations.
+
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
 
 ### **Analysis of Rate Of Natural Change Over the Years**
 
-```{r}
-# Load required libraries
-library(readxl)   # For reading Excel files
-library(tidyverse) # For data manipulation
-library(ggplot2)   # For plotting
+The rate of natural change refers to the difference between the birth rate and the death rate in a population. This rate provides a clear indication of how a population is growing or shrinking, excluding the effects of migration.
 
-# Load the data from the Excel file
+A high rate of natural change means a population is growing rapidly, typically due to a high birth rate and/or a low death rate. This is often observed in Less Developed regions. A low or negative rate of natural change, on the other hand, indicates either slow growth or population decline. More Developed regions often experience lower birth rates.
+
+This code block is used to visualize the graph:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Clik to Show code"
+
+library(readxl)   
+library(tidyverse) 
+library(ggplot2)   
+
+
 change_in_population <- read_excel("data/change_in_population.xlsx")
 
-# Filter the data for Turkey, More Developed, and Less Developed regions
+
 turkey_rate_of_natural_change <- change_in_population %>%
   filter(`Region, subregion, country or area *` == "Turkey")
 
@@ -185,39 +222,52 @@ more_developed_rate_of_natural_change <- change_in_population %>%
 less_developed_rate_of_natural_change <- change_in_population %>%
   filter(`Region, subregion, country or area *` == "Less developed regions")
 
-# Adding a "Source" column to each dataset for identification
+
 turkey_rate_of_natural_change$Source <- "Turkey"
 more_developed_rate_of_natural_change$Source <- "More developed regions"
 less_developed_rate_of_natural_change$Source <- "Less developed regions"
 
-# Combine the datasets into one
+
 combined_data <- rbind(turkey_rate_of_natural_change, more_developed_rate_of_natural_change, less_developed_rate_of_natural_change)
 
-# Plotting the graph for Life Expectancy at Birth (both sexes) Over Years
+
 ggplot(combined_data, aes(x = Year, y = `Rate of Natural Change (per 1,000 population)`, color = Source)) +
-  geom_line(linewidth = 1) +  # Add lines for each group
+  geom_line(linewidth = 1) +  
   labs(
     title = "Rate of Natural Change Over the Years",
     x = "Year",
     y = "Rate of Natural Change (per 1,000 population)"
   ) +
-  theme_minimal()  # Clean and minimal theme for the plot
+  theme_minimal()  
 ```
 
-While Turkey had the highest population ratio among the groups we compared, its population growth rate has slowed down since the 2000s to be somewhat lower than less developed countries. However, the increase in population ratio in 2020 is noteworthy.
+-   While Turkey had the highest population ratio among the groups we compared, its population growth rate has slowed down since the 2000s to be somewhat lower than less developed countries. However, the increase in population ratio in 2020 is noteworthy.
+
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
 
 ### **Analysis of Infant Mortality Rate Over the Years**
 
-```{r}
-# Load required libraries
-library(readxl)   # For reading Excel files
-library(tidyverse) # For data manipulation
-library(ggplot2)   # For plotting
+The infant mortality rate refers to the number of infants who die before reaching one year of age, per 1,000 live births in a given year. It is a critical indicator of the overall health and quality of healthcare in a population, as well as the general living conditions.
 
-# Load the data from the Excel file
+A high infant mortality rate typically reflects challenges such as limited access to healthcare, poor nutrition, inadequate sanitation, and high rates of infectious diseases. This is more commonly seen in Less Developed regions.
+
+The infant mortality rate is not only a measure of health but also a reflection of the effectiveness of a country's healthcare system and its social and economic development. Reducing infant mortality is a key goal for improving public health and overall well-being.
+
+This code block is used to visualize the graph:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Clik to Show code"
+
+library(readxl) 
+library(tidyverse) 
+library(ggplot2)   
+
+
 child <- read_excel("data/child.xlsx")
 
-# Filter the data for Turkey, More Developed, and Less Developed regions
+
 turkey_rate_of_infant_mortality <- child %>%
   filter(`Region, subregion, country or area *` == "Turkey")
 
@@ -227,23 +277,23 @@ more_developed_rate_of_infant_mortality <- child %>%
 less_developed_rate_of_infant_mortality <- child %>%
   filter(`Region, subregion, country or area *` == "Less developed regions")
 
-# Adding a "Source" column to each dataset for identification
+
 turkey_rate_of_infant_mortality$Source <- "Turkey"
 more_developed_rate_of_infant_mortality$Source <- "More developed regions"
 less_developed_rate_of_infant_mortality$Source <- "Less developed regions"
 
-# Combine the datasets into one
+
 combined_data <- rbind(turkey_rate_of_infant_mortality, more_developed_rate_of_infant_mortality, less_developed_rate_of_infant_mortality)
 
-# Plotting the graph for Life Expectancy at Birth (both sexes) Over Years
+
 ggplot(combined_data, aes(x = Year, y = `Infant Mortality Rate (infant deaths per 1,000 live births)`, color = Source)) +
-  geom_line(linewidth = 1) +  # Add lines for each group
+  geom_line(linewidth = 1) + 
   labs(
     title = "Infant Mortality Rate Over the Years",
     x = "Year",
     y = "Infant Mortality Rate (infant deaths per 1,000 live births)"
   ) +
-  theme_minimal()  # Clean and minimal theme for the plot
+  theme_minimal() 
 ```
 
-Although Turkey started from a rather poor point in terms of child mortality rate, with a steady improvement rate, it has now reached the level of developed countries.
+-   Although Turkey started from a rather poor point in terms of child mortality rate, with a steady improvement rate, it has now reached the level of developed countries.

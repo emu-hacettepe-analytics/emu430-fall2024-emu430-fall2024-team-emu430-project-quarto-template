@@ -8,10 +8,14 @@ This dataset provides demographic insights such as population trends, mortality 
 
 ![](images/9c7f7564-7982-4e10-baea-6dcab0ea78b5.jpg){fig-align="center" width="481"}
 
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
+
 ### Objective of Our Analysis
 
 \
 The objective of our analysis is to conduct a detailed comparison of Turkey's demographic indicators on a yearly basis, contrasting them with those of regions categorized as "More Developed," "Less Developed," and "Least Developed." By examining these indicators over time, we aim to evaluate Turkey's development status relative to other global regions.
+
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
 
 ### Reason for Choosing This Dataset
 
@@ -27,8 +31,12 @@ In addition to its trustworthiness, this dataset is exceptionally detailed and e
 
 ![](images/comparison.jpeg){fig-align="center"}
 
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
+
 **Accomplishments**\
 By organizing, cleaning, and processing the data, we aimed to create a streamlined version that enables targeted analysis of specific indicators such as population trends, death rates, life expectancy, and other demographic parameters.\
+
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
 
 **Initial Cleaning Process**
 
@@ -48,6 +56,8 @@ By organizing, cleaning, and processing the data, we aimed to create a streamlin
 
     -   All columns related to migration.
 
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
+
 **Simplifications**
 
 -   Redundant columns for gender-separated data were aggregated into general metrics where possible. For example:
@@ -56,9 +66,13 @@ By organizing, cleaning, and processing the data, we aimed to create a streamlin
 
     -   Metrics such as population density, sex ratios, and mortality rates for specific age groups were excluded to streamline the data set.
 
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
+
 **Custom Metrics**
 
 -   A new Death Rate (%) column was created by calculating the ratio of total deaths to the total population. We calculated this ratio using the Excel file.
+
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
 
 **Data Grouping**\
 The cleaned data set was organized into the following thematic groups for analysis:
@@ -86,6 +100,8 @@ The cleaned data set was organized into the following thematic groups for analys
 
 -   **Total Deaths**:\
     The section contains data on total deaths and crude death rates.
+
+![](images/blackline.jpg){fig-align="center" width="600" height="20"}
 
 **Storing the Processed Data**
 
