@@ -232,9 +232,11 @@ The section contains data on total deaths and crude death rates.</p></li>
 <p>To convert the data into <strong>.RData</strong> format, we performed the following steps:</p>
 <ol type="1">
 <li><p>First, we loaded the original data set into R from an Excel file using the <code>readxl</code> package:<br>
-<code>library(readxl)     file_path &lt;- "C:/Users/bugra/OneDrive/Belgeler/veri_proje/veri_dataset/total_deaths.xlsx"     total_deaths &lt;- read_excel(file_path)</code></p></li>
+<code>library(readxl)</code></p>
+<p><code>file_path &lt;- "data/change_in_population.xlsx"</code></p>
+<p><code>change_in_population &lt;- read_excel(file_path)</code></p></li>
 <li><p>After processing and cleaning the data set, the modified data (total_deaths in this case) was saved in the .RData format using the <code>save()</code> function. This format preserves the R objects, making it easier to load and analyze later.</p>
-<p><code>save(total_deaths, file = "C:/Users/bugra/OneDrive/Belgeler/veri_proje/veri_dataset/total_deaths.RData")</code></p>
+<p><code>save(change_in_population, file = "data/change_in_population.RData")</code></p>
 <p>The final data set is now available in the .RData format, and you can access the final cleaned and grouped files stored in .RData format below:</p>
 <p><a href="https://drive.google.com/drive/folders/1xH4i0-jM0OMhSljotZpxiy-VuX3_etGw?usp=sharing">.RData Files</a>.</p></li>
 </ol>
