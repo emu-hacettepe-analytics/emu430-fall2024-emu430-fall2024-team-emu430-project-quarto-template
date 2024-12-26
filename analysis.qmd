@@ -427,6 +427,10 @@ print(paste("P-Value: ",cortest_petrol$p.value))
 
 Correlation valu for PPI and Brent Oil prices is 0.603 which is moderatly high.P-value is 0.03 means this correlation test is statistically meaningful.We can say that there is a relation between these two economic indicators.
 
+**7-PRODEUCER PRICE INDEX and EXCHANGE RATE(USD)**
+
+In this study, we will compare PPI with 2 of our economic metrics and examine the relationship between them both visually with line charts and with our correlation calculations. We collected our data from the Central Bank of the Republic of Turkey's website for 4 years with monthly periods and combined them in a file. Our data consists of 4 columns in an Excel file. The first row contains the date, the second column PPI, the third column USD and the fourth column Import Price Index. Let's start our study by examining the first 10 rows of our data.
+
 ```{r include=FALSE}
 library(readxl)      
 library(ggplot2)     
@@ -444,11 +448,13 @@ dataefe$Date <- as.Date(paste0("01-", dataefe$Date), format = "%d-%m-%Y")
 head(dataefe, n = 10)
 ```
 
-```{r}
+```{r include=FALSE}
 scale_usd <- max(dataefe$`PPI (%)`, na.rm = TRUE) / max(dataefe$USD, na.rm = TRUE)
 scale_import <- max(dataefe$`PPI (%)`, na.rm = TRUE) / max(dataefe$`Import Unit Value Index (TL)`, na.rm = TRUE)
 
 ```
+
+Chart shows how the PPI (blue) and the exchange rate (USD, red) change over time. In mid-2021, the PPI rises sharply, while the USD exchange rate increases more gradually. Entering 2022, the PPI rises rapidly, but the exchange rate does not quite keep pace over the same period. After 2023, the exchange rate continues to rise, but the PPI starts to fall. This suggests that PPI can be driven by factors other than the exchange rate.
 
 ```{r}
 graph_usd <- dataefe |> 
@@ -468,6 +474,8 @@ graph_usd <- dataefe |>
   theme_economist()
 graph_usd
 ```
+
+The relationship between the PPI (blue) and the Import Price Index (orange) is clearer and more harmonized. Both indicators follow a similar pattern, moving almost together between 2021 and 2022. Towards the end of 2021 they both peak, but the PPI then falls sharply, while the Import Price Index continues to rise at a more steady pace. This could mean that rising import prices are affecting the PPI, but it may take some time for the effect to be seen.
 
 ```{r}
 graph_import <- dataefe |> 
@@ -495,20 +503,17 @@ cor_ppi_usd <- dataefe %>%
   summarize(correlation = cor(`PPI (%)`, USD, use = "complete.obs", method = "pearson"))
 cor_ppi_import <- dataefe %>%
   summarize(correlation = cor(`PPI (%)`, `Import Unit Value Index (TL)`, use = "complete.obs", method = "pearson"))
-
-```
-
-```{r}
 cor_ppi_usd$correlation
-```
-
-```{r}
 cor_ppi_import$correlation
-```
-
-```{r}
 
 ```
+
+The correlation between PPI and the exchange rate is 0.308, indicating a weak but positive relationship. This suggests that while exchange rate changes affect PPI, the effect may not be very strong or other economic factors play a larger role.
+
+The correlation between PPI and Import Price Index is 0.415, indicating a stronger link between the two compared to the exchange rate.
+
+
+
 
 **INDICATORS WHICH HAS MOST STRONG RELATİON WITH PPI**
 
