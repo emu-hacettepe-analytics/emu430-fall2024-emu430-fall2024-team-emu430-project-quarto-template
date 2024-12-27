@@ -25,7 +25,9 @@ Please stay tuned to follow our project activities.
 
 **Comparative Analysis of Turkey's Development Using Key Demographic Indicators**
 
-In this project, we analyze Turkey's development status compared to more developed, less developed, and least developed countries. The comparison is conducted on a year-by-year basis, focusing on key demographic indicators such as mortality rates, birth rates, population trends, and other relevant factors.
+In this project, we analyze Turkey's development status compared to more developed and less developed regions.
+
+The comparison is performed on an annual basis, concentrating on key demographic factors such as death rates, birth rates, population changes, and other relevant parameters.
 
 ![](images/blackline.jpg){fig-align="center" width="600" height="20"}
 

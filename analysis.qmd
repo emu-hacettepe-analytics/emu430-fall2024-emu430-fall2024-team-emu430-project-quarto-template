@@ -15,7 +15,9 @@ execute:
 
 ### **Analysis Overview:**
 
-This analysis seeks to explore and compare Turkey's demographic indicators with those of more developed and less developed regions, based on data provided by the UN Demographic Indicators Dataset. By examining critical parameters such as total deaths, crude death rates, and fertility trends, we aim to gain valuable insights into Turkey’s demographic status in relation to other regions with varying levels of development.
+This analysis seeks to explore and compare Turkey's demographic indicators with those of more developed and less developed regions, based on data provided by the UN Demographic Indicators Dataset.
+
+By analyzing key factors such as fertility patterns, life expectancy, and demographic trends, our goal is to gain valuable insights into Turkey's demographic situation compared to other regions with different levels of development.
 
 We will examine these indicators over time to assess whether Turkey’s demographic patterns are more aligned with developed countries, which generally experience better healthcare outcomes, or with less developed countries, where healthcare access may be limited, resulting in different development trends.\
 
